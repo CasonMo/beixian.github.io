@@ -11,6 +11,12 @@
     <content type="html"><![CDATA[<p>my first blog</p>]]></content>
     
     
+    <categories>
+      
+      <category>first categories</category>
+      
+    </categories>
+    
     
     <tags>
       
