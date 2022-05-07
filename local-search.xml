@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Hello Hexo</title>
+    <link href="/2022/05/07/Hello-Hexo/"/>
+    <url>/2022/05/07/Hello-Hexo/</url>
+    
+    <content type="html"><![CDATA[<p>my first blog</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>first tags</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2022/05/07/hello-world/"/>
     <url>/2022/05/07/hello-world/</url>
