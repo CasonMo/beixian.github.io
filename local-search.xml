@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>让google 收录博客</title>
+    <link href="/2022/05/08/%E8%AE%A9google-%E6%94%B6%E5%BD%95%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2022/05/08/%E8%AE%A9google-%E6%94%B6%E5%BD%95%E5%8D%9A%E5%AE%A2/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>注意：本文以Fluid主题当示例来介绍</p></blockquote><h3 id="Google-Search-Console配置"><a href="#Google-Search-Console配置" class="headerlink" title="Google Search Console配置"></a>Google Search Console配置</h3><p>进入网址<a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p><img src="/Users/casonmo/Documents/Typora/图片/image-20220508183546777.png" alt="image-20220508183546777" /><p>我选择的是&lt;网址前缀&gt; 输入网址后提示</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508183818914.png" alt="image-20220508183818914"></p><p>我选择的是HTML标识验证 把元标记复制添加到hexo配置</p><h3 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h3><p>因为上文中已使用覆盖配置的方式使<strong>主题配置</strong>放置在 &lt;主题&gt; 目录之外，所以我们需要在hexo根目录下修改_config.&lt;主题名称&gt;.yml即可</p><p>我这里是_config.fluid.yml，全局搜索comment找到以下内容添加google提供的meta</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508183318695.png" alt="image-20220508183318695"></p><p>添加成功并Hexo部署</p><p>然后再回到Google Search Console点击验证，显示这个代表配置成功</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508183634549.png" alt="image-20220508183634549"></p><h3 id="Google-Search-Console-请求编入索引"><a href="#Google-Search-Console-请求编入索引" class="headerlink" title="Google Search Console 请求编入索引"></a>Google Search Console 请求编入索引</h3><p>登录你的 <a href="https://search.google.com/search-console/about">Google search console</a>，登陆后在控制台点击网址检查。</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508184304499.png" alt="image-20220508184304499"></p><p>点击请求编入索引，耐心等待</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508184322245.png" alt="image-20220508184322245"></p><p>显示以下内容表示编入索引成功</p><p><img src="/Users/casonmo/Documents/Typora/%E5%9B%BE%E7%89%87/image-20220508184351161.png" alt="image-20220508184351161"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo 配置评论功能</title>
     <link href="/2022/05/08/Hexo-%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/"/>
     <url>/2022/05/08/Hexo-%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/</url>
@@ -19,8 +44,6 @@
     
     
     <tags>
-      
-      <tag>部署</tag>
       
       <tag>Hexo</tag>
       
