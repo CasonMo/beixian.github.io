@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Hexo 配置评论功能</title>
+    <link href="/2022/05/08/Hexo-%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/"/>
+    <url>/2022/05/08/Hexo-%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>注意：本文以Fluid主题当示例来介绍如何配置评论，其他主题请根据对应用户手册配置</p></blockquote><p>我是用的主题Fluid支持多种评论插件，utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | </p><p>cusdis，每种插件有不同的配置方法，为了和评论用户有真实反馈、长久的交互和尽可能简单配置我这里选择了基于 GitHub Issues实现的utterances</p><h3 id="新建github仓库"><a href="#新建github仓库" class="headerlink" title="新建github仓库"></a>新建github仓库</h3><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081715639.png" alt="image-20220508171452067"></p><p>（我这里已经创建过了，所以显示报错）</p><h3 id="github-Install-utterances-app"><a href="#github-Install-utterances-app" class="headerlink" title="github Install utterances app"></a>github Install utterances app</h3><p>utterances官网：<a href="https://utteranc.es/">https://utteranc.es/</a></p><p>点击此链接github安装<a href="https://github.com/apps/utterances">utterances app</a>。</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081720238.png" alt="image-20220508172011715"></p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081730113.png" alt="image-20220508172028588"></p><h3 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h3><p>因为上文中已使用覆盖配置的方式使<strong>主题配置</strong>放置在 &lt;主题&gt; 目录之外，所以我们需要在hexo根目录下修改_config.&lt;主题名称&gt;.yml即可</p><p>我这里是_config.fluid.yml，全局搜索comment找到以下内容开启评论并使用utterances插件 修改</p><figure class="highlight yaml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 评论插件</span><br><span class="hljs-comment"># Comment plugin</span><br><span class="hljs-attr">comments:</span><br><span class="hljs-comment">#开启评论插件</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># 指定的插件，需要同时设置对应插件的必要参数</span><br>  <span class="hljs-comment"># The specified plugin needs to set the necessary parameters at the same time</span><br>  <span class="hljs-comment"># Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">utterances</span><br></code></pre></td></tr></table></figure><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081730114.png" alt="image-20220508170721628"></p><p>配置utterances插件 在_config.fluid.yml文件全局搜索utterances找到以下内容修改</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Utterances</span><br><span class="hljs-comment"># 基于 GitHub Issues</span><br><span class="hljs-comment"># Based on GitHub Issues</span><br><span class="hljs-comment"># See: https://utteranc.es</span><br><span class="hljs-attr">utterances:</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">repo仓库</span><br>  <span class="hljs-attr">issue_term:</span> <span class="hljs-string">pathname</span><br>  <span class="hljs-attr">label:</span> <span class="hljs-string">utterances</span><br>  <span class="hljs-attr">theme:</span> <span class="hljs-string">github-light</span><br>  <span class="hljs-attr">theme_dark:</span> <span class="hljs-string">github-dark</span><br>  <span class="hljs-attr">crossorigin:</span> <span class="hljs-string">anonymous</span><br></code></pre></td></tr></table></figure><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>打开你的博客文章 看到以下内容 即为配置成功</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081730181.png" alt="image-20220508172837182"></p><p>注：如果有些页面没有出现此评论插件可以在文章开头手动打开</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205081729044.png" alt="image-20220508172937108"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>部署</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>部署</tag>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo 搭建博客Blog记录</title>
     <link href="/2022/05/07/Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2Blog%E8%AE%B0%E5%BD%95/"/>
     <url>/2022/05/07/Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2Blog%E8%AE%B0%E5%BD%95/</url>
