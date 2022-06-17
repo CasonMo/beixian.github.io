@@ -201,7 +201,7 @@
                             <p class="index-excerpt">
                                 <a href="/2022/06/17/InheritableThreadLocal%E8%A7%A3%E5%86%B3ThreadLocal%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%88%B6%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
                                     
-                                        当我用Mybatis-plus自动填充创建人员，更新人员字段的时候，发现数据库中又很多字段都没有记录这两个字段，通过分析发现是因为这些更新或者创建操作是在异步的情况下去执行的，由于父线程创建的子线程无法获取父线程的ThreadLocal变量，导致无法获取ThreadLocal里面的值。  以下代码说明使用ThreadLocal 子线程无法访问父线程的线程变量  123456789101112131
+                                        当我用Mybatis-plus自动填充创建人员，更新人员字段的时候，发现数据库中又很多字段都没有记录这两个字段，通过分析发现是因为这些更新或者创建操作是在异步的情况下去执行的，由于父线程创建的子线程无法获取父线程的ThreadLocal变量，导致无法正确的获取这两个字段。  以下代码说明使用ThreadLocal 子线程无法访问父线程的线程变量  123456789101112131415publ
                                 </a>
                             </p>
 
