@@ -193,6 +193,61 @@
                         <article class="col-12 col-md-12 mx-auto index-info">
                             <h1 class="index-header">
                                 
+                                        <a href="/2022/06/17/InheritableThreadLocal%E8%A7%A3%E5%86%B3ThreadLocal%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%88%B6%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+                                            InheritableThreadLocal解决ThreadLocal子线程不可继承父线程变量的问题
+                                        </a>
+                            </h1>
+
+                            <p class="index-excerpt">
+                                <a href="/2022/06/17/InheritableThreadLocal%E8%A7%A3%E5%86%B3ThreadLocal%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%88%B6%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+                                    
+                                        当我用Mybatis-plus自动填充创建人员，更新人员字段的时候，发现数据库中又很多字段都没有记录这两个字段，通过分析发现是因为这些更新或者创建操作是在异步的情况下去执行的，由于父线程创建的子线程无法获取父线程的ThreadLocal变量，导致无法获取ThreadLocal里面的值。  以下代码说明使用ThreadLocal 子线程无法访问父线程的线程变量  123456789101112131
+                                </a>
+                            </p>
+
+                            <div class="index-btm post-metas">
+                                
+                                    <div class="post-meta mr-3">
+                                        <i class="iconfont icon-date"></i>
+                                        <time datetime="2022-06-17 17:51" pubdate>
+              2022-06-17
+            </time>
+                                    </div>
+                                    
+                                        
+                                            <div class="post-meta mr-3">
+                                                <i class="iconfont icon-category"></i>
+                                                
+                                                    <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
+                                                        并发编程
+                                                    </a>
+                                                    
+                                            </div>
+                                            
+                                                
+                                                    <div class="post-meta">
+                                                        <i class="iconfont icon-tags"></i>
+                                                        
+                                                            <a href="/tags/ThreadLocal/">
+                                                                ThreadLocal
+                                                            </a>
+                                                            
+                                                            <a href="/tags/InheritableThreadLocal/">
+                                                                InheritableThreadLocal
+                                                            </a>
+                                                            
+                                                    </div>
+                                                    
+                            </div>
+                        </article>
+        </div>
+        
+        <div class="row mx-auto index-card">
+            
+                
+                        <article class="col-12 col-md-12 mx-auto index-info">
+                            <h1 class="index-header">
+                                
                                         <a href="/2022/06/16/Threadlocal%E7%9A%84%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%92%8C%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" target="_self">
                                             Threadlocal的简单理解和部分源码分析
                                         </a>
