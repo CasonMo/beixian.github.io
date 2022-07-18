@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>解决Okhttp只能获取一次responsebody的问题</title>
+    <link href="/2022/07/18/%E8%A7%A3%E5%86%B3Okhttp%E5%8F%AA%E8%83%BD%E8%8E%B7%E5%8F%96%E4%B8%80%E6%AC%A1responsebody%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <url>/2022/07/18/%E8%A7%A3%E5%86%B3Okhttp%E5%8F%AA%E8%83%BD%E8%8E%B7%E5%8F%96%E4%B8%80%E6%AC%A1responsebody%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>okhttp通过response.body().string() 获取字符串类型的responsebody</p><h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><pre><code class="hljs java">  <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> String <span class="hljs-title function_">string</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-keyword">try</span> (<span class="hljs-type">BufferedSource</span> <span class="hljs-variable">source</span> <span class="hljs-operator">=</span> source()) &#123;<br>      <span class="hljs-type">Charset</span> <span class="hljs-variable">charset</span> <span class="hljs-operator">=</span> Util.bomAwareCharset(source, charset());<br>      <span class="hljs-keyword">return</span> source.readString(charset);<br>    &#125;<br>  &#125;<br><br><br><span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">()</span> &#123;<br>    Util.closeQuietly(source());<br>  &#125;<br></code></pre></td></tr></table></figure><p>ResponseBody，其实现了 <code>Closeable</code> 接口，通过复写 <code>close()</code> 方法来 <strong>关闭并释放资源</strong>，关闭 <code>ResponseBody</code> 子类所持有的 <code>BufferedSource</code> 接口对象，当我们第一次调用 <code>response.body().string()</code> 时，OkHttp 将响应体的缓冲资源返回的同时，调用 <code>closeQuietly()</code> 方法默默释放了资源</p><h3 id="获取responseBody"><a href="#获取responseBody" class="headerlink" title="获取responseBody"></a>获取responseBody</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getResponseBody</span><span class="hljs-params">(Response response)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>     <span class="hljs-type">BufferedSource</span> <span class="hljs-variable">source</span> <span class="hljs-operator">=</span> response.body().source();<br>     source.request(Long.MAX_VALUE);<br>     <span class="hljs-type">Buffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> source.getBuffer();<br>     <span class="hljs-type">String</span> <span class="hljs-variable">responseBody</span> <span class="hljs-operator">=</span> buffer.clone().readUtf8();<br>     <span class="hljs-keyword">return</span> responseBody;<br> &#125;<br></code></pre></td></tr></table></figure><h3 id="获取requestBody"><a href="#获取requestBody" class="headerlink" title="获取requestBody"></a>获取requestBody</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getRequestBody</span><span class="hljs-params">(Request request)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">Buffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Buffer</span>();<br>        <span class="hljs-keyword">if</span> (request.body() != <span class="hljs-literal">null</span>) &#123;<br>            request.body().writeTo(buffer);<br>            <span class="hljs-keyword">return</span> buffer.clone().readUtf8();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>okhttp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>InheritableThreadLocal解决ThreadLocal子线程不可继承父线程变量的问题</title>
     <link href="/2022/06/17/InheritableThreadLocal%E8%A7%A3%E5%86%B3ThreadLocal%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%88%B6%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <url>/2022/06/17/InheritableThreadLocal%E8%A7%A3%E5%86%B3ThreadLocal%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%88%B6%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98/</url>
@@ -199,9 +218,9 @@
     
     <tags>
       
-      <tag>Hexo</tag>
-      
       <tag>部署</tag>
+      
+      <tag>Hexo</tag>
       
     </tags>
     
