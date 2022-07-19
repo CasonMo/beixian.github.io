@@ -16,15 +16,15 @@
   <meta name="author" content="Cason Mo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="来自网络  读取网络图片12URL url &#x3D; new URL(path);BufferedImage source&#x3D; ImageIO.read(url);    读取本地图片1BufferedImage source&#x3D; ImageIO.read(new File(path));">
+    <meta name="description" content="来自网络  读取网络图片12URL url &#x3D; new URL(path);BufferedImage source&#x3D; ImageIO.read(url);    读取本地图片1BufferedImage source&#x3D; ImageIO.read(new File(path));    获取网络图片工具类1234567891011121314151617181920212223242526272">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用ImageIO读取网络图片或本地图片">
 <meta property="og:url" content="http://example.com/2022/07/19/%E4%BD%BF%E7%94%A8ImageIO%E8%AF%BB%E5%8F%96%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%88%96%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="来自网络  读取网络图片12URL url &#x3D; new URL(path);BufferedImage source&#x3D; ImageIO.read(url);    读取本地图片1BufferedImage source&#x3D; ImageIO.read(new File(path));">
+<meta property="og:description" content="来自网络  读取网络图片12URL url &#x3D; new URL(path);BufferedImage source&#x3D; ImageIO.read(url);    读取本地图片1BufferedImage source&#x3D; ImageIO.read(new File(path));    获取网络图片工具类1234567891011121314151617181920212223242526272">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-19T04:03:31.000Z">
-<meta property="article:modified_time" content="2022-07-19T06:49:34.173Z">
+<meta property="article:modified_time" content="2022-07-19T08:57:11.943Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      125 字
+      1.1k 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      10 分钟
     </span>
   
 
@@ -256,6 +256,11 @@
 
 
 <h3 id="读取本地图片"><a href="#读取本地图片" class="headerlink" title="读取本地图片"></a>读取本地图片</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">BufferedImage source= ImageIO.read(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(path));<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="获取网络图片工具类"><a href="#获取网络图片工具类" class="headerlink" title="获取网络图片工具类"></a>获取网络图片工具类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HttpImageUtils</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(HttpImageUtils.class);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TIMEOUT</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span> * <span class="hljs-number">1000</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取网络图片转成字节流</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> strUrl 完整图片地址</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 图片资源数组</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">byte</span>[] getNetImgByUrl(String strUrl) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">URL</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">URL</span>(strUrl);<br>            <span class="hljs-type">HttpURLConnection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> (HttpURLConnection) url.openConnection();<br>            conn.setRequestMethod(<span class="hljs-string">&quot;GET&quot;</span>);<br>            conn.setConnectTimeout(TIMEOUT);<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">inStream</span> <span class="hljs-operator">=</span> conn.getInputStream();<br>            <span class="hljs-keyword">return</span> readInputStream(inStream);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            logger.error(e.getMessage(),e);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 从输入流中获取字节流数据</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> inStream 输入流</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span>  图片流</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">byte</span>[] readInputStream(InputStream inStream) <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">outStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>        <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[Integer.MAX_VALUE];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> ((len = inStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>            outStream.write(buffer, <span class="hljs-number">0</span>, len);<br>        &#125;<br>        inStream.close();<br>        <span class="hljs-keyword">return</span> outStream.toByteArray();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
