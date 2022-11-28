@@ -203,31 +203,6 @@
   
   
   <entry>
-    <title>科学上网 教程+工具</title>
-    <link href="/2022/05/10/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%20%E6%95%99%E7%A8%8B+%E5%B7%A5%E5%85%B7/"/>
-    <url>/2022/05/10/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%20%E6%95%99%E7%A8%8B+%E5%B7%A5%E5%85%B7/</url>
-    
-    <content type="html"><![CDATA[<h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><ol><li>下载 <a href="https://github.com/yichengchen/clashX/releases/download/1.91.1/ClashX.dmg">ClashX 客户端</a>，安装后运行 ClashX。</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100016429.png" alt="img"></p><ol start="2"><li>导入订阅链接</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100006366.png" alt="img"></p><ol start="3"><li>设置为系统代理</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100006282.png" alt="img"></p><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>1.下载 <a href="https://gs1024.com/client-download/Clash-Windows.7z">Clash for Windows 客户端</a>。</p><blockquote><p>注意：安装时请选择 为使用这台电脑的任何人安装（所有用户）<br>            运行时请右键，以管理员身份运行</p></blockquote><ol start="2"><li>导入订阅链接</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100008719.png" alt="img"></p><ol start="3"><li>打开客户端的侧边栏的 General，勾选 System Proxy 即可启用。</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100012810.png" alt="img"></p><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><ol><li><p>下载 <a href="https://gs1024.com/client-download/v2rayng.apk">v2rayNG 客户端</a>。</p></li><li><p>打开 V2rayNG 点击左上角的菜单图标打开侧边栏，随后点击 订阅设置。点击右上角的加号按钮，在新页面的备注中填写本站名称，地址输入框中粘贴订阅链接并点击右上角的 。</p></li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100014398.png" alt="img"></p><ol start="3"><li>再次从侧边栏进入 设置 页面，点击 路由模式 将其更改为 绕过局域网及xx地址。</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100014561.png" alt="img"></p><ol start="4"><li>随后从侧边栏回到 配置文件 页面，点击右上角的省略号图标选择更新订阅。</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100014847.png" alt="img"></p><ol start="5"><li>点击选择您需要的节点，点击右下角的按钮即可连接。</li></ol><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202205100015079.png" alt="img"></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>网络</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>网络</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>店匠插件开发-创建店匠应用</title>
     <link href="/2022/05/09/%E5%BA%97%E5%8C%A0%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91-%E5%88%9B%E5%BB%BA%E5%BA%97%E5%8C%A0%E5%BA%94%E7%94%A8/"/>
     <url>/2022/05/09/%E5%BA%97%E5%8C%A0%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91-%E5%88%9B%E5%BB%BA%E5%BA%97%E5%8C%A0%E5%BA%94%E7%94%A8/</url>
