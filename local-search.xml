@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>WooCommerce搭建（docker）</title>
+    <link href="/2023/01/04/WooCommerce%E6%90%AD%E5%BB%BA%EF%BC%88docker%EF%BC%89/"/>
+    <url>/2023/01/04/WooCommerce%E6%90%AD%E5%BB%BA%EF%BC%88docker%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<p>平台对接WooCommerce api 记录一下创建过程</p><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p><code>docker pull mysql  </code></p><p><code>docker run --name mysql -e MYSQL_ROOT_PASSWORD=&lt;密码&gt; -p 3306:3306 -d mysql</code></p><p>创建一个DB ：wordpress 编码utf8mb4</p><h2 id="wordpress"><a href="#wordpress" class="headerlink" title="wordpress"></a>wordpress</h2><p><code>docker pull wordpress:latest</code></p><p><code>docker run -d --name wordpress -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=&lt;mysql密码&gt; -e WORDPRESS_DB_NAME=wordpress -p 80:80 --link mysql:mysql wordpress</code></p><p>最好使用80端口 否则wordpress rest api无法使用</p><h2 id="WooCommerce"><a href="#WooCommerce" class="headerlink" title="WooCommerce"></a>WooCommerce</h2><p>在Plugins安装WooCommerce</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202301041630702.png" alt="image-20230104162118061"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>woocommerce</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>算法笔记</title>
     <link href="/2022/12/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
     <url>/2022/12/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
