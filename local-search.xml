@@ -49,6 +49,19 @@
   
   
   <entry>
+    <title>Javascript修改vue输入框的值</title>
+    <link href="/2023/01/18/Javascript%E4%BF%AE%E6%94%B9vue%E8%BE%93%E5%85%A5%E6%A1%86%E7%9A%84%E5%80%BC/"/>
+    <url>/2023/01/18/Javascript%E4%BF%AE%E6%94%B9vue%E8%BE%93%E5%85%A5%E6%A1%86%E7%9A%84%E5%80%BC/</url>
+    
+    <content type="html"><![CDATA[<p>vue 是通过<a href="https://so.csdn.net/so/search?q=input%E4%BA%8B%E4%BB%B6&spm=1001.2101.3001.7020">input事件</a>来触发双向绑定的，而你用单纯的js 去修改input值，并没有触发他的input事件，通过下方代码，进行触发即可。两种方式选其一即可。</p><blockquote><ol><li><p>event.target.dispatchEvent(new Event(‘input’));</p></li><li><p>el.dispatchEvent(new Event(‘input’));</p></li></ol></blockquote>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Tiktok Shop 生成signature（java）</title>
     <link href="/2023/01/10/Tiktok-Shop-%E7%94%9F%E6%88%90signature%EF%BC%88java%EF%BC%89/"/>
     <url>/2023/01/10/Tiktok-Shop-%E7%94%9F%E6%88%90signature%EF%BC%88java%EF%BC%89/</url>
