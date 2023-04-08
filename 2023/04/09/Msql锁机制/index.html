@@ -16,25 +16,23 @@
   <meta name="author" content="Cason Mo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="图片和内容总结来自：Dubbo 介绍 | Apache Dubbo  简单介绍Dubbo是一款高性能、轻量级的Java RPC框架。它可以用于构建分布式服务架构，简化不同服务之间的远程调用过程。Dubbo支持多种协议和序列化方式，可以轻松地与Spring Boot进行集成。Dubbo提供了服务治理、负载均衡、容错、路由、降级等丰富的特性，可以帮助我们构建健壮的分布式系统。 在使用Dubbo时，我">
+    <meta name="description" content="MySQL锁机制是为了保证并发操作的数据一致性而设计的。在并发环境下，多个事务同时访问同一数据，如果不加控制，就会导致数据的不一致性。 MySQL的锁可以分为行级锁和表级锁。  行级锁：在对表中的数据进行修改时，MySQL会自动加上行级锁，该锁只针对修改的行有效，其他行不受影响。行级锁的优点是精度高，缺点是占用资源多，容易造成死锁。InnoDB行锁是通过给索引上的索引项加锁 来实现的，没有索引的情">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对dubbo的一些理解和简单使用记录">
-<meta property="og:url" content="http://example.com/2023/04/06/%E5%AF%B9dubbo%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3%E5%92%8C%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="Msql锁机制">
+<meta property="og:url" content="http://example.com/2023/04/09/Msql%E9%94%81%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="图片和内容总结来自：Dubbo 介绍 | Apache Dubbo  简单介绍Dubbo是一款高性能、轻量级的Java RPC框架。它可以用于构建分布式服务架构，简化不同服务之间的远程调用过程。Dubbo支持多种协议和序列化方式，可以轻松地与Spring Boot进行集成。Dubbo提供了服务治理、负载均衡、容错、路由、降级等丰富的特性，可以帮助我们构建健壮的分布式系统。 在使用Dubbo时，我">
+<meta property="og:description" content="MySQL锁机制是为了保证并发操作的数据一致性而设计的。在并发环境下，多个事务同时访问同一数据，如果不加控制，就会导致数据的不一致性。 MySQL的锁可以分为行级锁和表级锁。  行级锁：在对表中的数据进行修改时，MySQL会自动加上行级锁，该锁只针对修改的行有效，其他行不受影响。行级锁的优点是精度高，缺点是占用资源多，容易造成死锁。InnoDB行锁是通过给索引上的索引项加锁 来实现的，没有索引的情">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304061124551.png">
-<meta property="article:published_time" content="2023-04-06T02:41:49.000Z">
-<meta property="article:modified_time" content="2023-04-06T03:34:50.322Z">
+<meta property="article:published_time" content="2023-04-08T19:17:25.000Z">
+<meta property="article:modified_time" content="2023-04-08T20:01:21.736Z">
 <meta property="article:author" content="Cason Mo">
-<meta property="article:tag" content="Dubbo">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304061124551.png">
   
   
     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
   
-  <title>对dubbo的一些理解和简单使用记录 - Blog|CasonMo</title>
+  <title>Msql锁机制 - Blog|CasonMo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -180,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="对dubbo的一些理解和简单使用记录">
+            <span class="h2" id="subtitle" title="Msql锁机制">
               
             </span>
 
@@ -190,8 +188,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-04-06 10:41" pubdate>
-        2023年4月6日 上午
+      <time datetime="2023-04-09 03:17" pubdate>
+        2023年4月9日 凌晨
       </time>
     </span>
   
@@ -201,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      2.3k 字
     </span>
   
 
@@ -210,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21 分钟
+      20 分钟
     </span>
   
 
@@ -247,59 +245,69 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">对dubbo的一些理解和简单使用记录</h1>
+            <h1 style="display: none">Msql锁机制</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>图片和内容总结来自：<a target="_blank" rel="noopener" href="https://cn.dubbo.apache.org/zh-cn/overview/what/">Dubbo 介绍 | Apache Dubbo</a></p>
-</blockquote>
-<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>Dubbo是一款高性能、轻量级的Java RPC框架。它可以用于构建分布式服务架构，简化不同服务之间的远程调用过程。Dubbo支持多种协议和序列化方式，可以轻松地与Spring Boot进行集成。Dubbo提供了服务治理、负载均衡、容错、路由、降级等丰富的特性，可以帮助我们构建健壮的分布式系统。</p>
-<p>在使用Dubbo时，我们可以将服务提供者注册到注册中心，消费者通过注册中心查找到服务提供者的地址，然后进行远程调用。Dubbo提供了多种负载均衡策略，例如随机、轮询、一致性哈希等，可以根据实际场景进行选择。此外，Dubbo还支持容错机制，例如超时、失败重试、熔断等，可以提高系统的可靠性和稳定性。</p>
-<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304061124551.png" srcset="/img/loading.gif" lazyload alt="service-discovery"></p>
-<p>服务发现包含提供者、消费者和注册中心三个参与角色，其中，Dubbo 提供者实例注册 URL 地址到注册中心，注册中心负责对数据进行聚合，Dubbo 消费者从注册中心读取地址列表并订阅变更，每当地址列表发生变化，注册中心将最新的列表通知到所有订阅的消费者实例。</p>
-<p>Dubbo 使用 JDK 动态代理或者字节码增强技术，生成一个代理类，该代理类实现了本地接口，具有本地接口的所有方法。在调用本地接口方法时，会通过代理类的 invoke 方法将请求转发到远程服务提供者上，服务提供方接收到请求后，会根据请求中的服务接口名和方法名，找到对应的实现类和方法，并将请求消息反序列化成参数列表，最终调用服务实现类的方法，并将执行结果序列化成响应消息返回给客户端。</p>
-<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><ul>
-<li><p>引入依赖</p>
-<p>配置Dubbo相关依赖：在<code>pom.xml</code>文件中添加Dubbo相关依赖，例如<code>dubbo-spring-boot-starter</code>、<code>dubbo</code>等。</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"> <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="language-xml"> 		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.dubbo<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="language-xml"> 		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>dubbo-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="language-xml"> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="language-xml"> 		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.dubbo<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="language-xml"> 		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>dubbo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="language-xml"> 		<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$</span><span class="hljs-template-variable">&#123;dubbo.version&#125;</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="language-xml"> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+              <p>MySQL锁机制是为了保证并发操作的数据一致性而设计的。在并发环境下，多个事务同时访问同一数据，如果不加控制，就会导致数据的不一致性。</p>
+<p>MySQL的锁可以分为行级锁和表级锁。</p>
+<ol>
+<li><p>行级锁：在对表中的数据进行修改时，MySQL会自动加上行级锁，该锁只针对修改的行有效，其他行不受影响。行级锁的优点是精度高，缺点是占用资源多，容易造成死锁。InnoDB行锁是通过给索引上的索引项加锁 来实现的，没有索引的情况下，InnoDB仍然可以使用行级锁。不过，由于在没有索引的情况下需要扫描整个表，因此会对性能产生较大的影响，同时会将锁定作用于整个表，从而影响并发性能和可伸缩性</p>
+<p>使用行级锁定的主要是 <code>InnoDB</code> 存储引擎。</p>
 </li>
-<li><p>服务提供者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ProvideService</span> &#123;<br>    String <span class="hljs-title function_">test</span><span class="hljs-params">(String text)</span>;<br>&#125;<br><br><span class="hljs-comment">//实现Dubbo服务接口：编写Dubbo服务接口的实现类</span><br><span class="hljs-meta">@DubboService</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProvideServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ProvideService</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">test</span><span class="hljs-params">(String text)</span> &#123;<br>         System.out.println(text);<br>      		<span class="hljs-keyword">return</span> text;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li><p>表级锁：在对整个表进行操作时，MySQL会自动加上表级锁，该锁可以防止其他事务修改该表。表级锁的优点是简单高效，缺点是并发度低，容易造成阻塞。</p>
+<p>使用表级锁定的主要是 <code>MyISAM</code>，<code>MEMORY</code>，<code>CSV</code> 等一些非事务性存储引擎。</p>
+</li>
+</ol>
+<h3 id="InnoDB-引擎实现的锁机制"><a href="#InnoDB-引擎实现的锁机制" class="headerlink" title="InnoDB 引擎实现的锁机制"></a>InnoDB 引擎实现的锁机制</h3><h4 id="共享锁（Shared-Lock）"><a href="#共享锁（Shared-Lock）" class="headerlink" title="共享锁（Shared Lock）"></a>共享锁（Shared Lock）</h4><p>共享锁（S锁）是一种共享锁定，它允许多个事务同时读取一行数据，但防止这些事务对该行数据进行修改，保证数据的一致性和隔离性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs mysql">-- 加共享锁（S）<br>select * from table_name where ... lock in share mode<br></code></pre></td></tr></table></figure>
 
-<p>在<code>application.properties</code>或<code>application.yml</code>中配置Dubbo服务提供者信息和注册中心地址和协议</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># Dubbo服务提供者配置</span><br><span class="hljs-attr">dubbo.application.name</span>=dubbo-provide<br><span class="hljs-attr">dubbo.registry.protocol</span>=zookeeper<br><span class="hljs-attr">dubbo.protocol.name</span>=dubbo<br><span class="hljs-attr">dubbo.protocol.port</span>=<span class="hljs-number">20880</span><br><span class="hljs-comment"># Dubbo注册中心配置</span><br><span class="hljs-attr">dubbo.registry.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br></code></pre></td></tr></table></figure>
 
-<p>打成jar包发不到maven仓库并启动服务</p>
-</li>
-<li><p>服务消费者</p>
-<p>引入包含ProvideService服务的依赖</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConsumerService</span> &#123;<br>    <span class="hljs-meta">@DubboReference</span><br>    <span class="hljs-keyword">private</span> ProvideService provideService;<br>  <br>   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">test</span><span class="hljs-params">(String text)</span> &#123;<br>         <span class="hljs-keyword">return</span> provideService.test(text)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>在<code>application.properties</code>或<code>application.yml</code>中配置Dubbo注册中心地址和协议</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># Dubbo注册中心配置</span><br><span class="hljs-attr">dubbo.registry.protocol</span>=zookeeper<br><span class="hljs-attr">dubbo.registry.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h4><blockquote>
-<p>为什么使用rpc框架，而不是用http？</p>
-</blockquote>
-<ul>
-<li><p>在异构系统（跨语言和跨平台），HTTP具有更好的兼容性，因为HTTP是一种通用的协议，几乎所有的编程语言和操作系统都支持HTTP协议，因为Dubbo支持更严格的通信协议和类型约束，而不是所有的编程语言和操作系统都支持相同的RPC协议。</p>
+<h4 id="排它锁（Exclusive-Lock）"><a href="#排它锁（Exclusive-Lock）" class="headerlink" title="排它锁（Exclusive Lock）"></a>排它锁（Exclusive Lock）</h4><p>排它锁（X锁）是一种排它锁定，它防止其他事务读取或修改该行数据，保证了数据的独占性。如果一个事务已经持有了一个行的 X 锁，其他的事务就不能再持有该行的任何锁，包括共享锁和排它锁。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 加排它锁（X)<br>select * from table_name where ... for update<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="间隙锁（GAP-LOCK）"><a href="#间隙锁（GAP-LOCK）" class="headerlink" title="间隙锁（GAP LOCK）"></a>间隙锁（GAP LOCK）</h4><p>间隙锁是 InnoDB 存储引擎实现的一种锁机制，它可以在多版本并发控制（MVCC）下防止幻读问题的发生。在 RR 隔离级别下，InnoDB 存储引擎可以使用 MVCC 机制来保证读取的数据的可重复性，并且可以使用间隙锁来避免幻读问题的发生。</p>
+<p>间隙锁是针对索引上的间隙（即索引记录之间的空隙）进行加锁，用来防止其他事务在这些间隙中插入新的数据，从而保证了查询结果的一致性。在 RR 隔离级别下，InnoDB 存储引擎使用间隙锁机制来支持幻读问题的解决。</p>
+<p>举例来说，假如 emp 表中只有 101 条记录，其 empid 的值分别是1, 2, …, 100, 101，下面的SQL：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM emp WHERE empid &gt; 100 FOR UPDATE<br></code></pre></td></tr></table></figure>
+
+
+<p>当我们用条件检索数据，并请求共享或排他锁时，InnoDB 不仅会对符合条件的 empid 值为 101 的记录加锁，也会对 empid 大于 101（这些记录并不存在）的 “间隙” 加锁。</p>
+<p>这个时候如果你插入 empid 等于 102 的数据的，如果那边事物还没有提交，那你就会处于等待状态，无法插入数据。</p>
+<p><strong>使用方式</strong></p>
+<ol>
+<li><p>使用 SELECT … FOR UPDATE 语句：可以在 SQL 查询语句中使用 SELECT … FOR UPDATE 语句，该语句会在查询时对索引进行间隙锁定。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table_name WHERE col BETWEEN 10 AND 20 FOR UPDATE;<br></code></pre></td></tr></table></figure>
+
+<p>该语句会对 col 列值在 10 和 20 之间的行进行间隙锁定，防止其他事务在该间隙内插入新的数据。</p>
 </li>
-<li><p>RPC适合用在企业内部，要求使用同一套注册中心进行服务治理，如果是跨组织，或者跨公司，这种情况只能用更加通用的HTTP进行通信。</p>
+<li><p>使用 SELECT … LOCK IN SHARE MODE 语句：该语句与 SELECT … FOR UPDATE 语句类似，但它会对索引进行共享锁定。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table_name WHERE col BETWEEN 10 AND 20 LOCK IN SHARE MODE;<br></code></pre></td></tr></table></figure>
+
+<p>该语句会对 col 列值在 10 和 20 之间的行进行共享锁定，防止其他事务在该间隙内修改数据。</p>
 </li>
-<li><p>Dubbo在并发连接数较高时表现更好，因为Dubbo使用长连接和TCP协议，而HTTP协议每次请求都要建立连接，在每次连接的过程中需要额外的时间开销和数据传输量。但是，在低并发量和小数据量的情况下，HTTP的开销相对较小。</p>
-</li>
-</ul>
-<blockquote>
-<p>rpc具有以下优点：</p>
-</blockquote>
-<ul>
-<li><p>性能好：RPC在传输效率上通常比HTTP更高，此外，RPC可以使用更紧凑的数据格式，如Protocol Buffers和Thrift，可以更有效地利用网络带宽和存储空间。</p>
-</li>
-<li><p>安全性：目前，Dubbo等RPC框架主要应用在企业内部之间的系统调用，而内部系统之间调用的话安全性就更有保障一些。</p>
-</li>
-<li><p>调用简单：RCP可以帮我们像调用本地方法一样调用远程代码，而HTTP调用需要拼接Body、Header等等，过于复杂。</p>
-</li>
-</ul>
+</ol>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>MySQL死锁是指两个或多个事务相互等待对方释放锁资源的状态，导致事务无法继续执行，造成数据库的阻塞。MySQL死锁是一个常见的并发问题，特别是在高并发环境下容易发生。</p>
+<p>MyISAM表锁是deadlock free的，这是因为MyISAM总是一次获得所需的全部锁，要么全部满足，要么等待，因此不会出现死锁。但在InnoDB中，除单个SQL组成的事务外，锁是逐步获得的，这就决定了在InnoDB中发生死锁是可能的。</p>
+<p>造成死锁的原因主要有以下几个：</p>
+<ol>
+<li>竞争资源：多个事务同时竞争同一资源（如行、表等），导致相互等待。</li>
+<li>事务执行顺序不一致：当两个事务在相互等待时，如果它们执行的顺序不一致，就会出现死锁。</li>
+<li>数据库事务隔离级别设置不当：如果事务隔离级别设置过高，可能会导致死锁的发生。</li>
+</ol>
+<p>为了避免MySQL死锁，我们可以采取以下措施：</p>
+<ol>
+<li>减少事务时间：事务执行时间越长，死锁的概率就越大。因此，我们应该尽可能地减少事务的执行时间。</li>
+<li>合理使用索引：合理地使用索引可以减少行级锁的竞争，降低死锁的发生率。</li>
+<li>设置合适的事务隔离级别：在选择事务隔离级别时，应根据业务需求来选择，避免设置过高的隔离级别。</li>
+<li>控制并发度：通过控制并发度，可以降低锁竞争的概率，减少死锁的发生。</li>
+<li>定期优化数据库表结构：定期优化表结构可以降低锁竞争的概率，从而减少死锁的发生。</li>
+<li>在应用中，如果不同的程序会并发存取多个表，应尽量约定以相同的顺序来访问表，这样可以大大降低产生死锁的机会。</li>
+<li>在程序以批量方式处理数据的时候，如果事先对数据排序，保证每个线程按固定的顺序来处理记录，也可以大大降低出现死锁的可能。</li>
+</ol>
+<p>如果出现死锁，通过 MySQL 提供的 SHOW ENGINE INNODB STATUS 命令可以查看当前 MySQL 的锁状态。该命令会输出包含当前所有事务、锁等信息的大量文本，需要找到其中的“LATEST DETECTED DEADLOCK”部分，查看最近发生的死锁信息。</p>
 
             </div>
             <hr>
@@ -310,7 +318,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Dubbo/">Dubbo</a>
+                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
                     
                   </div>
                 
@@ -327,18 +335,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/09/Msql%E9%94%81%E6%9C%BA%E5%88%B6/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Msql锁机制</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/28/%E8%AF%B7%E6%B1%82wordpress-json-api%E8%AE%B0%E5%BD%95/">
-                        <span class="hidden-mobile">请求wordpress json api记录</span>
+                      <a href="/2023/04/06/%E5%AF%B9dubbo%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3%E5%92%8C%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+                        <span class="hidden-mobile">对dubbo的一些理解和简单使用记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
