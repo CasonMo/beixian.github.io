@@ -11,6 +11,18 @@
     <content type="html"><![CDATA[<p>使用 PicGo 将图片上传到 Github 仓库作为图床，需要进行以下几个步骤：</p><ol><li><p>在 Github 上创建一个公开仓库，用于存放图片。仓库名称可以自定义，建议取一个简单明了的名称，比如 <code>pic-go</code>。</p></li><li><p>在本地安装 PicGo，并在设置中选择 Github 作为上传方式。</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304100345581.png" alt="image-20230410034338520"></p></li><li><p>创建一个 Github token，用于访问 Github 仓库。在 Github 中进入 <code>Settings</code> -&gt; <code>Developer settings</code> -&gt; <code>Personal access tokens</code>，点击 <code>Generate new token</code> 按钮，按照提示填写 token 的名称和权限，并点击 <code>Generate token</code> 按钮生成 token。复制 token 的值，然后在 PicGo 的设置中将其粘贴到 <code>Token</code> 中。</p></li><li><p>上传图片</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304100346131.png" alt="image-20230410034508553">上传完成后，PicGo 会自动将图片的访问链接复制到剪贴板中，可以直接将链接粘贴到需要使用图片的地方。</p></li></ol><p>需要注意的是，Github 有上传文件大小限制，单个文件不能超过 100 MB，总大小不能超过 1 GB。另外，上传的图片会占用 Github 的存储空间，需要根据实际情况进行管理。</p>]]></content>
     
     
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
     
   </entry>
   
