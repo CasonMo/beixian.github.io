@@ -19,7 +19,7 @@
                     <meta name="description" content="okhttp通过response.body().string() 获取字符串类型的responsebody 源码分析1234567891011  public final String string() throws IOException &amp;#123;    try (BufferedSource source &#x3D; source()) &amp;#123;      Charset charset &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Okhttp只能获取一次responsebody的问题">
-<meta property="og:url" content="http://example.com/2022/07/18/%E8%A7%A3%E5%86%B3Okhttp%E5%8F%AA%E8%83%BD%E8%8E%B7%E5%8F%96%E4%B8%80%E6%AC%A1responsebody%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="https://casonmo.github.io/2022/07/18/%E8%A7%A3%E5%86%B3Okhttp%E5%8F%AA%E8%83%BD%E8%8E%B7%E5%8F%96%E4%B8%80%E6%AC%A1responsebody%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="okhttp通过response.body().string() 获取字符串类型的responsebody 源码分析1234567891011  public final String string() throws IOException &amp;#123;    try (BufferedSource source &#x3D; source()) &amp;#123;      Charset charset &#x3D;">
 <meta property="og:locale" content="zh_CN">
@@ -71,7 +71,7 @@
 
                                                 <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"casonmo.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
                                                     <script  src="/js/utils.js" ></script>
                                                         <script  src="/js/color-schema.js" ></script>
