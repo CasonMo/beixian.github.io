@@ -5,18 +5,18 @@
 
 
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Cason Mo">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="基础Unix里mysql服务器程序：mysqld:mysql服务器程序 mysqld_safe: 调用mysqld+监控进程+日志 mysql.server:启动脚本&#x3D;调用mysqld_safe  mysql_multi:启动多个mysql服务器程序 启动客户端mysql -h主机名 -u用户名 -p密码 -P端口 客户端和服务器连接的方法 TCP&#x2F;IP  采用TCP协议，通过">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+        <link rel="icon" href="/img/favicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+                <meta name="theme-color" content="#2f4154">
+                <meta name="author" content="Cason Mo">
+                <meta name="keywords" content="">
+                
+                    <meta name="description" content="基础Unix里mysql服务器程序：mysqld:mysql服务器程序 mysqld_safe: 调用mysqld+监控进程+日志 mysql.server:启动脚本&#x3D;调用mysqld_safe  mysql_multi:启动多个mysql服务器程序 启动客户端mysql -h主机名 -u用户名 -p密码 -P端口 客户端和服务器连接的方法 TCP&#x2F;IP  采用TCP协议，通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《mysql是怎样运行的》笔记">
 <meta property="og:url" content="http://example.com/2023/01/20/%E3%80%8Amysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E3%80%8B%E7%AC%94%E8%AE%B0/index.html">
@@ -40,13 +40,15 @@
 <meta property="article:author" content="Cason Mo">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202302091807683.png">
-  
-  
-    <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
-  
-  <title>《mysql是怎样运行的》笔记 - Blog|CasonMo</title>
+                        
+                                
+                                    <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
+                                        
+                                            <title>
+                                                《mysql是怎样运行的》笔记 - Blog|CasonMo
+                                            </title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+                                            <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
@@ -79,14 +81,23 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script id="fluid-configs">
+                                                <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.1.0"></head>
-
+                                                    <script  src="/js/utils.js" ></script>
+                                                        <script  src="/js/color-schema.js" ></script>
+                                                            <script type="text/javascript">
+                                                                document.addEventListener("contextmenu", function(e) {
+                                                                    e.preventDefault();
+                                                                });
+                                                                document.addEventListener("keydown", function(e) {
+                                                                    if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86)) {
+                                                                        e.preventDefault();
+                                                                    }
+                                                                });
+                                                            </script>
+    <meta name="generator" content="Hexo 6.1.0"></head>
 
 <body>
   <header style="height: 70vh;">

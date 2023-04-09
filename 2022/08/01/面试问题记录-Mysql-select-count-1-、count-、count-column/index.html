@@ -5,18 +5,18 @@
 
 
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Cason Mo">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="摘抄自网络  count(*)：先把星号翻译为具体字段名字，多了一步翻译，效率差点count(1)：计算有多少符合条件的行，可以理解为每行数据存在某个值固定的字段，计算有多少个固定值 从结果来说：  count(*) 和 count(1) 没区别，都不会过滤 NULL count(column) 会过滤 NULL  从速度来说：  如果只有一列，count() 效率最高 多列时，count(1)">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+        <link rel="icon" href="/img/favicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+                <meta name="theme-color" content="#2f4154">
+                <meta name="author" content="Cason Mo">
+                <meta name="keywords" content="">
+                
+                    <meta name="description" content="摘抄自网络  count(*)：先把星号翻译为具体字段名字，多了一步翻译，效率差点count(1)：计算有多少符合条件的行，可以理解为每行数据存在某个值固定的字段，计算有多少个固定值 从结果来说：  count(*) 和 count(1) 没区别，都不会过滤 NULL count(column) 会过滤 NULL  从速度来说：  如果只有一列，count() 效率最高 多列时，count(1)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试问题记录-Mysql select count(1)、count(*)、count(column)">
 <meta property="og:url" content="http://example.com/2022/08/01/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95-Mysql-select-count-1-%E3%80%81count-%E3%80%81count-column/index.html">
@@ -29,13 +29,15 @@
 <meta property="article:tag" content="面试问题">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
-  
-  
-    <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
-  
-  <title>面试问题记录-Mysql select count(1)、count(*)、count(column) - Blog|CasonMo</title>
+                        
+                                
+                                    <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
+                                        
+                                            <title>
+                                                面试问题记录-Mysql select count(1)、count(*)、count(column) - Blog|CasonMo
+                                            </title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+                                            <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
@@ -68,14 +70,23 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script id="fluid-configs">
+                                                <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.1.0"></head>
-
+                                                    <script  src="/js/utils.js" ></script>
+                                                        <script  src="/js/color-schema.js" ></script>
+                                                            <script type="text/javascript">
+                                                                document.addEventListener("contextmenu", function(e) {
+                                                                    e.preventDefault();
+                                                                });
+                                                                document.addEventListener("keydown", function(e) {
+                                                                    if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86)) {
+                                                                        e.preventDefault();
+                                                                    }
+                                                                });
+                                                            </script>
+    <meta name="generator" content="Hexo 6.1.0"></head>
 
 <body>
   <header style="height: 70vh;">
