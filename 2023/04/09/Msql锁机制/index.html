@@ -24,7 +24,7 @@
 <meta property="og:description" content="MySQL锁机制是为了保证并发操作的数据一致性而设计的。在并发环境下，多个事务同时访问同一数据，如果不加控制，就会导致数据的不一致性。 MySQL的锁可以分为行级锁和表级锁。  行级锁：在对表中的数据进行修改时，MySQL会自动加上行级锁，该锁只针对修改的行有效，其他行不受影响。行级锁的优点是精度高，缺点是占用资源多，容易造成死锁。InnoDB行锁是通过给索引上的索引项加锁 来实现的，没有索引的情">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-08T19:17:25.000Z">
-<meta property="article:modified_time" content="2023-04-09T14:38:23.737Z">
+<meta property="article:modified_time" content="2023-04-09T14:41:21.185Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.9k 字
+      3k 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      26 分钟
     </span>
   
 
@@ -258,7 +258,8 @@
 <p>使用表级锁定的主要是 <code>MyISAM</code>，<code>MEMORY</code>，<code>CSV</code> 等一些非事务性存储引擎。</p>
 </li>
 </ol>
-<h3 id="InnoDB-引擎实现的锁机制"><a href="#InnoDB-引擎实现的锁机制" class="headerlink" title="InnoDB 引擎实现的锁机制"></a>InnoDB 引擎实现的锁机制</h3><h4 id="记录锁（Record-LOCK）"><a href="#记录锁（Record-LOCK）" class="headerlink" title="记录锁（Record LOCK）"></a>记录锁（Record LOCK）</h4><h5 id="共享锁（Shared-Lock）"><a href="#共享锁（Shared-Lock）" class="headerlink" title="共享锁（Shared Lock）"></a>共享锁（Shared Lock）</h5><p>共享锁（S锁）是一种共享锁定，它允许多个事务同时读取一行数据，但防止这些事务对该行数据进行修改，保证数据的一致性和隔离性。</p>
+<h3 id="InnoDB-引擎实现的锁机制"><a href="#InnoDB-引擎实现的锁机制" class="headerlink" title="InnoDB 引擎实现的锁机制"></a>InnoDB 引擎实现的锁机制</h3><h4 id="记录锁（Record-LOCK）"><a href="#记录锁（Record-LOCK）" class="headerlink" title="记录锁（Record LOCK）"></a>记录锁（Record LOCK）</h4><p>记录锁是 InnoDB 存储引擎实现多版本并发控制（MVCC）机制的重要基础，用来保证数据的一致性和并发性。在 MVCC 中，每个事务在执行修改操作时都会为所修改的数据行创建一个新的版本，并且使用记录锁来保护当前事务对该数据行的修改操作。</p>
+<h5 id="共享锁（Shared-Lock）"><a href="#共享锁（Shared-Lock）" class="headerlink" title="共享锁（Shared Lock）"></a>共享锁（Shared Lock）</h5><p>共享锁（S锁）是一种共享锁定，它允许多个事务同时读取一行数据，但防止这些事务对该行数据进行修改，保证数据的一致性和隔离性。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs mysql">-- 加共享锁（S）<br>select * from table_name where ... lock in share mode<br></code></pre></td></tr></table></figure>
 
 
