@@ -16,15 +16,21 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta property="og:type" content="article">
+                    <meta name="description" content="本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》  简介MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。 索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引">
 <meta property="og:url" content="https://casonmo.github.io/2023/04/10/Mysql%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
+<meta property="og:description" content="本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》  简介MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。 索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034269.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034015.png">
 <meta property="article:published_time" content="2023-04-09T17:58:53.000Z">
-<meta property="article:modified_time" content="2023-04-09T18:41:08.979Z">
+<meta property="article:modified_time" content="2023-04-10T12:37:24.171Z">
 <meta property="article:author" content="Cason Mo">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034269.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
@@ -197,7 +203,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.1k 字
     </span>
   
 
@@ -206,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      10 分钟
     </span>
   
 
@@ -246,7 +252,32 @@
             <h1 style="display: none">Mysql索引</h1>
             
             <div class="markdown-body">
-              
+              <blockquote>
+<p>本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》</p>
+</blockquote>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。</p>
+<p>索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是在大型数据表中查询数据时，索引的性能优势非常明显。</p>
+<h3 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h3><p>mysql通过数据页进行存储数据，如下图结构，每个数据页之间的结构是双向链表，单个数据页内的记录是通过单向链接根据主键从小到大串连</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034269.png" srcset="/img/loading.gif" lazyload alt="image-20230410193826228"></p>
+<p>每个数据页会为里面的记录生成页目录（槽组成页目录）</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034284.png" srcset="/img/loading.gif" lazyload alt="image-20230410195931662"></p>
+<p>如果是根据主键（有序存储进数据页）查找是通过二分快速定位然后遍历槽（4-8条记录组合一个槽）内记录会比较快。但是如果不是主键的字段（且不是索引）这种情况下只能按主键顺序把每个数据页从 最小记录 开始依次遍历单链表中的每条记录。</p>
+<p>Innodb使用 <code>目录项纪录</code> 来实现索引，<code>目录项纪录</code>里只存储主键+数据页号，目录项纪录还有更顶层的目录项纪录，直至根节点，如下图</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102034015.png" srcset="/img/loading.gif" lazyload alt="image-20230410193422059"></p>
+<p>叶子结点存放用户记录，非叶子结点（内结点）存放目录项</p>
+<h4 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h4><p>聚簇索引根据主键值的大小进行记录和页的排序，目录项存储的是主键值和数据页号，叶子结点记录的是完整的用户记录。不需要显式的使用Index去创建，Innodb会为我们自动创建。</p>
+<p>非叶子结点（目录项记录）：主键 - 数据页号</p>
+<p>叶子结点（索引记录）：主键 - 完整用户记录</p>
+<h4 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h4><p>二级索引根据索引键值的大小进行记录和页的排序，非叶子结点记录索引键值和数据页号，叶子结点只记录索引键值和主键值。二级索引查询到主键后需要执行回表操作获取完整记录。（再开了一个b+树）</p>
+<p>非叶子结点（目录项记录）：索引列 - 数据页号</p>
+<p>叶子结点（索引记录）：索引列 - 主键</p>
+<h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><p>联合索引是按照定义的索引列顺序排序，对于相同的索引列，再按照其索引键值的大小进行排序。也就是说，在索引建立之时，定义的索引列顺序就对应了索引的排序方式，按照它们定义的顺序排序，以达到最优的查询效率。</p>
+<p>对于非叶子结点，它们按照索引列的顺序记录着子结点的索引键值和数据页号，索引键值用于指示要查找的数据应该落在哪个子结点中，数据页号则用于指示存储该子结点中数据的数据页。</p>
+<p>对于叶子结点，它们也按照索引列的顺序记录着索引键值和主键值，索引键值用于查询操作中定位到叶子结点，而主键值则用于获取完整的数据行。</p>
+<p>联合索引遵循最左前缀集合。</p>
+<p>非叶子结点（目录项记录）：A索引列 - B索引列 - 数据页号</p>
+<p>叶子结点（索引记录）：A索引列 - B索引列 - 主键</p>
+
             </div>
             <hr>
             <div>
