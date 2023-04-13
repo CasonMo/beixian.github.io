@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="适配器模式是一种结构型设计模式，它允许将一个现有的类与另一个不兼容的类进行协同工作。适配器模式通过创建一个中间适配器来连接两个不兼容的接口，使它们能够正常地协作。 适配器模式适用于需要将不兼容的类或接口进行适配的情况。例如，当我们需要将一个旧版 API 系统与新版的客户端进行集成时，可以使用适配器模式将两种不同的接口进行适配。适配器模式的主要优点是可以复用现有的代码，减少代码的修改和重构，从而提高">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304101732677.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102055869.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304101732677.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102055869.png">
 <meta property="article:published_time" content="2023-04-10T09:31:00.000Z">
-<meta property="article:modified_time" content="2023-04-10T13:00:35.180Z">
+<meta property="article:modified_time" content="2023-04-13T06:40:23.585Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304101732677.png">
+<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304101732677.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
@@ -254,7 +254,7 @@
             <div class="markdown-body">
               <p>适配器模式是一种结构型设计模式，它允许将一个现有的类与另一个不兼容的类进行协同工作。适配器模式通过创建一个中间适配器来连接两个不兼容的接口，使它们能够正常地协作。</p>
 <p>适配器模式适用于需要将不兼容的类或接口进行适配的情况。例如，当我们需要将一个旧版 API 系统与新版的客户端进行集成时，可以使用适配器模式将两种不同的接口进行适配。适配器模式的主要优点是可以复用现有的代码，减少代码的修改和重构，从而提高代码的可维护性和可重用性。但是，适配器模式也会增加系统的复杂度，需要额外的适配器类来协调两个不兼容的接口，在设计时需要慎重考虑其使用场景和影响。</p>
-<h3 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h3><p><strong>大概的构思图</strong><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304101732677.png" srcset="/img/loading.gif" lazyload alt="构思图"></p>
+<h3 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h3><p><strong>大概的构思图</strong><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304101732677.png" srcset="/img/loading.gif" lazyload alt="构思图"></p>
 <p><strong>这是影像数据输出接口</strong>（只输出数据啊 不负责显示！！！）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IComputerOuputContent</span> &#123;<br>    String <span class="hljs-title function_">toDisplayData</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p> <strong>适配器接口类</strong>（数据转换器接口类）</p>
@@ -275,7 +275,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 实例化显示器</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-type">Displayer</span> <span class="hljs-variable">displayer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Displayer</span>();<br>        displayer.setVideoAdapter(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Adapter</span>());<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 把数据转换器接入显示器</span><br><span class="hljs-comment">         * 显示器显示内容</span><br><span class="hljs-comment">         */</span><br>        displayer.view();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>输出内容</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304102055869.png" srcset="/img/loading.gif" lazyload alt="image-20230410205458740"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102055869.png" srcset="/img/loading.gif" lazyload alt="image-20230410205458740"></p>
 <p>懒得敲代码的人可以到这里下载<a target="_blank" rel="noopener" href="https://download.csdn.net/download/Mo_0214/12536851">https://download.csdn.net/download/Mo_0214/12536851</a></p>
 
             </div>
