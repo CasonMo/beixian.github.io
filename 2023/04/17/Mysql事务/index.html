@@ -16,27 +16,23 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta name="description" content="本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》  简介MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。 索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是">
+                    <meta name="description" content="数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。 事务具有以下四个特性，通常称为 ACID 特性：  原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。 一致性（Consistency）：事务执行前和执行后，数据库的完整性约">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql索引">
-<meta property="og:url" content="https://casonmo.github.io/2023/04/10/Mysql%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:title" content="Mysql事务">
+<meta property="og:url" content="https://casonmo.github.io/2023/04/17/Mysql%E4%BA%8B%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》  简介MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。 索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是">
+<meta property="og:description" content="数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。 事务具有以下四个特性，通常称为 ACID 特性：  原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。 一致性（Consistency）：事务执行前和执行后，数据库的完整性约">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034269.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034284.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034015.png">
-<meta property="article:published_time" content="2023-04-09T17:58:53.000Z">
-<meta property="article:modified_time" content="2023-04-17T08:43:37.886Z">
+<meta property="article:published_time" content="2023-04-17T09:28:00.000Z">
+<meta property="article:modified_time" content="2023-04-18T08:54:21.697Z">
 <meta property="article:author" content="Cason Mo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034269.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
                                         
                                             <title>
-                                                Mysql索引 - Blog|CasonMo
+                                                Mysql事务 - Blog|CasonMo
                                             </title>
 
                                             <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
@@ -182,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Mysql索引">
+            <span class="h2" id="subtitle" title="Mysql事务">
               
             </span>
 
@@ -192,8 +188,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-04-10 01:58" pubdate>
-        2023年4月10日 凌晨
+      <time datetime="2023-04-17 17:28" pubdate>
+        2023年4月17日 下午
       </time>
     </span>
   
@@ -203,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.3k 字
     </span>
   
 
@@ -212,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      11 分钟
     </span>
   
 
@@ -249,51 +245,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mysql索引</h1>
+            <h1 style="display: none">Mysql事务</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>本文基于Innodb存储引擎编写，图源+总结自《mysql是怎样运行的》</p>
-</blockquote>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>MySQL索引是MySQL数据库中的一种数据结构，它可以帮助快速查询数据。它类似于书的索引，可以让您快速找到特定的数据行，而无需遍历整个数据表。</p>
-<p>索引是通过在一个或多个列上创建一个数据结构来实现的。当查询需要使用索引的列时，MySQL会使用索引的数据结构来快速定位和检索相应的数据行。这种方式比全表扫描要快得多，特别是在大型数据表中查询数据时，索引的性能优势非常明显。</p>
-<h3 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h3><p>mysql通过数据页进行存储数据，如下图结构，每个数据页之间的结构是双向链表，单个数据页内的记录是通过单向链接根据主键从小到大串连</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034269.png" srcset="/img/loading.gif" lazyload alt="image-20230410193826228"></p>
-<p>每个数据页会为里面的记录生成页目录（槽组成页目录）</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034284.png" srcset="/img/loading.gif" lazyload alt="image-20230410195931662"></p>
-<p>如果是根据主键（有序存储进数据页）查找是通过二分快速定位然后遍历槽（4-8条记录组合一个槽）内记录会比较快。但是如果不是主键的字段（且不是索引）这种情况下只能按主键顺序把每个数据页从 最小记录 开始依次遍历单链表中的每条记录。</p>
-<p>Innodb使用 <code>目录项纪录</code> 来实现索引，<code>目录项纪录</code>里只存储主键+数据页号，目录项纪录还有更顶层的目录项纪录，直至根节点，如下图</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202304102034015.png" srcset="/img/loading.gif" lazyload alt="image-20230410193422059"></p>
-<p>叶子结点存放用户记录，非叶子结点（内结点）存放目录项</p>
-<h4 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h4><p>聚簇索引根据主键值的大小进行记录和页的排序，目录项存储的是主键值和数据页号，叶子结点记录的是完整的用户记录。不需要显式的使用Index去创建，Innodb会为我们自动创建。</p>
-<p>非叶子结点（目录项记录）：主键 - 数据页号</p>
-<p>叶子结点（索引记录）：主键 - 完整用户记录</p>
-<h4 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h4><p>二级索引根据索引键值的大小进行记录和页的排序，非叶子结点记录索引键值和数据页号，叶子结点只记录索引键值和主键值。二级索引查询到主键后需要执行回表操作获取完整记录。（再开了一个b+树）</p>
-<p>非叶子结点（目录项记录）：索引列 - 数据页号</p>
-<p>叶子结点（索引记录）：索引列 - 主键</p>
-<h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><p>联合索引是按照定义的索引列顺序排序，对于相同的索引列，再按照其索引键值的大小进行排序。也就是说，在索引建立之时，定义的索引列顺序就对应了索引的排序方式，按照它们定义的顺序排序，以达到最优的查询效率。</p>
-<p>对于非叶子结点，它们按照索引列的顺序记录着子结点的索引键值和数据页号，索引键值用于指示要查找的数据应该落在哪个子结点中，数据页号则用于指示存储该子结点中数据的数据页。</p>
-<p>对于叶子结点，它们也按照索引列的顺序记录着索引键值和主键值，索引键值用于查询操作中定位到叶子结点，而主键值则用于获取完整的数据行。</p>
-<p>联合索引遵循最左前缀集合。</p>
-<p>非叶子结点（目录项记录）：A索引列 - B索引列 - 数据页号</p>
-<p>叶子结点（索引记录）：A索引列 - B索引列 - 主键</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><strong>字符串索引原理</strong></p>
-<p>在B-tree索引中，MySQL将每个字符串值都分解成一组前缀，然后将这些前缀作为索引的键值。这些前缀可以是固定长度的，也可以是可变长度的，具体取决于索引定义的长度。</p>
-<p>例如，如果我们在一个名为<code>mytable</code>的表的<code>name</code>列上创建了一个长度为10的索引，那么MySQL将对每个<code>name</code>值提取前10个字符，并将其存储在索引树中。查询时，MySQL可以使用这个索引快速查找匹配的记录。</p>
-<p>然而，需要注意的是，在创建索引时需要权衡索引长度和查询效率。如果索引长度过长，那么会导致索引树变得更大，更慢，甚至会影响到查询性能。因此，我们需要根据具体情况来确定索引长度，以平衡查询效率和存储空间的利用率。</p>
-<p>查询时MySQL 会将字符串按照字符集的排序规则进行比较</p>
+              <p>数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。</p>
+<p>事务具有以下四个特性，通常称为 ACID 特性：</p>
+<ol>
+<li>原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。</li>
+<li>一致性（Consistency）：事务执行前和执行后，数据库的完整性约束没有被破坏。</li>
+<li>隔离性（Isolation）：多个事务并发执行时，每个事务都应该感觉不到其他事务的存在，各个事务之间应该相互隔离。</li>
+<li>持久性（Durability）：事务一旦提交成功，其结果就应该永久保存在数据库中，即使出现系统故障也不应该丢失。</li>
+</ol>
+<h4 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h4><p>脏读（Dirty Read）是指在一个事务中读取了另一个事务尚未提交的数据。在脏读的情况下，读取到的数据可能是不准确的，因为这些数据可能会被另一个事务撤销或修改。</p>
+<p>例如，假设有两个事务 A 和 B，事务 A 在读取了一条数据之后，事务 B 修改了该数据，但是尚未提交。如果此时事务 A 再次读取该数据，那么就会读取到事务 B 修改后的数据，而这个数据可能是不准确的。</p>
+<h4 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h4><p>在数据库事务中，不可重复读是指在同一个事务中，多次读取同一个数据时得到的结果可能不同。这通常是由于在事务执行期间，另一个并发的事务修改了同一个数据所导致的。</p>
+<p>以下是一个示例，说明不可重复读的情况：</p>
+<ol>
+<li>事务T1读取数据X，获得结果A。</li>
+<li>在T1读取数据X之后，事务T2修改了数据X，将其更改为B。</li>
+<li>事务T1再次读取数据X，此时获得结果B，与第一次读取时的结果不同。</li>
+</ol>
+<h4 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h4><p>在数据库事务中，幻读是指在同一个事务中多次读取同一个范围内的记录时，得到的结果可能不同。这通常是由于在事务执行期间，另一个并发的事务插入或删除了一些记录所导致的。</p>
+<p>以下是一个示例，说明幻读的情况：</p>
+<ol>
+<li>事务T1读取数据集X，获得结果A。</li>
+<li>在T1读取数据集X之后，事务T2在数据集X中插入了一条新的记录，这条记录不在T1的结果集中。</li>
+<li>事务T1再次读取数据集X，此时获得结果B，其中包含了T2插入的新记录。</li>
+</ol>
+<p>在这个示例中，T1的两次读取之间的差异就是幻读的结果。</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>数据库事务隔离级别是指多个事务之间相互隔离的程度，可以通过设置隔离级别来控制事务之间的并发性和数据一致性。常见的隔离级别有四个，分别是：</p>
+<ol>
+<li>读未提交（Read Uncommitted）：在这个隔离级别下，一个事务可以读取另一个事务尚未提交的数据，会出现脏读、不可重复读和幻读的问题。</li>
+<li>读已提交（Read Committed）：在这个隔离级别下，一个事务只能读取另一个事务已经提交的数据，可以避免脏读的问题，但是仍然会出现不可重复读和幻读的问题。</li>
+<li>可重复读（Repeatable Read）：在这个隔离级别下，一个事务在执行期间多次读取同一条记录的数据时，会保证每次读取的数据都相同，可以避免脏读和不可重复读的问题，但是仍然会出现幻读的问题。</li>
+<li>串行化（Serializable）：在这个隔离级别下，所有的事务都是串行执行的，每个事务必须等待前一个事务执行完成后才能执行，可以避免脏读、不可重复读和幻读的问题，但是会降低系统的并发性能。</li>
+</ol>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Mysql/">Mysql</a>
-                    
-                  </div>
                 
                 
               </div>
@@ -309,18 +300,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/10/Hexo-%E4%BC%98%E5%8C%96seo/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo-优化seo</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/09/Msql%E9%94%81%E6%9C%BA%E5%88%B6/">
-                        <span class="hidden-mobile">Msql锁机制</span>
+                      <a href="/2023/04/13/zookeeper%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8-%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+                        <span class="hidden-mobile">zookeeper简单使用+工具类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
