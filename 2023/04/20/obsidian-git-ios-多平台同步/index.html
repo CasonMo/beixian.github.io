@@ -16,24 +16,28 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta name="description" content="数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。 事务特性事务具有以下四个特性，通常称为 ACID 特性：  原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。 一致性（Consistency）：事务执行前和执行后，数据库的">
+                    <meta name="description" content="Obsidian 提供了多种数据同步方式，其中可以通过第三方插件实现 Git 同步。通过 Git 同步，你可以将 Obsidian 中的笔记数据上传到 GitHub、GitLab、Bitbucket 等 Git 仓库中，从而实现在 iOS 和 Mac 等不同设备之间同步笔记。 以下是实现 Obsidian Git 同步的步骤： Mac： 在你的 Git 仓库中创建一个新的仓库，并将其克隆到本地计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql事务">
-<meta property="og:url" content="https://casonmo.github.io/2023/04/17/Mysql%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:title" content="obsidian git ios 多平台同步">
+<meta property="og:url" content="https://casonmo.github.io/2023/04/20/obsidian-git-ios-%E5%A4%9A%E5%B9%B3%E5%8F%B0%E5%90%8C%E6%AD%A5/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。 事务特性事务具有以下四个特性，通常称为 ACID 特性：  原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。 一致性（Consistency）：事务执行前和执行后，数据库的">
+<meta property="og:description" content="Obsidian 提供了多种数据同步方式，其中可以通过第三方插件实现 Git 同步。通过 Git 同步，你可以将 Obsidian 中的笔记数据上传到 GitHub、GitLab、Bitbucket 等 Git 仓库中，从而实现在 iOS 和 Mac 等不同设备之间同步笔记。 以下是实现 Obsidian Git 同步的步骤： Mac： 在你的 Git 仓库中创建一个新的仓库，并将其克隆到本地计算">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-17T09:28:00.000Z">
-<meta property="article:modified_time" content="2023-04-19T08:12:49.251Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201140960.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201142184.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201146055.png">
+<meta property="article:published_time" content="2023-04-20T03:36:55.000Z">
+<meta property="article:modified_time" content="2023-04-20T03:55:08.670Z">
 <meta property="article:author" content="Cason Mo">
-<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="obsidian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201140960.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
                                         
                                             <title>
-                                                Mysql事务 - Blog|CasonMo
+                                                obsidian git ios 多平台同步 - Blog|CasonMo
                                             </title>
 
                                             <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
@@ -179,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Mysql事务">
+            <span class="h2" id="subtitle" title="obsidian git ios 多平台同步">
               
             </span>
 
@@ -189,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-04-17 17:28" pubdate>
-        2023年4月17日 下午
+      <time datetime="2023-04-20 11:36" pubdate>
+        2023年4月20日 中午
       </time>
     </span>
   
@@ -200,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      704 字
     </span>
   
 
@@ -209,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      6 分钟
     </span>
   
 
@@ -246,60 +250,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mysql事务</h1>
+            <h1 style="display: none">obsidian git ios 多平台同步</h1>
             
             <div class="markdown-body">
-              <p>数据库事务是指一组数据库操作，它们作为一个逻辑单元一起执行，要么全部执行，要么全部不执行。在数据库中，事务通常用于执行一系列的数据库操作，比如插入、更新或删除多条记录等。</p>
-<h3 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h3><p>事务具有以下四个特性，通常称为 ACID 特性：</p>
-<ol>
-<li>原子性（Atomicity）：事务中的所有操作都要么全部执行，要么全部不执行，不允许出现部分执行的情况。</li>
-<li>一致性（Consistency）：事务执行前和执行后，数据库的完整性约束没有被破坏。</li>
-<li>隔离性（Isolation）：多个事务并发执行时，每个事务都应该感觉不到其他事务的存在，各个事务之间应该相互隔离。</li>
-<li>持久性（Durability）：事务一旦提交成功，其结果就应该永久保存在数据库中，即使出现系统故障也不应该丢失。</li>
-</ol>
-<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>脏读（Dirty Read）是指在一个事务中读取了另一个事务尚未提交的数据。在脏读的情况下，读取到的数据可能是不准确的，因为这些数据可能会被另一个事务撤销或修改。</p>
-<p>例如，假设有两个事务 A 和 B，事务 A 在读取了一条数据之后，事务 B 修改了该数据，但是尚未提交。如果此时事务 A 再次读取该数据，那么就会读取到事务 B 修改后的数据，而这个数据可能是不准确的。</p>
-<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>在数据库事务中，不可重复读是指在同一个事务中，多次读取同一个数据时得到的结果可能不同。这通常是由于在事务执行期间，另一个并发的事务修改了同一个数据所导致的。</p>
-<p>以下是一个示例，说明不可重复读的情况：</p>
-<ol>
-<li>事务T1读取数据X，获得结果A。</li>
-<li>在T1读取数据X之后，事务T2修改了数据X，将其更改为B。</li>
-<li>事务T1再次读取数据X，此时获得结果B，与第一次读取时的结果不同。</li>
-</ol>
-<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>在数据库事务中，幻读是指在同一个事务中多次读取同一个范围内的记录时，得到的结果可能不同。这通常是由于在事务执行期间，另一个并发的事务插入或删除了一些记录所导致的。</p>
-<p>以下是一个示例，说明幻读的情况：</p>
-<ol>
-<li>事务T1读取数据集X，获得结果A。</li>
-<li>在T1读取数据集X之后，事务T2在数据集X中插入了一条新的记录，这条记录不在T1的结果集中。</li>
-<li>事务T1再次读取数据集X，此时获得结果B，其中包含了T2插入的新记录。</li>
-</ol>
-<p>在这个示例中，T1的两次读取之间的差异就是幻读的结果。</p>
-<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>数据库事务隔离级别是指多个事务之间相互隔离的程度，可以通过设置隔离级别来控制事务之间的并发性和数据一致性。常见的隔离级别有四个，分别是：</p>
-<ol>
-<li>读未提交（Read Uncommitted）：在这个隔离级别下，一个事务可以读取另一个事务尚未提交的数据，会出现脏读、不可重复读和幻读的问题。</li>
-<li>读已提交（Read Committed）：在这个隔离级别下，一个事务只能读取另一个事务已经提交的数据，可以避免脏读的问题，但是仍然会出现不可重复读和幻读的问题。</li>
-<li>可重复读（Repeatable Read）：在这个隔离级别下，一个事务在执行期间多次读取同一条记录的数据时，会保证每次读取的数据都相同，可以避免脏读和不可重复读的问题，但是仍然会出现幻读的问题。</li>
-<li>串行化（Serializable）：在这个隔离级别下，所有的事务都是串行执行的，每个事务必须等待前一个事务执行完成后才能执行，可以避免脏读、不可重复读和幻读的问题，但是会降低系统的并发性能。</li>
-</ol>
-<h3 id="log"><a href="#log" class="headerlink" title="log"></a>log</h3><h4 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h4><p>在 MySQL 中，redo log 是一种用于崩溃恢复和事务持久化的机制。redo log 记录了所有的修改操作，即事务对数据库中数据所做的所有修改。当 MySQL 在崩溃后重新启动时，它可以使用 redo log 来恢复最后一次崩溃之前提交的事务。</p>
-<p>redo log 是基于磁盘的日志，它是循环写入的，当所有的 redo log 被写满之后，MySQL 将从 redo log 的开头重新开始写入。redo log 存储在磁盘上，因此它不会消耗过多的内存。</p>
-<p>redo log 的工作原理是：当一个事务开始时，所有的修改操作都被记录到 redo log 中，但实际的数据修改操作不会立即被执行。相反，它们会被暂时保存在内存中，等到事务提交时，MySQL 才会将其写入磁盘。这样做的目的是为了减少磁盘写入的次数，提高系统的性能。</p>
-<p>当 MySQL 发生崩溃或非正常关闭时，redo log 就发挥了重要的作用。MySQL 在重新启动时，会检查 redo log 中尚未提交的事务，然后将其重新执行，以保证数据库状态的一致性。</p>
-<h4 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h4><p>在 MySQL 中，undo log 是用于事务回滚和 MVCC（多版本并发控制）实现的机制。当一个事务开始时，MySQL 会创建一个 undo log 来记录该事务所做的修改操作。当事务被回滚时，MySQL 就会使用 undo log 将数据恢复到事务开始之前的状态。</p>
-<p>与 redo log 不同的是，undo log 记录的是原始数据的“旧值”，而不是新的修改值。因此，在事务回滚时，MySQL 可以使用 undo log 将数据恢复到事务开始之前的状态。此外，undo log 还可以用于支持 MVCC 实现，MVCC 允许多个事务同时读取同一个数据项，而不会互相干扰。</p>
-<p>undo log 存储在磁盘上，但它们通常存储在内存中的临时缓冲区中。当事务提交时，MySQL 会将其对应的 undo log 从内存中写入磁盘中的 undo log 文件中。如果一个事务还没有提交，那么它的 undo log 就不会被写入磁盘，这样可以避免写入磁盘的开销。</p>
-<h4 id="bin-log"><a href="#bin-log" class="headerlink" title="bin log"></a>bin log</h4><p>在 MySQL 中，bin log 是用于数据备份、恢复以及复制的机制。bin log 记录了 MySQL 中所有修改数据的操作，包括对数据的插入、更新和删除等操作。</p>
-<p>bin log 存储在磁盘上，可以用来恢复数据或复制数据到其他 MySQL 实例。因此，bin log 可以用于数据备份和恢复，也可以用于主从复制，将一个 MySQL 实例的数据复制到其他 MySQL 实例。</p>
-<p>bin log 的工作原理是：当一个事务开始时，MySQL 会将所有的修改操作记录到 bin log 中。当事务提交时，MySQL 将事务的提交信息一并记录到 bin log 中。因此，bin log 中不仅包含数据的修改操作，还包含了事务提交的时间、事务 ID 等信息。</p>
-<p>bin log 有多种格式，包括 statement、row 和 mixed 等格式。其中，statement 格式记录的是 SQL 语句，row 格式记录的是行级别的变化，mixed 格式是两者的结合。</p>
-<h4 id="事务中日志执行流程"><a href="#事务中日志执行流程" class="headerlink" title="事务中日志执行流程"></a>事务中日志执行流程</h4><ol>
-<li><p>记录undo log，将修改前的数据记录到undoLog中，以便在事务回滚时恢复原来的数据。</p>
+              <p>Obsidian 提供了多种数据同步方式，其中可以通过第三方插件实现 Git 同步。通过 Git 同步，你可以将 Obsidian 中的笔记数据上传到 GitHub、GitLab、Bitbucket 等 Git 仓库中，从而实现在 iOS 和 Mac 等不同设备之间同步笔记。</p>
+<p>以下是实现 Obsidian Git 同步的步骤：</p>
+<h4 id="Mac："><a href="#Mac：" class="headerlink" title="Mac："></a>Mac：</h4><ol>
+<li><p>在你的 Git 仓库中创建一个新的仓库，并将其克隆到本地计算机上。</p>
 </li>
-<li><p>执行事务中的SQL语句，这些语句会修改数据库中的数据。</p>
+<li><p>在 Obsidian 中打开设置界面，选择「第三方插件」选项卡，安装并启用「Obsidian Git」插件。</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201140960.png" srcset="/img/loading.gif" lazyload alt="image-20230420114013073"></p>
 </li>
-<li><p>记录redo log，将修改后的数据写入到磁盘上的数据文件中，保证事务的持久性。</p>
+<li><p>在 Obsidian Git设置界面中，点击开启自动commit和push，并设置时间。</p>
+<img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201142184.png" srcset="/img/loading.gif" lazyload alt="image-20230420114154147" style="zoom:50%;" /></li>
+</ol>
+<p>此时，Obsidian 中的笔记数据将被同步到 Git 仓库中</p>
+<h4 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h4><ol>
+<li>apple store下载ISH</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201146055.png" srcset="/img/loading.gif" lazyload alt="image-20230420114624522"></p>
+<ol start="2">
+<li><p>打开ISH执行以下命令</p>
+<ol>
+<li>安装git</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">apk add git<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>用于在当前用户的主目录下创建一个名为 “obsidian” 的新文件夹</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~ &amp;&amp; mkdir obsidian<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行以下命令会打开手机文件管理器，之后需要选中本地的obsidian文件夹，点击完成。这样就让obsidian软件中的math文件夹，装载到ish上的obsidian文件夹内 ，之后对于obsidian软件内math文件的修改，iSH上也同步修改</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount -t ios . obsidian<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>通过cd命令，进入obsidian文件夹内</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~/obsidian<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Git 克隆仓库到obsidian目录,输入账号和密码（github personal access key）</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://xxxxxx.git<br></code></pre></td></tr></table></figure>
+
+
 </li>
-<li><p>记录bin log，将执行的SQL语句记录在二进制日志中，以便用于主从同步和数据恢复等。</p>
+<li><p>打开obsidian就会看到你的仓库咯，然后打开Obsidian Git配置，git账号密码</p>
 </li>
 </ol>
 
@@ -311,7 +310,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/categories/obsidian/">obsidian</a>
                     
                   </div>
                 
@@ -319,7 +318,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/tags/obsidian/">obsidian</a>
                     
                   </div>
                 
@@ -336,18 +335,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/20/obsidian-git-ios-%E5%A4%9A%E5%B9%B3%E5%8F%B0%E5%90%8C%E6%AD%A5/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">obsidian git ios 多平台同步</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/13/zookeeper%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8-%E5%B7%A5%E5%85%B7%E7%B1%BB/">
-                        <span class="hidden-mobile">zookeeper简单使用+工具类</span>
+                      <a href="/2023/04/17/Mysql%E4%BA%8B%E5%8A%A1/">
+                        <span class="hidden-mobile">Mysql事务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
