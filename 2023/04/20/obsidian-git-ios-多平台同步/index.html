@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201142184.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202304201146055.png">
 <meta property="article:published_time" content="2023-04-20T03:36:55.000Z">
-<meta property="article:modified_time" content="2023-04-20T03:55:08.670Z">
+<meta property="article:modified_time" content="2023-04-23T14:22:09.563Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="obsidian">
 <meta name="twitter:card" content="summary_large_image">
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      704 字
+      1.4k 字
     </span>
   
 
@@ -213,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      12 分钟
     </span>
   
 
@@ -301,7 +301,36 @@
 <li><p>打开obsidian就会看到你的仓库咯，然后打开Obsidian Git配置，git账号密码</p>
 </li>
 </ol>
+<h4 id="异常解决"><a href="#异常解决" class="headerlink" title="异常解决"></a>异常解决</h4><p>如果遇到git clone 一直卡着 多次尝试都无法clone成功的</p>
+<ol>
+<li>先创建目录并进入目录</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir ～/obsidian/目录名<br>cd ～/obsidian/目录名<br></code></pre></td></tr></table></figure>
 
+<ol start="2">
+<li>初始化git仓库</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git init<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将一个名为 “safe.directory” 的 Git 全局配置设置添加到您的 Git 环境中，并将其设置为 “ <del>&#x2F;obsidian&#x2F;目录名” 目录。这个全局配置设置被添加到您的 “</del>&#x2F;.gitconfig” 文件中，并且可以被所有在您的本地机器上运行的 Git 仓库使用，以确保它们都知道您选择的安全目录的位置。这个命令是为了帮助您保护您的个人、敏感或重要的 Git 仓库，以防止在错误的位置或受到攻击的计算机上泄露。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global --add safe.directory ~/obsidian/目录名<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>当 Git 打包一个仓库的对象时，会将这些对象压缩成一个文件存储在 Git 对象库中。这个操作非常耗费资源，因此使用多线程处理可以加速打包过程。设置 “pack.threads” 为 1 意味着 Git 将使用单线程进行打包操作，这样可能会减缓打包速度，但是也能够减少计算机的 CPU 和内存负载。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config pack.threads 1<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>从远程仓库获取最新的提交和对象，但是不会将它们合并到当前的本地分支中。它通常被用来检查远程仓库中的最新变更，以便在本地进行更新或者合并操作之前先了解这些变更。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git fetch<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>如果想要拉取最新的代码并自动将其合并到本地分支中，可以使用 <code>git pull</code> 命令。但是如果只是想要知道远程仓库的最新状态，而不会改变当前的本地分支状态，可以使用 <code>git fetch</code>。这样可以避免不必要的合并冲突，提高工作效率。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git pull<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
