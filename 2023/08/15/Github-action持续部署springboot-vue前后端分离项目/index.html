@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="因为购买的阿里云服务器性能比较拉垮，安装jenkins做持续集成和持续部署会占用比较大量的服务器资源。因为实习的时候当时负责的一个项目就是把jenkins迁移到github action，所以就优先考虑使用Github action. GitHub Actions 是一个由 GitHub 提供的持续集成（CI）和持续部署（CD）平台，它允许开发者在代码仓库中设置自动化的工作流程。这些工作流程可以在">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308151056837.png">
 <meta property="article:published_time" content="2023-08-15T02:09:24.000Z">
-<meta property="article:modified_time" content="2023-08-15T02:52:54.295Z">
+<meta property="article:modified_time" content="2023-08-15T02:56:51.456Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="CI&#x2F;CD">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308151056837.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
@@ -200,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      3.6k 字
     </span>
   
 
@@ -209,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32 分钟
+      30 分钟
     </span>
   
 
@@ -252,7 +254,7 @@
               <p>因为购买的阿里云服务器性能比较拉垮，安装jenkins做持续集成和持续部署会占用比较大量的服务器资源。因为实习的时候当时负责的一个项目就是把jenkins迁移到github action，所以就优先考虑使用Github action.</p>
 <p>GitHub Actions 是一个由 GitHub 提供的持续集成（CI）和持续部署（CD）平台，它允许开发者在代码仓库中设置自动化的工作流程。这些工作流程可以在代码的不同事件触发时自动执行，例如推送代码、创建 Pull Request、发布 Release 等。</p>
 <h2 id="Secret配置"><a href="#Secret配置" class="headerlink" title="Secret配置"></a>Secret配置</h2><p>需要提前配置一些github action secret，打开对应项目setting</p>
-<p>![image-20230815103929921](..&#x2F;..&#x2F;..&#x2F;..&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20230815103929921.png)</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308151056837.png" srcset="/img/loading.gif" lazyload alt="image-20230815103929921"></p>
 <p>配置后即可在yaml文件中使用$使用对应值</p>
 <h2 id="vue项目"><a href="#vue项目" class="headerlink" title="vue项目"></a>vue项目</h2><p>在项目里编写.github&#x2F;workflows&#x2F;node.js.yml</p>
 <p>在github action里实现了</p>
