@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308162052859.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308162052726.png">
 <meta property="article:published_time" content="2023-08-16T12:23:44.000Z">
-<meta property="article:modified_time" content="2023-08-16T12:57:11.158Z">
+<meta property="article:modified_time" content="2023-08-16T13:05:22.925Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="SpringCloud">
 <meta name="twitter:card" content="summary_large_image">
@@ -203,7 +203,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.9k 字
+      4.2k 字
     </span>
   
 
@@ -212,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33 分钟
+      36 分钟
     </span>
   
 
@@ -304,7 +304,13 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FeignClient(&quot;user-service&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserClient</span> &#123;<br>    <span class="hljs-meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span><br>    UserEntity <span class="hljs-title function_">getUser</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>user-service</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserClient</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> UserEntity <span class="hljs-title function_">getUser</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span> &#123;<br>        <span class="hljs-keyword">return</span> userService.getUser(id);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserClient</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> UserEntity <span class="hljs-title function_">getUser</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span> &#123;<br>        <span class="hljs-keyword">return</span> userService.getUser(id);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Order-service引入user-api</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.cason<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>user-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>指定client注入容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableFeignClients(clients = &#123;UserClient.class&#125;)</span><br></code></pre></td></tr></table></figure></li>
 </ul>
 
             </div>
