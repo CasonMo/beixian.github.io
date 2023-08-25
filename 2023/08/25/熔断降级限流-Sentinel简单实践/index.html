@@ -16,26 +16,27 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta name="description" content="分布式配置中心是一种用于管理和集中存储应用程序配置的系统，特别适用于大规模、复杂的分布式系统。它的主要目标是将应用程序的配置信息从代码中分离出来，使得配置可以在运行时进行动态修改和管理，而无需重新部署应用程序。 以下是分布式配置中心的一些关键特点和优势：  集中管理： 分布式配置中心允许将所有应用程序的配置集中存储在一个地方，从而方便统一管理和修改配置，避免了在每个应用程序实例中手动更改配置。 动">
+                    <meta name="description" content="在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。 熔断： 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式配置中心-Nacos简单实践">
-<meta property="og:url" content="https://casonmo.github.io/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:title" content="熔断降级限流-Sentinel简单实践">
+<meta property="og:url" content="https://casonmo.github.io/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="分布式配置中心是一种用于管理和集中存储应用程序配置的系统，特别适用于大规模、复杂的分布式系统。它的主要目标是将应用程序的配置信息从代码中分离出来，使得配置可以在运行时进行动态修改和管理，而无需重新部署应用程序。 以下是分布式配置中心的一些关键特点和优势：  集中管理： 分布式配置中心允许将所有应用程序的配置集中存储在一个地方，从而方便统一管理和修改配置，避免了在每个应用程序实例中手动更改配置。 动">
+<meta property="og:description" content="在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。 熔断： 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308231648127.png">
-<meta property="article:published_time" content="2023-08-23T08:07:15.000Z">
-<meta property="article:modified_time" content="2023-08-23T08:49:07.612Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251825142.png">
+<meta property="article:published_time" content="2023-08-25T07:09:15.000Z">
+<meta property="article:modified_time" content="2023-08-25T10:31:18.463Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="SpringCloud">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308231648127.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
                                         
                                             <title>
-                                                分布式配置中心-Nacos简单实践 - Blog|CasonMo
+                                                熔断降级限流-Sentinel简单实践 - Blog|CasonMo
                                             </title>
 
                                             <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
@@ -181,7 +182,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分布式配置中心-Nacos简单实践">
+            <span class="h2" id="subtitle" title="熔断降级限流-Sentinel简单实践">
               
             </span>
 
@@ -191,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-23 16:07" pubdate>
-        2023年8月23日 下午
+      <time datetime="2023-08-25 15:09" pubdate>
+        2023年8月25日 下午
       </time>
     </span>
   
@@ -202,7 +203,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.6k 字
     </span>
   
 
@@ -248,40 +249,49 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">分布式配置中心-Nacos简单实践</h1>
+            <h1 style="display: none">熔断降级限流-Sentinel简单实践</h1>
             
             <div class="markdown-body">
-              <p>分布式配置中心是一种用于管理和集中存储应用程序配置的系统，特别适用于大规模、复杂的分布式系统。它的主要目标是将应用程序的配置信息从代码中分离出来，使得配置可以在运行时进行动态修改和管理，而无需重新部署应用程序。</p>
-<p>以下是分布式配置中心的一些关键特点和优势：</p>
+              <p>在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。</p>
+<p><strong>熔断：</strong> 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助于防止故障扩散，提高系统的稳定性。</p>
+<p><strong>降级：</strong> 降级是一种在系统压力剧增、资源不足或异常情况下的应对策略。为了保持核心功能的可用性，系统可以主动放弃一些非核心或次要功能，从而减轻系统的负载。例如，在高流量期间，系统可以降级为提供基本的服务，禁用某些高成本或资源密集型的功能。这可以确保系统的关键部分仍然正常工作，即使在资源有限的情况下也能保持较好的响应性能。</p>
+<p><strong>限流：</strong> 限流是一种控制系统访问量的策略，用于防止系统过载。通过限制对某个特定服务、接口或资源的并发访问数量，限流可以防止过多的请求影响系统的性能和可用性。限流可以基于多种条件进行，如设置每秒查询数（QPS）限制、并发连接数、请求频率等。这有助于维护系统的稳定性，确保系统在其可承受的负载范围内运行。</p>
+<h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><p>Sentinel旨在解决分布式系统中常见的流量控制、熔断降级和保护问题，帮助开发人员构建稳定、可靠的微服务架构。以下是Sentinel的一些重要方面：</p>
 <ol>
-<li><strong>集中管理：</strong> 分布式配置中心允许将所有应用程序的配置集中存储在一个地方，从而方便统一管理和修改配置，避免了在每个应用程序实例中手动更改配置。</li>
-<li><strong>动态更新：</strong> 配置中心支持在应用程序运行时动态更新配置，而无需重新启动或重新部署应用。这对于需要频繁变更配置的场景非常有用。</li>
-<li><strong>版本控制：</strong> 配置中心通常支持配置版本控制，使得可以跟踪配置的变更历史，方便回退或恢复配置。</li>
-<li><strong>环境隔离：</strong> 配置中心允许将不同环境（如开发、测试、生产）的配置隔离开来，从而确保在不同环境中使用不同的配置。</li>
-<li><strong>动态扩展：</strong> 配置中心可以支持多个应用程序实例和多个团队同时访问，并能够处理高并发的配置请求。</li>
-<li><strong>安全性：</strong> 配置中心通常提供权限控制，确保只有授权用户可以访问和修改配置。</li>
-<li><strong>集成支持：</strong> 配置中心可以与其他工具和框架集成，如监控系统、CI&#x2F;CD流水线等，从而更好地支持自动化和运维流程。</li>
-</ol>
-<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><p>Nacos（Naming and Configuration Service）是阿里巴巴开源的一个用于服务发现、动态配置管理和可视化平台的项目。它结合了服务发现、配置管理和健康监测等功能，是一个综合的微服务基础设施组件。其中，Nacos的配置管理部分可以被用作分布式配置中心。</p>
-<ul>
-<li><p>添加nacos配置管理依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs xml">  <span class="hljs-comment">&lt;!-- nacos的配置管理依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<li><p><strong>流量控制：</strong> Sentinel可以根据系统的负载情况和资源的可用性，限制对某个特定资源的访问。通过设定阈值，开发人员可以限制资源的并发访问数、QPS等，防止过多的请求导致资源耗尽或性能下降。</p>
 </li>
-<li><p>在resource下创建bootstrap.yaml配置文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">gateway</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-comment"># 环境</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span> <br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-comment"># nacos地址</span><br>      <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span> <br>      <span class="hljs-attr">config:</span><br>        <span class="hljs-comment"># 文件后缀</span><br>        <span class="hljs-attr">file-extension:</span> <span class="hljs-string">yaml</span> <br></code></pre></td></tr></table></figure>
+<li><p><strong>熔断降级：</strong> Sentinel可以监控资源的错误率、异常率等情况。如果错误率超过了设定的阈值，Sentinel可以自动触发熔断操作，停止对该资源的请求一段时间，以防止故障扩散。熔断机制有助于保护系统免受故障的影响。</p>
+</li>
+<li><p><strong>系统保护：</strong> Sentinel可以监控整个系统的健康状态，包括系统负载、资源利用率等。当系统负载过高或出现异常情况时，Sentinel可以采取措施，如限制某些资源的访问，以保护整个系统免受过载的影响。</p>
+</li>
+<li><p><strong>实时监控和统计：</strong> Sentinel提供实时的监控面板和统计信息，开发人员可以通过这些信息了解资源的使用情况、异常情况和系统的整体状态。这些数据有助于及时发现问题并采取措施。</p>
+</li>
+<li><p><strong>规则配置：</strong> Sentinel允许开发人员配置流量控制和熔断降级的规则。规则可以基于资源的名称、路径、HTTP方法等进行配置，以适应不同的场景和需求。</p>
+</li>
+<li><p><strong>集成和适用性：</strong> Sentinel可以与各种编程语言和框架一起使用，适用于微服务架构中的各种场景。它提供了丰富的API和插件，以便与现有系统集成。</p>
+</li>
+</ol>
+<h3 id="简单实践"><a href="#简单实践" class="headerlink" title="简单实践"></a>简单实践</h3><ul>
+<li><p>下载sentinel</p>
+<blockquote>
+<p>地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a></p>
+</blockquote>
+</li>
+<li><p>启动sentinel</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">java -jar sentinel-dashboard-1.8.6.jar <br></code></pre></td></tr></table></figure>
 
-<ol>
-<li><strong>配置加载顺序：</strong> 在Spring Boot应用程序中，配置文件的加载顺序是有一定规则的。<code>bootstrap.yaml</code> 配置文件在加载顺序上位于其他配置文件（如 <code>application.yaml</code> 或 <code>application.properties</code>）之前。这意味着它可以用于配置一些在应用程序启动之前就需要的属性，例如连接到配置服务器的属性。</li>
-<li><strong>外部配置加载：</strong> 通常，分布式系统中的应用程序可能需要从配置中心（如Nacos、Consul等）获取配置信息。<code>bootstrap.yaml</code> 配置文件可以用来配置与配置中心的连接和身份验证等信息，以便在应用程序启动时能够正确地加载配置。</li>
-</ol>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png" srcset="/img/loading.gif" lazyload alt="image-20230825182945267"></p>
 </li>
-<li><p>在nacos中以&lt;spring.application.name&gt;-&lt;spring.profiles.active&gt;.yaml作为data id在DEFAULT_GROUP新建配置，例如：gateway-dev.yaml</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308231648127.png" srcset="/img/loading.gif" lazyload alt="image-20230823161911507"></p>
+<li><p><strong>引入依赖：</strong> 在你的Spring Boot项目的 <code>pom.xml</code> 文件中，添加Sentinel的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置：</strong> 在你的 <code>application.properties</code> 或 <code>application.yml</code> 文件中，可以进行一些基本的配置，例如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启动项目即可在页面中实时监控、配置流控规则等</p>
+<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251825142.png" srcset="/img/loading.gif" lazyload alt="image-20230825182546927"></p>
 </li>
 </ul>
-<p>项目启动后，无需重新启动或停机就会从nacos中动态加载配置下来，通过@Value即可获取对应的值。如果您将配置属性注入到了Spring管理的Bean中，而且希望在配置发生变化时动态刷新Bean的状态，您可以使用 <code>@RefreshScope</code> 注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RefreshScope</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyService</span> &#123;<br><br>    <span class="hljs-meta">@Value(&quot;$&#123;config.hello&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String helloConfig;<br><br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
 
             </div>
             <hr>
@@ -309,18 +319,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">熔断降级限流-Sentinel简单实践</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/17/API%E7%BD%91%E5%85%B3-SpringCloud-Gateway/">
-                        <span class="hidden-mobile">API网关-SpringCloud Gateway</span>
+                      <a href="/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">
+                        <span class="hidden-mobile">分布式配置中心-Nacos简单实践</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

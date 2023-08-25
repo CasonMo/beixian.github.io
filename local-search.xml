@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>熔断降级限流-Sentinel简单实践</title>
+    <link href="/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/"/>
+    <url>/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</url>
+    
+    <content type="html"><![CDATA[<p>在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。</p><p><strong>熔断：</strong> 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助于防止故障扩散，提高系统的稳定性。</p><p><strong>降级：</strong> 降级是一种在系统压力剧增、资源不足或异常情况下的应对策略。为了保持核心功能的可用性，系统可以主动放弃一些非核心或次要功能，从而减轻系统的负载。例如，在高流量期间，系统可以降级为提供基本的服务，禁用某些高成本或资源密集型的功能。这可以确保系统的关键部分仍然正常工作，即使在资源有限的情况下也能保持较好的响应性能。</p><p><strong>限流：</strong> 限流是一种控制系统访问量的策略，用于防止系统过载。通过限制对某个特定服务、接口或资源的并发访问数量，限流可以防止过多的请求影响系统的性能和可用性。限流可以基于多种条件进行，如设置每秒查询数（QPS）限制、并发连接数、请求频率等。这有助于维护系统的稳定性，确保系统在其可承受的负载范围内运行。</p><h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><p>Sentinel旨在解决分布式系统中常见的流量控制、熔断降级和保护问题，帮助开发人员构建稳定、可靠的微服务架构。以下是Sentinel的一些重要方面：</p><ol><li><p><strong>流量控制：</strong> Sentinel可以根据系统的负载情况和资源的可用性，限制对某个特定资源的访问。通过设定阈值，开发人员可以限制资源的并发访问数、QPS等，防止过多的请求导致资源耗尽或性能下降。</p></li><li><p><strong>熔断降级：</strong> Sentinel可以监控资源的错误率、异常率等情况。如果错误率超过了设定的阈值，Sentinel可以自动触发熔断操作，停止对该资源的请求一段时间，以防止故障扩散。熔断机制有助于保护系统免受故障的影响。</p></li><li><p><strong>系统保护：</strong> Sentinel可以监控整个系统的健康状态，包括系统负载、资源利用率等。当系统负载过高或出现异常情况时，Sentinel可以采取措施，如限制某些资源的访问，以保护整个系统免受过载的影响。</p></li><li><p><strong>实时监控和统计：</strong> Sentinel提供实时的监控面板和统计信息，开发人员可以通过这些信息了解资源的使用情况、异常情况和系统的整体状态。这些数据有助于及时发现问题并采取措施。</p></li><li><p><strong>规则配置：</strong> Sentinel允许开发人员配置流量控制和熔断降级的规则。规则可以基于资源的名称、路径、HTTP方法等进行配置，以适应不同的场景和需求。</p></li><li><p><strong>集成和适用性：</strong> Sentinel可以与各种编程语言和框架一起使用，适用于微服务架构中的各种场景。它提供了丰富的API和插件，以便与现有系统集成。</p></li></ol><h3 id="简单实践"><a href="#简单实践" class="headerlink" title="简单实践"></a>简单实践</h3><ul><li><p>下载sentinel</p><blockquote><p>地址：<a href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a></p></blockquote></li><li><p>启动sentinel</p><figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">java -jar sentinel-dashboard-1.8.6.jar <br></code></pre></td></tr></table></figure><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png" alt="image-20230825182945267"></p></li><li><p><strong>引入依赖：</strong> 在你的Spring Boot项目的 <code>pom.xml</code> 文件中，添加Sentinel的依赖：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure></li><li><p><strong>配置：</strong> 在你的 <code>application.properties</code> 或 <code>application.yml</code> 文件中，可以进行一些基本的配置，例如：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure></li><li><p>启动项目即可在页面中实时监控、配置流控规则等</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251825142.png" alt="image-20230825182546927"></p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>SpringCloud</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>分布式配置中心-Nacos简单实践</title>
     <link href="/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/"/>
     <url>/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</url>
