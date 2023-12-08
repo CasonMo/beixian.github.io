@@ -19,7 +19,7 @@
                     <meta name="description" content="下载arthas curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-boot.jar 启动arthas java -jar arthas-boot.jar dashboard 仪表板  第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等 第二部分显示的JVM内存的使用情况 第三部分是操作系统的一些信息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arthas:排查cpu异常过高的问题">
-<meta property="og:url" content="https://casonmo.github.io/2023/10/27/Arthas-%E6%8E%92%E6%9F%A5cpu%E5%BC%82%E5%B8%B8%E8%BF%87%E9%AB%98%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="https://cason.work/2023/10/27/Arthas-%E6%8E%92%E6%9F%A5cpu%E5%BC%82%E5%B8%B8%E8%BF%87%E9%AB%98%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="下载arthas curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-boot.jar 启动arthas java -jar arthas-boot.jar dashboard 仪表板  第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等 第二部分显示的JVM内存的使用情况 第三部分是操作系统的一些信息">
 <meta property="og:locale" content="zh_CN">
@@ -70,7 +70,7 @@
 
                                                 <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"casonmo.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"cason.work","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mrkAghx9eMrolWwrYAdkz1JY-MdYXbMMI","app_key":"ySRiT9dGUKi9GsTq8uKjf4kc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
                                                     <script  src="/js/utils.js" ></script>
                                                         <script  src="/js/color-schema.js" ></script>
