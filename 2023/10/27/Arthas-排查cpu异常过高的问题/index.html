@@ -16,11 +16,15 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://casonmo.github.io/archives/page/3/index.html">
+                    <meta name="description" content="下载arthas curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-boot.jar 启动arthas java -jar arthas-boot.jar dashboard 仪表板  第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等 第二部分显示的JVM内存的使用情况 第三部分是操作系统的一些信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arthas:排查cpu异常过高的问题">
+<meta property="og:url" content="https://casonmo.github.io/2023/10/27/Arthas-%E6%8E%92%E6%9F%A5cpu%E5%BC%82%E5%B8%B8%E8%BF%87%E9%AB%98%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
+<meta property="og:description" content="下载arthas curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-boot.jar 启动arthas java -jar arthas-boot.jar dashboard 仪表板  第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等 第二部分显示的JVM内存的使用情况 第三部分是操作系统的一些信息">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-27T03:24:17.000Z">
+<meta property="article:modified_time" content="2023-10-27T03:37:43.506Z">
 <meta property="article:author" content="Cason Mo">
 <meta name="twitter:card" content="summary_large_image">
                         
@@ -28,11 +32,26 @@
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
                                         
                                             <title>
-                                                归档 - Blog|CasonMo
+                                                Arthas:排查cpu异常过高的问题 - Blog|CasonMo
                                             </title>
 
                                             <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -58,7 +77,7 @@
     <meta name="generator" content="Hexo 6.1.0"></head>
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -159,9 +178,51 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="Arthas:排查cpu异常过高的问题">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-27 11:24" pubdate>
+        2023年10月27日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      766 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -174,103 +235,138 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 42 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2023</p>
-    
-    <a href="/2023/04/06/%E5%AF%B9dubbo%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3%E5%92%8C%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">对dubbo的一些理解和简单使用记录</span>
-      <time style="float: right;">04-06</time>
-    </a>
-  
-    
-    <a href="/2023/01/28/%E8%AF%B7%E6%B1%82wordpress-json-api%E8%AE%B0%E5%BD%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">请求wordpress json api记录</span>
-      <time style="float: right;">01-28</time>
-    </a>
-  
-    
-    <a href="/2023/01/20/%E3%80%8Amysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E3%80%8B%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">《mysql是怎样运行的》笔记</span>
-      <time style="float: right;">01-20</time>
-    </a>
-  
-    
-    <a href="/2023/01/18/Javascript%E4%BF%AE%E6%94%B9vue%E8%BE%93%E5%85%A5%E6%A1%86%E7%9A%84%E5%80%BC/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Javascript修改vue输入框的值</span>
-      <time style="float: right;">01-18</time>
-    </a>
-  
-    
-    <a href="/2023/01/18/nginx-%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91%E5%AF%B9%E5%BA%94%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nginx:根据二级域名自动分发对应文件夹目录</span>
-      <time style="float: right;">01-18</time>
-    </a>
-  
-    
-    <a href="/2023/01/10/Tiktok-Shop-%E7%94%9F%E6%88%90signature%EF%BC%88java%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Tiktok Shop 生成signature（java）</span>
-      <time style="float: right;">01-10</time>
-    </a>
-  
-    
-    <a href="/2023/01/04/WooCommerce%E6%90%AD%E5%BB%BA%EF%BC%88docker%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">WooCommerce搭建（docker）</span>
-      <time style="float: right;">01-04</time>
-    </a>
-  
-    
-      
-      <p class="h5">2022</p>
-    
-    <a href="/2022/12/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">算法笔记</span>
-      <time style="float: right;">12-27</time>
-    </a>
-  
-    
-    <a href="/2022/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">数据结构笔记</span>
-      <time style="float: right;">12-27</time>
-    </a>
-  
-    
-    <a href="/2022/08/01/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95-Mysql-select-count-1-%E3%80%81count-%E3%80%81count-column/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">面试问题记录-Mysql select count(1)、count(*)、count(column)</span>
-      <time style="float: right;">08-01</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Arthas:排查cpu异常过高的问题</h1>
+            
+            <div class="markdown-body">
+              <p>下载arthas</p>
+<p><code>curl -O https://alibaba.github.io/arthas/arthas-boot.jar</code></p>
+<p>启动arthas</p>
+<p><code>java -jar arthas-boot.jar</code></p>
+<p>dashboard 仪表板</p>
+<blockquote>
+<p>第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等</p>
+<p>第二部分显示的JVM内存的使用情况</p>
+<p>第三部分是操作系统的一些信息和Java版本号</p>
+</blockquote>
+<p><code>dashboard</code></p>
+<p>![image-20231026201432458](..&#x2F;..&#x2F;..&#x2F;..&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20231026201432458.png)</p>
+<p>通过 thread 命令来获取线程信息</p>
+<blockquote>
+<p>1、当没有参数时，显示所有线程的信息</p>
+<p>thread<br>2、展示当前最忙的前3个线程并打印堆栈</p>
+<p>thread -n 3<br>3、显示1号线程的运行堆栈</p>
+<p>thread 1<br>4、找出当前阻塞其他线程的线程，有时候我们发现应用卡住了， 通常是由于某个线程拿住了某个锁， 并且其他线程都在等待这把锁造成的。 为了排查这类问题， arthas提供了thread -b， 一键找出那个罪魁祸首。</p>
+<p>thread -b<br>5、指定采样时间间隔，每过1000毫秒采样，显示最占时间的3个线程</p>
+<p>thread -i 1000 -n 3<br>6、查看处于等待状态的线程</p>
+</blockquote>
+<p>![image-20231027113702498](..&#x2F;..&#x2F;..&#x2F;..&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20231027113702498.png)</p>
+<p>找对对应方法解决</p>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/#board">4</a><a class="page-number" href="/archives/page/5/#board">5</a><a class="extend next" rel="next" href="/archives/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/08/Easypoi-%E5%AF%BC%E5%87%BAexcel%E5%8D%95%E5%85%83%E6%A0%BC%E6%B7%BB%E5%8A%A0%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Easypoi-导出excel单元格添加下拉列表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/05/Elasticseatch%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">
+                        <span class="hidden-mobile">Elasticseatch简单实践</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'CasonMo/comment-utterances');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -387,6 +483,19 @@
   
 
 
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
