@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Hexo-生成站点地图（sitemap）</title>
+    <link href="/2023/12/08/Hexo-%E7%94%9F%E6%88%90%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE%EF%BC%88sitemap%EF%BC%89/"/>
+    <url>/2023/12/08/Hexo-%E7%94%9F%E6%88%90%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE%EF%BC%88sitemap%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h3 id="SiteMap是什么"><a href="#SiteMap是什么" class="headerlink" title="SiteMap是什么"></a>SiteMap是什么</h3><p>Sitemap 是一种列举了网站中所有页面的 XML 文件。它可以被搜索引擎（如 Google、Bing）用来更有效地抓取网站，了解网站的结构。Sitemap 文件提供了网站上每个页面的链接以及有关页面最后修改时间、更新频率和相对重要性的附加信息，这有助于搜索引擎确定哪些页面应该优先考虑以及多久抓取一次这些页面。</p><p>对于大型网站、具有许多动态页面的网站或新网站，Sitemap 尤其重要，因为它能确保搜索引擎能够发现并索引网站上的所有重要页面。即便对于小型网站，拥有 Sitemap 也有助于提高SEO（搜索引擎优化）的效果。</p><p>站点地图有两种常见类型：</p><ol><li><p>XML Sitemap：<br>这是给搜索引擎的，规范定义比较严格，它使用 XML 语言编写，一般会放在网站的根目录下，并可以通过 &#x2F;sitemap.xml 访问。这样做可以使搜索引擎更容易找到和抓取所有的页面。</p></li><li><p>HTML Sitemap：<br>这类 Sitemap 是给用户的，通常是一个简单的 HTML 页面，包含了网站上所有或是最重要的页面的链接。这可以帮助用户快速导航到他们想要找的页面，并提高网站的用户体验。</p></li></ol><h3 id="Hexo如何生成Sitemap"><a href="#Hexo如何生成Sitemap" class="headerlink" title="Hexo如何生成Sitemap"></a>Hexo如何生成Sitemap</h3><ul><li><p>Google 版本</p><p><code>npm install hexo-generator-sitemap --save</code></p></li><li><p>Baidu 版本</p><p><code>npm install hexo-generator-baidu-sitemap --save</code></p></li><li><p>打包自动在<code>public</code>下生成<code>sitemap.xml</code>和<code>baidusitemap.xml</code></p><p><code>hexo g -d</code></p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174125354.png" alt="image-20231208174125354"></p><p>浏览器访问<code>https://&lt;域名&gt;/sitemap.xml</code>和<code>https://&lt;域名&gt;/baidusitemap.xml</code>即可看到内容<img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174254230.png" alt="image-20231208174254230"></p></li></ul><h3 id="提交站点到百度"><a href="#提交站点到百度" class="headerlink" title="提交站点到百度"></a>提交站点到百度</h3><ul><li><p>到百度资源平台提交站点</p><blockquote><p><a href="https://ziyuan.baidu.com/site/index#/">站点管理_站长工具_百度搜索资源平台 (baidu.com)</a></p></blockquote><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174539329.png" alt="image-20231208174539329"></p></li><li><p>提交Sitemap<br><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174443927.png" alt="image-20231208174443927"></p></li></ul><h3 id="提交站点到谷歌"><a href="#提交站点到谷歌" class="headerlink" title="提交站点到谷歌"></a>提交站点到谷歌</h3><ul><li><p>到google search console 提交站点</p><blockquote><p><a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p></blockquote><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174713820.png" alt="image-20231208174713820"></p></li><li><p>提交站点地图Sitemap</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/image-20231208174929691.png" alt="image-20231208174929691"></p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Seo</tag>
+      
+      <tag>Sitemap</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Easypoi-导出excel单元格添加下拉列表</title>
     <link href="/2023/12/08/Easypoi-%E5%AF%BC%E5%87%BAexcel%E5%8D%95%E5%85%83%E6%A0%BC%E6%B7%BB%E5%8A%A0%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8/"/>
     <url>/2023/12/08/Easypoi-%E5%AF%BC%E5%87%BAexcel%E5%8D%95%E5%85%83%E6%A0%BC%E6%B7%BB%E5%8A%A0%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8/</url>

@@ -194,6 +194,57 @@
                         <article class="col-12 col-md-12 mx-auto index-info">
                             <h1 class="index-header">
                                 
+                                        <a href="/2023/04/09/Msql%E9%94%81%E6%9C%BA%E5%88%B6/" target="_self">
+                                            Msql锁机制
+                                        </a>
+                            </h1>
+
+                            <p class="index-excerpt">
+                                <a href="/2023/04/09/Msql%E9%94%81%E6%9C%BA%E5%88%B6/" target="_self">
+                                    
+                                        MySQL锁机制是为了保证并发操作的数据一致性而设计的。在并发环境下，多个事务同时访问同一数据，如果不加控制，就会导致数据的不一致性。 MySQL的锁可以分为行级锁和表级锁。  行级锁：在对表中的数据进行修改时，MySQL会自动加上行级锁，该锁只针对修改的行有效，其他行不受影响。行级锁的优点是精度高，缺点是占用资源多，容易造成死锁。InnoDB行锁是通过给索引上的索引项加锁 来实现的，没有索引的情
+                                </a>
+                            </p>
+
+                            <div class="index-btm post-metas">
+                                
+                                    <div class="post-meta mr-3">
+                                        <i class="iconfont icon-date"></i>
+                                        <time datetime="2023-04-09 03:17" pubdate>
+              2023-04-09
+            </time>
+                                    </div>
+                                    
+                                        
+                                            <div class="post-meta mr-3">
+                                                <i class="iconfont icon-category"></i>
+                                                
+                                                    <a href="/categories/mysql/">
+                                                        mysql
+                                                    </a>
+                                                    
+                                            </div>
+                                            
+                                                
+                                                    <div class="post-meta">
+                                                        <i class="iconfont icon-tags"></i>
+                                                        
+                                                            <a href="/tags/mysql/">
+                                                                mysql
+                                                            </a>
+                                                            
+                                                    </div>
+                                                    
+                            </div>
+                        </article>
+        </div>
+        
+        <div class="row mx-auto index-card">
+            
+                
+                        <article class="col-12 col-md-12 mx-auto index-info">
+                            <h1 class="index-header">
+                                
                                         <a href="/2023/04/06/%E5%AF%B9dubbo%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3%E5%92%8C%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" target="_self">
                                             对dubbo的一些理解和简单使用记录
                                         </a>
@@ -576,52 +627,6 @@
                                                         
                                                             <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
                                                                 数据结构
-                                                            </a>
-                                                            
-                                                    </div>
-                                                    
-                            </div>
-                        </article>
-        </div>
-        
-        <div class="row mx-auto index-card">
-            
-                
-                        <article class="col-12 col-md-12 mx-auto index-info">
-                            <h1 class="index-header">
-                                
-                                        <a href="/2022/08/01/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95-Mysql-select-count-1-%E3%80%81count-%E3%80%81count-column/" target="_self">
-                                            面试问题记录-Mysql select count(1)、count(*)、count(column)
-                                        </a>
-                            </h1>
-
-                            <p class="index-excerpt">
-                                <a href="/2022/08/01/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95-Mysql-select-count-1-%E3%80%81count-%E3%80%81count-column/" target="_self">
-                                    
-                                        摘抄自网络  count(*)：先把星号翻译为具体字段名字，多了一步翻译，效率差点count(1)：计算有多少符合条件的行，可以理解为每行数据存在某个值固定的字段，计算有多少个固定值 从结果来说：  count(*) 和 count(1) 没区别，都不会过滤 NULL count(column) 会过滤 NULL  从速度来说：  如果只有一列，count() 效率最高 多列时，count(1)
-                                </a>
-                            </p>
-
-                            <div class="index-btm post-metas">
-                                
-                                    <div class="post-meta mr-3">
-                                        <i class="iconfont icon-date"></i>
-                                        <time datetime="2022-08-01 15:49" pubdate>
-              2022-08-01
-            </time>
-                                    </div>
-                                    
-                                        
-                                                
-                                                    <div class="post-meta">
-                                                        <i class="iconfont icon-tags"></i>
-                                                        
-                                                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/">
-                                                                面试问题
-                                                            </a>
-                                                            
-                                                            <a href="/tags/mysql/">
-                                                                mysql
                                                             </a>
                                                             
                                                     </div>
