@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Threadlocal-内存泄露问题</title>
+    <link href="/2024/01/03/Threadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98/"/>
+    <url>/2024/01/03/Threadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://cason.work/2022/06/16/Threadlocal%E7%9A%84%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%92%8C%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Threadlocal的简单理解和部分源码分析 - Blog|CasonMo</a></p></blockquote><p>在ThreadLocalMap中，用Entry来保存K-V结构数据的。Entry的构造方法已经限定Entry中key只能是ThreadLocal对象。</p><figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">WeakReference</span>&lt;ThreadLocal&gt; &#123;<br>    <span class="hljs-comment">/** The value associated with this ThreadLocal. */</span><br>    Object value;<br><br>    Entry(ThreadLocal k, Object v) &#123;<br>        <span class="hljs-built_in">super</span>(k);<br>        value = v;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Entry继承自WeakReference（弱引用，生命周期只能存活到下次GC前），但只有Key是弱引用类型的，Value并非弱引用。（问题马上就来了）</p><blockquote><h4 id="四种引用类型"><a href="#四种引用类型" class="headerlink" title="四种引用类型"></a>四种引用类型</h4><ol><li>强引用（StrongReference）</li></ol><p>  类似Object obj &#x3D; new Object()这类似的引用，强引用在程序代码中普遍存在，只要强引用在，垃圾搜集器永远不会搜集被引用的对象。也就是说，<strong>宁愿出现内存溢出（OutOfMemoryError），也不会回收这些对象</strong></p><ol start="2"><li>软引用（SoftReference）</li></ol><p>  在Java中用java.lang.ref.SoftReference类来表示。<strong>对于软引用关联着的对象，只有在内存不足的时候JVM才会回收该对象</strong></p><ol start="3"><li>弱引用（WeakReference）</li></ol><p>  弱引用也是用来描述非必需对象的，用java.lang.ref.WeakReference类来表示，<strong>当JVM进行垃圾回收时，无论内存是否充足，都会回收被弱引用关联的对象。</strong></p><ol start="4"><li>虚引用 （PhantomReference）</li></ol><p>  java.lang.ref.PhantomReference类表示。如果一个对象与虚引用关联，则跟没有引用与之关联一样，<strong>在任何时候都可能被垃圾回收器回收</strong>。</p><p>  虚引用与软引用和弱引用的区别：<strong>虚引用必须和引用队列联合使用。</strong></p>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Object</span> <span class="hljs-variable">object</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-type">ReferenceQueue</span> <span class="hljs-variable">queue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReferenceQueue</span> ();<br><span class="hljs-type">PhantomReference</span> <span class="hljs-variable">pr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PhantomReference</span> (object, queue); <br></code></pre></td></tr></table></figure></blockquote><p>由于ThreadLocalMap的key是弱引用，而Value是强引用。这就导致了一个问题，ThreadLocal在没有外部对象强引用时，发生GC时弱引用Key会被回收，而Value不会回收。</p><p>当线程没有结束，但是ThreadLocal已经被回收，则可能导致线程中存在<code>ThreadLocalMap&lt;null, Object&gt;</code>的键值对，造成内存泄露。（ThreadLocal被回收，ThreadLocal关联的线程共享变量还存在）。</p><h2 id="如何避免泄漏"><a href="#如何避免泄漏" class="headerlink" title="如何避免泄漏"></a>如何避免泄漏</h2><p>为了防止此类情况的出现，我们有两种手段。</p><ul><li><p>使用完线程共享变量后，显示调用<code>ThreadLocalMap.remove</code>方法清除线程共享变量；</p><p>既然Key是弱引用，那么我们要做的事，就是在调用ThreadLocal的<code>get()</code>、<code>set()</code>方法时完成后再调用remove方法，将Entry节点和Map的引用关系移除，这样整个Entry对象在GC Roots分析后就变成不可达了，下次GC的时候就可以被回收。</p></li><li><p>JDK建议ThreadLocal定义为<code>private static</code>，这样ThreadLocal的弱引用问题则不存在了。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>并发编程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ThreadLocal</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Mybatisplus-动态获取sql字符串</title>
     <link href="/2023/12/11/Mybatisplus-%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96sql%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     <url>/2023/12/11/Mybatisplus-%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96sql%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
