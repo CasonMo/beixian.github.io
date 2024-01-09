@@ -16,24 +16,25 @@
                 <meta name="author" content="Cason Mo">
                 <meta name="keywords" content="">
                 
-                    <meta name="description" content="Threadlocal的简单理解和部分源码分析 - Blog|CasonMo  在ThreadLocalMap中，用Entry来保存K-V结构数据的。Entry的构造方法已经限定Entry中key只能是ThreadLocal对象。 123456789static class Entry extends WeakReference&lt;ThreadLocal&gt; &amp;#123;    &#x2F;**">
+                    <meta name="description" content="EasyExcel 在处理 Excel 文件时，需要占用一定的内存。如果导出的数据量过大，可能导致内存占用过高，从而引发 CPU 过高的问题。可以尝试分批次导出数据，减小每次导出的数据量，以降低内存使用。并发访问导出接口也会导致性能问题，所以尽量在数据量比较大的导出接口添加锁控制。  以下是虚化业务后的代码，记录一下遇到的问题解决方案  123456789101112131415161718192">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Threadlocal-内存泄露问题">
-<meta property="og:url" content="https://cason.work/2024/01/03/Threadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Easypoi-大数据量导出">
+<meta property="og:url" content="https://cason.work/2024/01/09/Easypoi-%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E5%AF%BC%E5%87%BA/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="Threadlocal的简单理解和部分源码分析 - Blog|CasonMo  在ThreadLocalMap中，用Entry来保存K-V结构数据的。Entry的构造方法已经限定Entry中key只能是ThreadLocal对象。 123456789static class Entry extends WeakReference&lt;ThreadLocal&gt; &amp;#123;    &#x2F;**">
+<meta property="og:description" content="EasyExcel 在处理 Excel 文件时，需要占用一定的内存。如果导出的数据量过大，可能导致内存占用过高，从而引发 CPU 过高的问题。可以尝试分批次导出数据，减小每次导出的数据量，以降低内存使用。并发访问导出接口也会导致性能问题，所以尽量在数据量比较大的导出接口添加锁控制。  以下是虚化业务后的代码，记录一下遇到的问题解决方案  123456789101112131415161718192">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-03T06:57:14.000Z">
-<meta property="article:modified_time" content="2024-01-03T07:13:45.586Z">
+<meta property="article:published_time" content="2024-01-09T08:52:27.000Z">
+<meta property="article:modified_time" content="2024-01-09T09:11:33.503Z">
 <meta property="article:author" content="Cason Mo">
-<meta property="article:tag" content="ThreadLocal">
+<meta property="article:tag" content="Easypoi">
+<meta property="article:tag" content="Excel">
 <meta name="twitter:card" content="summary_large_image">
                         
                                 
                                     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
                                         
                                             <title>
-                                                Threadlocal-内存泄露问题 - Blog|CasonMo
+                                                Easypoi-大数据量导出 - Blog|CasonMo
                                             </title>
 
                                             <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
@@ -179,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Threadlocal-内存泄露问题">
+            <span class="h2" id="subtitle" title="Easypoi-大数据量导出">
               
             </span>
 
@@ -189,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-01-03 14:57" pubdate>
-        2024年1月3日 下午
+      <time datetime="2024-01-09 16:52" pubdate>
+        2024年1月9日 下午
       </time>
     </span>
   
@@ -200,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.6k 字
     </span>
   
 
@@ -209,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      14 分钟
     </span>
   
 
@@ -246,46 +247,15 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Threadlocal-内存泄露问题</h1>
+            <h1 style="display: none">Easypoi-大数据量导出</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p><a href="https://cason.work/2022/06/16/Threadlocal%E7%9A%84%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%92%8C%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Threadlocal的简单理解和部分源码分析 - Blog|CasonMo</a></p>
-</blockquote>
-<p>在ThreadLocalMap中，用Entry来保存K-V结构数据的。Entry的构造方法已经限定Entry中key只能是ThreadLocal对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">WeakReference</span>&lt;ThreadLocal&gt; &#123;<br>    <span class="hljs-comment">/** The value associated with this ThreadLocal. */</span><br>    Object value;<br><br>    Entry(ThreadLocal k, Object v) &#123;<br>        <span class="hljs-built_in">super</span>(k);<br>        value = v;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Entry继承自WeakReference（弱引用，生命周期只能存活到下次GC前），但只有Key是弱引用类型的，Value并非弱引用。（问题马上就来了）</p>
+              <p>EasyExcel 在处理 Excel 文件时，需要占用一定的内存。如果导出的数据量过大，可能导致内存占用过高，从而引发 CPU 过高的问题。可以尝试分批次导出数据，减小每次导出的数据量，以降低内存使用。并发访问导出接口也会导致性能问题，所以尽量在数据量比较大的导出接口添加锁控制。</p>
 <blockquote>
-<h4 id="四种引用类型"><a href="#四种引用类型" class="headerlink" title="四种引用类型"></a>四种引用类型</h4><ol>
-<li>强引用（StrongReference）</li>
-</ol>
-<p>  类似Object obj &#x3D; new Object()这类似的引用，强引用在程序代码中普遍存在，只要强引用在，垃圾搜集器永远不会搜集被引用的对象。也就是说，<strong>宁愿出现内存溢出（OutOfMemoryError），也不会回收这些对象</strong></p>
-<ol start="2">
-<li>软引用（SoftReference）</li>
-</ol>
-<p>  在Java中用java.lang.ref.SoftReference类来表示。<strong>对于软引用关联着的对象，只有在内存不足的时候JVM才会回收该对象</strong></p>
-<ol start="3">
-<li>弱引用（WeakReference）</li>
-</ol>
-<p>  弱引用也是用来描述非必需对象的，用java.lang.ref.WeakReference类来表示，<strong>当JVM进行垃圾回收时，无论内存是否充足，都会回收被弱引用关联的对象。</strong></p>
-<ol start="4">
-<li>虚引用 （PhantomReference）</li>
-</ol>
-<p>  java.lang.ref.PhantomReference类表示。如果一个对象与虚引用关联，则跟没有引用与之关联一样，<strong>在任何时候都可能被垃圾回收器回收</strong>。</p>
-<p>  虚引用与软引用和弱引用的区别：<strong>虚引用必须和引用队列联合使用。</strong></p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Object</span> <span class="hljs-variable">object</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-type">ReferenceQueue</span> <span class="hljs-variable">queue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReferenceQueue</span> ();<br><span class="hljs-type">PhantomReference</span> <span class="hljs-variable">pr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PhantomReference</span> (object, queue); <br></code></pre></td></tr></table></figure>
+<p>以下是虚化业务后的代码，记录一下遇到的问题解决方案</p>
 </blockquote>
-<p>由于ThreadLocalMap的key是弱引用，而Value是强引用。这就导致了一个问题，ThreadLocal在没有外部对象强引用时，发生GC时弱引用Key会被回收，而Value不会回收。</p>
-<p>当线程没有结束，但是ThreadLocal已经被回收，则可能导致线程中存在<code>ThreadLocalMap&lt;null, Object&gt;</code>的键值对，造成内存泄露。（ThreadLocal被回收，ThreadLocal关联的线程共享变量还存在）。</p>
-<h2 id="如何避免泄漏"><a href="#如何避免泄漏" class="headerlink" title="如何避免泄漏"></a>如何避免泄漏</h2><p>为了防止此类情况的出现，我们有两种手段。</p>
-<ul>
-<li><p>使用完线程共享变量后，显示调用<code>ThreadLocalMap.remove</code>方法清除线程共享变量；</p>
-<p>既然Key是弱引用，那么我们要做的事，就是在调用ThreadLocal的<code>get()</code>、<code>set()</code>方法时完成后再调用remove方法，将Entry节点和Map的引用关系移除，这样整个Entry对象在GC Roots分析后就变成不可达了，下次GC的时候就可以被回收。</p>
-</li>
-<li><p>JDK建议ThreadLocal定义为<code>private static</code>，这样ThreadLocal的弱引用问题则不存在了。</p>
-</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 导出大数据量Excel文件</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> response HttpServletResponse对象，用于设置响应头和输出流</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> requestForm 包含查询参数的表单对象</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> ParseException 当日期解析发生错误时抛出异常</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> IOException 当输入或输出操作发生错误时抛出异常</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">exportBigExcelist</span><span class="hljs-params">(HttpServletResponse response, RequestForm requestForm)</span> <span class="hljs-keyword">throws</span> ParseException, IOException &#123;<br>    <span class="hljs-comment">// 设置Excel导出参数，包括标题和sheet名称</span><br>    <span class="hljs-type">ExportParams</span> <span class="hljs-variable">params</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ExportParams</span>(<span class="hljs-string">&quot;标题&quot;</span>, <span class="hljs-string">&quot;sheet名称&quot;</span>);<br><br>    <span class="hljs-comment">// 使用EasyExcel工具类导出大数据Excel文件</span><br>    <span class="hljs-type">Workbook</span> <span class="hljs-variable">workbook</span> <span class="hljs-operator">=</span> ExcelExportUtil.exportBigExcel(params, ExcelDto.class, <span class="hljs-keyword">new</span> <span class="hljs-title class_">IExcelExportServer</span>() &#123;<br>        <span class="hljs-meta">@SneakyThrows</span><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> List&lt;Object&gt; <span class="hljs-title function_">selectListForExcelExport</span><span class="hljs-params">(Object queryParams, <span class="hljs-type">int</span> page)</span> &#123;<br>            <span class="hljs-comment">// 强制转换查询参数为RequestForm对象</span><br>            <span class="hljs-type">RequestForm</span> <span class="hljs-variable">tempForm</span> <span class="hljs-operator">=</span> (RequestForm) queryParams;<br>            <br>            <span class="hljs-comment">// 设置分页参数</span><br>            tempForm.setPage(page);<br>            tempForm.setPageSize(<span class="hljs-number">10000</span>);<br>            <br>            <span class="hljs-comment">// 调用业务服务进行分页查询逻辑</span><br>            List&lt;ExcelDto&gt; list = service.selectlist(tempForm);<br>            <br>            <span class="hljs-comment">// 将查询结果转化为List&lt;Object&gt;</span><br>            List&lt;Object&gt; objects = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(list);<br>            <br>            <span class="hljs-comment">// 如果查询结果为空，则返回null</span><br>            <span class="hljs-keyword">if</span> (list.size() == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br>            <br>            <span class="hljs-keyword">return</span> objects;<br>        &#125;<br>    &#125;, requestForm);<br><br>    <span class="hljs-comment">// 设置响应头，指定导出文件类型为Excel</span><br>    response.setHeader(<span class="hljs-string">&quot;content-Type&quot;</span>, <span class="hljs-string">&quot;application/vnd.ms-excel&quot;</span>);<br>    <span class="hljs-comment">// 设置响应头，指定导出文件的名称，并对文件名进行UTF-8编码</span><br>    response.setHeader(<span class="hljs-string">&quot;Content-Disposition&quot;</span>, <span class="hljs-string">&quot;attachment;filename=&quot;</span> + URLEncoder.encode(<span class="hljs-string">&quot;filename.xls&quot;</span>, <span class="hljs-string">&quot;UTF-8&quot;</span>));<br>    <br>    <span class="hljs-comment">// 将生成的Excel文件写入到响应输出流</span><br>    workbook.write(response.getOutputStream());<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -295,7 +265,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>
+                      <a class="hover-with-bg" href="/categories/Springboot/">Springboot</a>
                     
                   </div>
                 
@@ -303,7 +273,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/ThreadLocal/">ThreadLocal</a>
+                      <a class="hover-with-bg" href="/tags/Easypoi/">Easypoi</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Excel/">Excel</a>
                     
                   </div>
                 
@@ -320,18 +292,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/09/Easypoi-%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E5%AF%BC%E5%87%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Easypoi-大数据量导出</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/11/Mybatisplus-%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96sql%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-                        <span class="hidden-mobile">Mybatisplus-动态获取sql字符串</span>
+                      <a href="/2024/01/03/Threadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">Threadlocal-内存泄露问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
