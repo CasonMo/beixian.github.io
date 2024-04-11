@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Gitee page 自动更新</title>
+    <link href="/2024/04/11/Gitee-page-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/"/>
+    <url>/2024/04/11/Gitee-page-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/</url>
+    
+    <content type="html"><![CDATA[<p>借助<a href="https://gitee.com/yanglbme/gitee-pages-action">gitee-pages-action: 🤖 Auto Deploy Gitee Pages | 无须人为干预，自动部署 Gitee Pages</a>实现hexo 部署并发布github以后gitee page自动更新 里面已经有详细的教学</p><p>在github仓库目录下创建.github&#x2F;workflows&#x2F;Sync.yaml工作流文件</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>部署</tag>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo giscus配置评论功能</title>
     <link href="/2024/04/07/Hexo-giscus%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/"/>
     <url>/2024/04/07/Hexo-giscus%E9%85%8D%E7%BD%AE%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/</url>
