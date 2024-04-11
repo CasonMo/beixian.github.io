@@ -23,10 +23,10 @@
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。 熔断： 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251825142.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251829872.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251825142.png">
 <meta property="article:published_time" content="2023-08-25T07:09:15.000Z">
-<meta property="article:modified_time" content="2023-09-05T07:11:00.263Z">
+<meta property="article:modified_time" content="2024-04-11T02:27:28.314Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="分布式系统">
 <meta property="article:tag" content="Sentinel">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="降级">
 <meta property="article:tag" content="限流">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png">
+<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251829872.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -272,7 +272,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          1.1k 字
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          9 分钟
         
       </span>
     
@@ -360,9 +360,9 @@
 </blockquote>
 </li>
 <li><p>启动sentinel</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">java -jar sentinel-dashboard-1.8.6.jar <br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar sentinel-dashboard-1.8.6.jar <br></code></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251829872.png" srcset="/img/loading.gif" lazyload alt="image-20230825182945267"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251829872.png" srcset="/img/loading.gif" lazyload alt="image-20230825182945267"></p>
 </li>
 <li><p><strong>引入依赖：</strong> 在你的Spring Boot项目的 <code>pom.xml</code> 文件中，添加Sentinel的依赖：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
@@ -371,7 +371,7 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>启动项目即可在页面中实时监控、配置流控规则等</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308251825142.png" srcset="/img/loading.gif" lazyload alt="image-20230825182546927"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251825142.png" srcset="/img/loading.gif" lazyload alt="image-20230825182546927"></p>
 </li>
 </ul>
 

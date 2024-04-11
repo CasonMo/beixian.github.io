@@ -23,20 +23,20 @@
 <meta property="og:site_name" content="Blog|CasonMo">
 <meta property="og:description" content="Spring Cloud Gateway是一个基于Spring Framework的开源API网关，用于构建微服务架构中的统一访问层。它充当了应用程序和后端服务之间的代理，提供了路由、负载均衡、安全性、监控等功能，以简化微服务架构中的网络请求管理和流量控制。 Spring Cloud Gateway的主要特点包括：  动态路由： 可以根据请求的信息将流量路由到不同的后端服务，支持动态添加、删除和修">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172132323.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133265.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133225.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133551.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133941.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308180955610.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172132323.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133265.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133225.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133551.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133941.png">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308180955610.png">
 <meta property="article:published_time" content="2023-08-17T12:31:24.000Z">
-<meta property="article:modified_time" content="2023-09-05T07:11:42.611Z">
+<meta property="article:modified_time" content="2024-04-11T02:27:28.320Z">
 <meta property="article:author" content="Cason Mo">
 <meta property="article:tag" content="Gateway">
 <meta property="article:tag" content="API网关">
 <meta property="article:tag" content="分布式系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172132323.png">
+<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172132323.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.6k 字
+          1.5k 字
         
       </span>
     
@@ -286,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          39 分钟
+          13 分钟
         
       </span>
     
@@ -350,7 +350,7 @@
 </ol>
 <h2 id="SpringCloud-Gateway简单使用"><a href="#SpringCloud-Gateway简单使用" class="headerlink" title="SpringCloud Gateway简单使用"></a>SpringCloud Gateway简单使用</h2><ul>
 <li><p><strong>添加依赖：</strong> 在生成的<code>pom.xml</code>文件中，添加Spring Cloud Gateway的依赖。通常，您需要添加以下依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>因为我们使用了nacos实现服务注册与服务发现，所以也要引入nacos相关的依赖，如果不需要可以不引入，routes.uri直接指定目标服务的完整URL字符串。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">  <span class="hljs-comment">&lt;!--nacos服务发现依赖--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
@@ -407,18 +407,18 @@
 
 </li>
 <li><p><strong>配置动态路由：</strong> 在Nacos配置中心中创建配置，用于定义动态路由规则。配置的Data ID可以根据您的实际情况进行定义，我这里用的是&lt;spring.application.name&gt;-&lt;spring.profiles.active&gt;.yaml以下是一个示例配置：</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172132323.png" srcset="/img/loading.gif" lazyload alt="image-20230817212606004"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172132323.png" srcset="/img/loading.gif" lazyload alt="image-20230817212606004"></p>
 </li>
 <li><p><strong>测试</strong></p>
 <ul>
 <li><p>访问user，order相关路由没有问题</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133265.png" srcset="/img/loading.gif" lazyload alt="image-20230817213157261"></p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133225.png" srcset="/img/loading.gif" lazyload alt="image-20230817213209689"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133265.png" srcset="/img/loading.gif" lazyload alt="image-20230817213157261"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133225.png" srcset="/img/loading.gif" lazyload alt="image-20230817213209689"></p>
 </li>
 <li><p>移除user相关的路由，请求user相关路由404，请求order相关路由没有问题</p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133551.png" srcset="/img/loading.gif" lazyload alt="image-20230817213049030"></p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308172133941.png" srcset="/img/loading.gif" lazyload alt="image-20230817213130551"></p>
-<p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/202308180955610.png" srcset="/img/loading.gif" lazyload alt="image-20230817213238702"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133551.png" srcset="/img/loading.gif" lazyload alt="image-20230817213049030"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308172133941.png" srcset="/img/loading.gif" lazyload alt="image-20230817213130551"></p>
+<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308180955610.png" srcset="/img/loading.gif" lazyload alt="image-20230817213238702"></p>
 </li>
 </ul>
 </li>
