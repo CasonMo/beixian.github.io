@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>实用的 IntelliJ 插件</title>
+    <link href="/2024/04/22/%E5%AE%9E%E7%94%A8%E7%9A%84-IntelliJ-%E6%8F%92%E4%BB%B6/"/>
+    <url>/2024/04/22/%E5%AE%9E%E7%94%A8%E7%9A%84-IntelliJ-%E6%8F%92%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>最好用过的翻译工具</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111533246.png" alt="image-20240422111533246"></p><h2 id="RoboPOJOGenerator"><a href="#RoboPOJOGenerator" class="headerlink" title="RoboPOJOGenerator"></a>RoboPOJOGenerator</h2><p>IntelliJ Idea 和 Android Studio 的插件，用于将 JSON 转换为 POJO。 从 JSON 生成 Java、Java Records 和 Kotlin 的 POJO 文件：GSON、FastJSON、AutoValue（GSON）、Logan Square、Jackson、Lombok、Jakarta JSON Binding、空注解模板。支持：原始类型、多个内部 JSONArray。</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112843612.png" alt="image-20240422112843612"></p><h2 id="Java-Bean-to-Json"><a href="#Java-Bean-to-Json" class="headerlink" title="Java Bean to Json"></a>Java Bean to Json</h2><p> Java类对象转换成一个 json</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111653856.png" alt="image-20240422111653856"></p><h2 id="SequenceDiagram"><a href="#SequenceDiagram" class="headerlink" title="SequenceDiagram"></a>SequenceDiagram</h2><p> Java类直接生成时序图</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111717408.png" alt="image-20240422111717408"></p><h2 id="CamelCase"><a href="#CamelCase" class="headerlink" title="CamelCase"></a>CamelCase</h2><p>可以轻松地在kebab-case、SNAKE_CASE、PascalCase、camelCase、snake_case或者space case之间切换。查看编辑菜单或使用 ⇧ + ⌥ + U &#x2F; Shift + Alt + U。</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111856198.png" alt="image-20240422111856198"></p><h2 id="GenerateAllSetter"><a href="#GenerateAllSetter" class="headerlink" title="GenerateAllSetter"></a>GenerateAllSetter</h2><p>一键调用一个对象的所有的set方法,get方法等，在方法上生成两个对象的转换</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112011976.png" alt="image-20240422112011976"></p><h2 id="Key-Promoter-X"><a href="#Key-Promoter-X" class="headerlink" title="Key Promoter X"></a>Key Promoter X</h2><p>Key Promoter X能帮助你在工作时学习必要的快捷键。当你在IDE内使用鼠标点击按钮时，Key Promoter X会显示你应该使用的键盘快捷键。这为学习如何用键盘按键替换繁琐的鼠标操作提供了一种简单的方法，并有助于过渡到更快速、无需鼠标的开发方式。Key Promoter X工具窗口会显示你最常使用的鼠标操作的清单，并直接提供可替代的快捷键。对于没有快捷键的按钮，Key Promoter X会提示你直接创建一个快捷键。</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112110446.png" alt="image-20240422112110446"></p><h2 id="LeetCode-Editor"><a href="#LeetCode-Editor" class="headerlink" title="LeetCode Editor"></a>LeetCode Editor</h2><p>支持leetcode.com和leetcode.cn，可以测试和提交问题</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112201974.png" alt="image-20240422112201974"></p><h2 id="Maven-Helper"><a href="#Maven-Helper" class="headerlink" title="Maven Helper"></a>Maven Helper</h2><p>一个必备的 Maven 工作插件。 </p><ul><li>分析和排除冲突依赖的简便方式。 </li><li>在包含当前文件的模块或根模块上运行&#x2F;调试 Maven 目标的操作。 </li><li>在当前 Maven 模块路径打开终端的操作。 运行&#x2F;调试当前测试文件的操作。</li></ul><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112321393.png" alt="image-20240422112321393"></p><h2 id="MyBatis-Log-Free"><a href="#MyBatis-Log-Free" class="headerlink" title="MyBatis Log Free"></a>MyBatis Log Free</h2><p>将MyBatis的SQL日志还原为原始的完整可执行SQL。</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112434638.png" alt="image-20240422112434638"></p><h2 id="MyBatisX"><a href="#MyBatisX" class="headerlink" title="MyBatisX"></a>MyBatisX</h2><p>MybatisX插件功能：</p><ul><li>Mapper和XML之间可以相互跳转</li><li>提示MyBatis.xml和Mapper.xml文件</li><li>Mapper和XML支持像JPA一样的自动提示（参考MybatisCodeHelperPro）</li><li>集成MyBatis Generator GUI（从免费MyBatis插件复制）</li></ul><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112524955.png" alt="image-20240422112524955"></p><h2 id="Rainbow-Brackets"><a href="#Rainbow-Brackets" class="headerlink" title="Rainbow Brackets"></a>Rainbow Brackets</h2><p>彩虹色的花括号</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112711489.png" alt="image-20240422112711489"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>IntelliJ</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>腾讯云大文件迁移教程-内网互联+scp</title>
     <link href="/2024/04/15/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E8%BF%81%E7%A7%BB%E6%95%99%E7%A8%8B-%E5%86%85%E7%BD%91%E4%BA%92%E8%81%94-scp/"/>
     <url>/2024/04/15/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E8%BF%81%E7%A7%BB%E6%95%99%E7%A8%8B-%E5%86%85%E7%BD%91%E4%BA%92%E8%81%94-scp/</url>
