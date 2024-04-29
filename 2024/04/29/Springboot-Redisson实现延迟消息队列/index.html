@@ -16,31 +16,21 @@
   <meta name="author" content="Cason Mo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Translation最好用过的翻译工具  RoboPOJOGeneratorIntelliJ Idea 和 Android Studio 的插件，用于将 JSON 转换为 POJO。 从 JSON 生成 Java、Java Records 和 Kotlin 的 POJO 文件：GSON、FastJSON、AutoValue（GSON）、Logan Square、Jackson、Lombok、Ja">
+    <meta name="description" content="Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。 延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实用的 IntelliJ 插件">
-<meta property="og:url" content="https://cason.work/2024/04/22/%E5%AE%9E%E7%94%A8%E7%9A%84-IntelliJ-%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:title" content="Springboot-Redisson实现延迟消息队列">
+<meta property="og:url" content="https://cason.work/2024/04/29/Springboot-Redisson%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="Translation最好用过的翻译工具  RoboPOJOGeneratorIntelliJ Idea 和 Android Studio 的插件，用于将 JSON 转换为 POJO。 从 JSON 生成 Java、Java Records 和 Kotlin 的 POJO 文件：GSON、FastJSON、AutoValue（GSON）、Logan Square、Jackson、Lombok、Ja">
+<meta property="og:description" content="Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。 延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111533246.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112843612.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111653856.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111717408.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111856198.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112011976.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112110446.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112201974.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112321393.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112434638.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112524955.png">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112711489.png">
-<meta property="article:published_time" content="2024-04-22T03:13:42.000Z">
-<meta property="article:modified_time" content="2024-04-22T03:39:58.197Z">
+<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png">
+<meta property="article:published_time" content="2024-04-29T03:42:13.000Z">
+<meta property="article:modified_time" content="2024-04-29T04:04:27.018Z">
 <meta property="article:author" content="Cason Mo">
-<meta property="article:tag" content="IntelliJ">
+<meta property="article:tag" content="Redisson">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111533246.png">
+<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -48,7 +38,7 @@
   
     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
   
-  <title>实用的 IntelliJ 插件 - Blog|CasonMo</title>
+  <title>Springboot-Redisson实现延迟消息队列 - Blog|CasonMo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -254,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="实用的 IntelliJ 插件"></span>
+            <span id="subtitle" data-typed-text="Springboot-Redisson实现延迟消息队列"></span>
           
         </div>
 
@@ -265,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-22 11:13" pubdate>
-          2024年4月22日 上午
+        <time datetime="2024-04-29 11:42" pubdate>
+          2024年4月29日 中午
         </time>
       </span>
     
@@ -278,7 +268,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          451 字
+          645 字
         
       </span>
     
@@ -290,7 +280,7 @@
         
         
           <!-- compatible with older versions-->
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -335,46 +325,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">实用的 IntelliJ 插件</h1>
+            <h1 id="seo-header">Springboot-Redisson实现延迟消息队列</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>最好用过的翻译工具</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111533246.png" srcset="/img/loading.gif" lazyload alt="image-20240422111533246"></p>
-<h2 id="RoboPOJOGenerator"><a href="#RoboPOJOGenerator" class="headerlink" title="RoboPOJOGenerator"></a>RoboPOJOGenerator</h2><p>IntelliJ Idea 和 Android Studio 的插件，用于将 JSON 转换为 POJO。 从 JSON 生成 Java、Java Records 和 Kotlin 的 POJO 文件：GSON、FastJSON、AutoValue（GSON）、Logan Square、Jackson、Lombok、Jakarta JSON Binding、空注解模板。支持：原始类型、多个内部 JSONArray。</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112843612.png" srcset="/img/loading.gif" lazyload alt="image-20240422112843612"></p>
-<h2 id="Java-Bean-to-Json"><a href="#Java-Bean-to-Json" class="headerlink" title="Java Bean to Json"></a>Java Bean to Json</h2><p> Java类对象转换成一个 json</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111653856.png" srcset="/img/loading.gif" lazyload alt="image-20240422111653856"></p>
-<h2 id="SequenceDiagram"><a href="#SequenceDiagram" class="headerlink" title="SequenceDiagram"></a>SequenceDiagram</h2><p> Java类直接生成时序图</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111717408.png" srcset="/img/loading.gif" lazyload alt="image-20240422111717408"></p>
-<h2 id="CamelCase"><a href="#CamelCase" class="headerlink" title="CamelCase"></a>CamelCase</h2><p>可以轻松地在kebab-case、SNAKE_CASE、PascalCase、camelCase、snake_case或者space case之间切换。查看编辑菜单或使用 ⇧ + ⌥ + U &#x2F; Shift + Alt + U。</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422111856198.png" srcset="/img/loading.gif" lazyload alt="image-20240422111856198"></p>
-<h2 id="GenerateAllSetter"><a href="#GenerateAllSetter" class="headerlink" title="GenerateAllSetter"></a>GenerateAllSetter</h2><p>一键调用一个对象的所有的set方法,get方法等，在方法上生成两个对象的转换</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112011976.png" srcset="/img/loading.gif" lazyload alt="image-20240422112011976"></p>
-<h2 id="Key-Promoter-X"><a href="#Key-Promoter-X" class="headerlink" title="Key Promoter X"></a>Key Promoter X</h2><p>Key Promoter X能帮助你在工作时学习必要的快捷键。当你在IDE内使用鼠标点击按钮时，Key Promoter X会显示你应该使用的键盘快捷键。这为学习如何用键盘按键替换繁琐的鼠标操作提供了一种简单的方法，并有助于过渡到更快速、无需鼠标的开发方式。Key Promoter X工具窗口会显示你最常使用的鼠标操作的清单，并直接提供可替代的快捷键。对于没有快捷键的按钮，Key Promoter X会提示你直接创建一个快捷键。</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112110446.png" srcset="/img/loading.gif" lazyload alt="image-20240422112110446"></p>
-<h2 id="LeetCode-Editor"><a href="#LeetCode-Editor" class="headerlink" title="LeetCode Editor"></a>LeetCode Editor</h2><p>支持leetcode.com和leetcode.cn，可以测试和提交问题</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112201974.png" srcset="/img/loading.gif" lazyload alt="image-20240422112201974"></p>
-<h2 id="Maven-Helper"><a href="#Maven-Helper" class="headerlink" title="Maven Helper"></a>Maven Helper</h2><p>一个必备的 Maven 工作插件。 </p>
-<ul>
-<li>分析和排除冲突依赖的简便方式。 </li>
-<li>在包含当前文件的模块或根模块上运行&#x2F;调试 Maven 目标的操作。 </li>
-<li>在当前 Maven 模块路径打开终端的操作。 运行&#x2F;调试当前测试文件的操作。</li>
-</ul>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112321393.png" srcset="/img/loading.gif" lazyload alt="image-20240422112321393"></p>
-<h2 id="MyBatis-Log-Free"><a href="#MyBatis-Log-Free" class="headerlink" title="MyBatis Log Free"></a>MyBatis Log Free</h2><p>将MyBatis的SQL日志还原为原始的完整可执行SQL。</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112434638.png" srcset="/img/loading.gif" lazyload alt="image-20240422112434638"></p>
-<h2 id="MyBatisX"><a href="#MyBatisX" class="headerlink" title="MyBatisX"></a>MyBatisX</h2><p>MybatisX插件功能：</p>
-<ul>
-<li>Mapper和XML之间可以相互跳转</li>
-<li>提示MyBatis.xml和Mapper.xml文件</li>
-<li>Mapper和XML支持像JPA一样的自动提示（参考MybatisCodeHelperPro）</li>
-<li>集成MyBatis Generator GUI（从免费MyBatis插件复制）</li>
-</ul>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112524955.png" srcset="/img/loading.gif" lazyload alt="image-20240422112524955"></p>
-<h2 id="Rainbow-Brackets"><a href="#Rainbow-Brackets" class="headerlink" title="Rainbow Brackets"></a>Rainbow Brackets</h2><p>彩虹色的花括号</p>
-<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240422112711489.png" srcset="/img/loading.gif" lazyload alt="image-20240422112711489"></p>
+                <p>Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。</p>
+<p>延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后自动执行任务，这对于需要在一定时间后执行操作的应用程序非常有用，如消息通知、订单处理、定时任务等。</p>
+<p>Redisson实现延迟队列的原理基于Redis的有序集合（Sorted Set）和Redis的过期时间机制</p>
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>因为<code>RDelayedQueue</code>并不直接存储任务。相反，它是一种装饰器或包装器，用于添加延迟功能到一个标准的Redisson队列（如<code>RBlockingQueue</code>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonDelayQueueProducer</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RedissonClient redissonClient;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addDelayedTask</span><span class="hljs-params">(String topic, Object task, <span class="hljs-type">long</span> delay, TimeUnit timeUnit)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;redis的延迟队列 &#123;&#125; (添加)的key:&#123;&#125;,time:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, topic, task, delay, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>        redissonClient.getDelayedQueue(redissonClient.getBlockingQueue(topic)).offerAsync(task, delay, timeUnit);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Boolean <span class="hljs-title function_">cancelDelayedTask</span><span class="hljs-params">(String topic, Object task)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;redis的延迟队列&#123;&#125; (移除)的key:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, topic, task, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>        <span class="hljs-comment">// 从延迟队列中移除任务</span><br>        <span class="hljs-keyword">return</span> redissonClient.getDelayedQueue(redissonClient.getBlockingQueue(topic)).remove(task);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>起一个线程循环监听延迟队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonDelayedQueueConsumer</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">topic</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;topic&quot;</span>;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RedissonClient redissonClient;<br><br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 创建延迟队列</span><br>        log.info(<span class="hljs-string">&quot;&#123;&#125; 开始监听&quot;</span>, topic);<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    RBlockingQueue&lt;Object&gt; aaa = redissonClient.getBlockingQueue(topic);<br>                    RDelayedQueue&lt;Object&gt; delayedQueue = redissonClient.getDelayedQueue(aaa);<br>                    <span class="hljs-comment">// 从延迟队列中取出任务</span><br>                    <span class="hljs-type">Object</span> <span class="hljs-variable">take</span> <span class="hljs-operator">=</span> aaa.take();<br>                    <span class="hljs-comment">// 处理延迟任务，例如执行某个操作</span><br>                    log.info(<span class="hljs-string">&quot;redis的延迟队列:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, take, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    log.error(<span class="hljs-string">&quot;redis的延迟队列抛出异常&quot;</span>, e);<br>                &#125;<br>            &#125;<br>        &#125;).start();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h4><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png" srcset="/img/loading.gif" lazyload alt="image-20240429115537300"></p>
+<h4 id="redisson配置"><a href="#redisson配置" class="headerlink" title="redisson配置"></a>redisson配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.redisson<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>redisson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.17.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonConfig</span> &#123;<br><br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.host&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String redisHost;<br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.port&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String redisPort;<br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.password&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String password;<br><br>    <span class="hljs-meta">@Bean(destroyMethod = &quot;shutdown&quot;)</span><br>    <span class="hljs-keyword">public</span> RedissonClient <span class="hljs-title function_">redissonClient</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">Config</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Config</span>();<br>        config.useSingleServer().setAddress(<span class="hljs-string">&quot;redis://&quot;</span> + redisHost + <span class="hljs-string">&quot;:&quot;</span> + redisPort);<br>        <span class="hljs-keyword">if</span>(StringUtils.isBlank(password)) &#123;<br>            config.useSingleServer().setPassword(<span class="hljs-literal">null</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            config.useSingleServer().setPassword(password);<br>        &#125;<br>        <span class="hljs-keyword">return</span> Redisson.create(config);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -383,11 +356,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Springboot/" class="category-chain-item">Springboot</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/IntelliJ/" class="print-no-link">#IntelliJ</a>
+        <a href="/tags/Redisson/" class="print-no-link">#Redisson</a>
+      
+        <a href="/tags/Redis/" class="print-no-link">#Redis</a>
       
     </div>
   
@@ -399,8 +395,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>实用的 IntelliJ 插件</div>
-      <div>https://cason.work/2024/04/22/实用的-IntelliJ-插件/</div>
+      <div>Springboot-Redisson实现延迟消息队列</div>
+      <div>https://cason.work/2024/04/29/Springboot-Redisson实现延迟消息队列/</div>
     </div>
     <div class="license-meta">
       
@@ -412,7 +408,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月22日</div>
+          <div>2024年4月29日</div>
         </div>
       
       
@@ -444,18 +440,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/29/Springboot-Redisson%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" title="Springboot-Redisson实现延迟消息队列">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Springboot-Redisson实现延迟消息队列</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/15/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E8%BF%81%E7%A7%BB%E6%95%99%E7%A8%8B-%E5%86%85%E7%BD%91%E4%BA%92%E8%81%94-scp/" title="腾讯云大文件迁移教程-内网互联+scp">
-                        <span class="hidden-mobile">腾讯云大文件迁移教程-内网互联+scp</span>
+                      <a href="/2024/04/22/%E5%AE%9E%E7%94%A8%E7%9A%84-IntelliJ-%E6%8F%92%E4%BB%B6/" title="实用的 IntelliJ 插件">
+                        <span class="hidden-mobile">实用的 IntelliJ 插件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
