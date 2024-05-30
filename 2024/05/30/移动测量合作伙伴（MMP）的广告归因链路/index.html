@@ -16,21 +16,17 @@
   <meta name="author" content="Cason Mo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。 延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后">
+    <meta name="description" content="移动测量合作伙伴（MMP）的广告归因链路移动测量合作伙伴（Mobile Measurement Partner，简称MMP）是一类专门提供移动应用广告归因和分析服务的第三方平台。MMP的主要功能是帮助广告主和应用开发者跟踪和分析广告效果，确定用户的来源，从而优化广告投放策略，提高广告投放的投资回报率（ROI）。广告归因是MMP的核心功能之一，通过收集和分析用户的点击和安装数据，确定用户是通过哪个广">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Springboot-Redisson实现延迟消息队列">
-<meta property="og:url" content="https://cason.work/2024/04/29/Springboot-Redisson%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+<meta property="og:title" content="移动测量合作伙伴（MMP）的广告归因链路">
+<meta property="og:url" content="https://cason.work/2024/05/30/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E9%87%8F%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%EF%BC%88MMP%EF%BC%89%E7%9A%84%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0%E9%93%BE%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Blog|CasonMo">
-<meta property="og:description" content="Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。 延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后">
+<meta property="og:description" content="移动测量合作伙伴（MMP）的广告归因链路移动测量合作伙伴（Mobile Measurement Partner，简称MMP）是一类专门提供移动应用广告归因和分析服务的第三方平台。MMP的主要功能是帮助广告主和应用开发者跟踪和分析广告效果，确定用户的来源，从而优化广告投放策略，提高广告投放的投资回报率（ROI）。广告归因是MMP的核心功能之一，通过收集和分析用户的点击和安装数据，确定用户是通过哪个广">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png">
-<meta property="article:published_time" content="2024-04-29T03:42:13.000Z">
-<meta property="article:modified_time" content="2024-04-29T04:04:27.018Z">
+<meta property="article:published_time" content="2024-05-30T07:02:22.000Z">
+<meta property="article:modified_time" content="2024-05-30T08:09:57.958Z">
 <meta property="article:author" content="Cason Mo">
-<meta property="article:tag" content="Redisson">
-<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -38,7 +34,7 @@
   
     <meta name="google-site-verification" content="f-Zx1s0QlBYDQAEQEaqHl-vpTbRmq-FDQ8IRLOTat6c" />
   
-  <title>Springboot-Redisson实现延迟消息队列 - Blog|CasonMo</title>
+  <title>移动测量合作伙伴（MMP）的广告归因链路 - Blog|CasonMo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -244,7 +240,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Springboot-Redisson实现延迟消息队列"></span>
+            <span id="subtitle" data-typed-text="移动测量合作伙伴（MMP）的广告归因链路"></span>
           
         </div>
 
@@ -255,8 +251,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-29 11:42" pubdate>
-          2024年4月29日 中午
+        <time datetime="2024-05-30 15:02" pubdate>
+          2024年5月30日 下午
         </time>
       </span>
     
@@ -268,7 +264,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          645 字
+          1.3k 字
         
       </span>
     
@@ -280,7 +276,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          12 分钟
         
       </span>
     
@@ -325,29 +321,100 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Springboot-Redisson实现延迟消息队列</h1>
+            <h1 id="seo-header">移动测量合作伙伴（MMP）的广告归因链路</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Redisson是一个基于Redis的Java驻留库，旨在简化Java应用程序对Redis的操作。它提供了丰富的功能和易于使用的API，使得在Java应用中集成Redis变得更加简单和高效。Redisson的主要功能包括分布式对象、分布式锁、分布式队列、分布式调度器等，使得在分布式环境中进行协作变得更加容易。</p>
-<p>延迟队列是Redisson提供的一个功能强大的组件之一。它允许开发者在指定的延迟时间之后自动执行任务，这对于需要在一定时间后执行操作的应用程序非常有用，如消息通知、订单处理、定时任务等。</p>
-<p>Redisson实现延迟队列的原理基于Redis的有序集合（Sorted Set）和Redis的过期时间机制</p>
-<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>因为<code>RDelayedQueue</code>并不直接存储任务。相反，它是一种装饰器或包装器，用于添加延迟功能到一个标准的Redisson队列（如<code>RBlockingQueue</code>）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonDelayQueueProducer</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RedissonClient redissonClient;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addDelayedTask</span><span class="hljs-params">(String topic, Object task, <span class="hljs-type">long</span> delay, TimeUnit timeUnit)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;redis的延迟队列 &#123;&#125; (添加)的key:&#123;&#125;,time:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, topic, task, delay, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>        redissonClient.getDelayedQueue(redissonClient.getBlockingQueue(topic)).offerAsync(task, delay, timeUnit);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Boolean <span class="hljs-title function_">cancelDelayedTask</span><span class="hljs-params">(String topic, Object task)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;redis的延迟队列&#123;&#125; (移除)的key:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, topic, task, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>        <span class="hljs-comment">// 从延迟队列中移除任务</span><br>        <span class="hljs-keyword">return</span> redissonClient.getDelayedQueue(redissonClient.getBlockingQueue(topic)).remove(task);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>起一个线程循环监听延迟队列</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonDelayedQueueConsumer</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">topic</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;topic&quot;</span>;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RedissonClient redissonClient;<br><br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 创建延迟队列</span><br>        log.info(<span class="hljs-string">&quot;&#123;&#125; 开始监听&quot;</span>, topic);<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    RBlockingQueue&lt;Object&gt; aaa = redissonClient.getBlockingQueue(topic);<br>                    RDelayedQueue&lt;Object&gt; delayedQueue = redissonClient.getDelayedQueue(aaa);<br>                    <span class="hljs-comment">// 从延迟队列中取出任务</span><br>                    <span class="hljs-type">Object</span> <span class="hljs-variable">take</span> <span class="hljs-operator">=</span> aaa.take();<br>                    <span class="hljs-comment">// 处理延迟任务，例如执行某个操作</span><br>                    log.info(<span class="hljs-string">&quot;redis的延迟队列:&#123;&#125;,当前时间:&#123;&#125;&quot;</span>, take, LocalDateTimeUtil.formatNormal(LocalDateTime.now()));<br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    log.error(<span class="hljs-string">&quot;redis的延迟队列抛出异常&quot;</span>, e);<br>                &#125;<br>            &#125;<br>        &#125;).start();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
-
-<h4 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h4><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20240429115537300.png" srcset="/img/loading.gif" lazyload alt="image-20240429115537300"></p>
-<h4 id="redisson配置"><a href="#redisson配置" class="headerlink" title="redisson配置"></a>redisson配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.redisson<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>redisson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.17.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedissonConfig</span> &#123;<br><br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.host&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String redisHost;<br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.port&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String redisPort;<br>    <span class="hljs-meta">@Value(&quot;$&#123;spring.data.redis.password&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String password;<br><br>    <span class="hljs-meta">@Bean(destroyMethod = &quot;shutdown&quot;)</span><br>    <span class="hljs-keyword">public</span> RedissonClient <span class="hljs-title function_">redissonClient</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">Config</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Config</span>();<br>        config.useSingleServer().setAddress(<span class="hljs-string">&quot;redis://&quot;</span> + redisHost + <span class="hljs-string">&quot;:&quot;</span> + redisPort);<br>        <span class="hljs-keyword">if</span>(StringUtils.isBlank(password)) &#123;<br>            config.useSingleServer().setPassword(<span class="hljs-literal">null</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            config.useSingleServer().setPassword(password);<br>        &#125;<br>        <span class="hljs-keyword">return</span> Redisson.create(config);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+                <h3 id="移动测量合作伙伴（MMP）的广告归因链路"><a href="#移动测量合作伙伴（MMP）的广告归因链路" class="headerlink" title="移动测量合作伙伴（MMP）的广告归因链路"></a>移动测量合作伙伴（MMP）的广告归因链路</h3><p>移动测量合作伙伴（Mobile Measurement Partner，简称MMP）是一类专门提供移动应用广告归因和分析服务的第三方平台。MMP的主要功能是帮助广告主和应用开发者跟踪和分析广告效果，确定用户的来源，从而优化广告投放策略，提高广告投放的投资回报率（ROI）。广告归因是MMP的核心功能之一，通过收集和分析用户的点击和安装数据，确定用户是通过哪个广告平台、广告活动甚至具体的广告创意下载并安装了应用。</p>
+<h4 id="无链接广告的归因链路"><a href="#无链接广告的归因链路" class="headerlink" title="无链接广告的归因链路"></a>无链接广告的归因链路</h4><p>![image-20240530145119242](..&#x2F;..&#x2F;..&#x2F;..&#x2F;Library&#x2F;Mobile Documents&#x2F;iCloud<del>md</del>obsidian&#x2F;Documents&#x2F;typora&#x2F;images&#x2F;image-20240530145119242.png)</p>
+<p>无链接广告通常指那些不包含深度链接或特定归因链接的广告。这类广告的归因依赖于设备标识符和时间窗口。以下是无链接广告的归因链路详细过程：</p>
+<ol>
+<li><strong>广告展示与点击</strong>：<ul>
+<li>用户在广告平台（如Google、Facebook）上看到广告并点击。</li>
+<li>广告平台记录下点击事件，包括设备ID（如IDFA、GAID）和点击时间。</li>
+<li>为了能够进行准确的归因，广告平台（如Google、Facebook）在用户点击广告时，会将点击数据（如点击时间、设备ID等）发送到MMP。</li>
+</ul>
+</li>
+<li><strong>应用下载与安装</strong>：<ul>
+<li>用户被引导到应用商店，下载并安装应用。</li>
+</ul>
+</li>
+<li><strong>应用激活与MMP SDK的作用</strong>：<ul>
+<li>用户首次打开应用时，应用内集成的MMP SDK（如Adjust、AppsFlyer）会触发一次激活事件。</li>
+<li>SDK收集设备标识符、安装时间等信息，并发送到MMP服务器。</li>
+</ul>
+</li>
+<li><strong>广告归因处理</strong>：<ul>
+<li>MMP服务器将接收到的激活数据与之前从广告平台获取的点击数据进行匹配。</li>
+<li>通过时间窗口（通常为点击后的24至48小时）和设备标识符，MMP确定用户的安装行为与哪个点击事件相关联。</li>
+</ul>
+</li>
+<li><strong>归因报告</strong>：<ul>
+<li>MMP回传数据告知是通过哪个广告平台的广告安装了应用。</li>
+</ul>
+</li>
+</ol>
+<p>这种归因方法依赖于设备标识符和时间窗口来推断用户行为，可能会因设备ID的变化或其他因素影响归因准确性。</p>
+<h4 id="有链接广告的归因链路"><a href="#有链接广告的归因链路" class="headerlink" title="有链接广告的归因链路"></a>有链接广告的归因链路</h4><p>![image-20240530145130921](..&#x2F;..&#x2F;..&#x2F;..&#x2F;Library&#x2F;Mobile Documents&#x2F;iCloud<del>md</del>obsidian&#x2F;Documents&#x2F;typora&#x2F;images&#x2F;image-20240530145130921.png)</p>
+<p>有链接广告包含深度链接或特定的归因链接，例如Branch链接或AppsFlyer Onelink。这些链接能直接追踪用户的点击行为，使归因过程更为精确。以下是有链接广告的归因链路详细过程：</p>
+<ol>
+<li><strong>广告展示与点击</strong>：<ul>
+<li>用户在广告平台上看到包含归因链接的广告（如Branch链接或AppsFlyer Onelink）。</li>
+<li>用户点击广告链接。</li>
+</ul>
+</li>
+<li><strong>链接重定向与归因信息收集</strong>：<ul>
+<li>点击广告链接后，用户会被重定向到归因平台的中间页面。</li>
+<li>中间页面收集用户点击信息，包括设备ID、点击时间、广告来源等。</li>
+</ul>
+</li>
+<li><strong>重定向到应用商店</strong>：<ul>
+<li>收集完必要信息后，用户被重定向到应用商店的应用下载页面。</li>
+</ul>
+</li>
+<li><strong>应用下载与安装</strong>：<ul>
+<li>用户下载并安装应用。</li>
+</ul>
+</li>
+<li><strong>应用激活与SDK的作用</strong>：<ul>
+<li>用户首次打开应用时，应用内集成的归因平台SDK（如Branch SDK、AppsFlyer SDK）会触发一次激活事件。</li>
+<li>SDK将设备标识符和安装时间等信息发送到归因平台服务器。</li>
+</ul>
+</li>
+<li><strong>归因匹配</strong>：<ul>
+<li>归因平台服务器将激活事件与之前收集的点击数据进行匹配。</li>
+<li>由于链接中包含了具体的归因信息，归因平台能够直接将用户安装归因到特定的广告点击。</li>
+</ul>
+</li>
+<li><strong>归因报告</strong>：<ul>
+<li>归因平台回调告知是通过哪个广告平台和具体的广告链接下载并安装了应用。</li>
+</ul>
+</li>
+</ol>
+<p>有链接广告的归因方法由于使用了明确的点击信息和广告来源，归因过程更加直接和精确。</p>
+<h4 id="无链接广告与有链接广告的区别"><a href="#无链接广告与有链接广告的区别" class="headerlink" title="无链接广告与有链接广告的区别"></a>无链接广告与有链接广告的区别</h4><ol>
+<li><strong>归因信息收集</strong>：<ul>
+<li><strong>无链接广告</strong>：依赖于设备标识符和时间窗口进行归因，需要更多的匹配步骤。</li>
+<li><strong>有链接广告</strong>：通过深度链接或归因链接直接收集点击信息，归因过程更加直接和精确。</li>
+</ul>
+</li>
+<li><strong>中间页面重定向</strong>：<ul>
+<li><strong>无链接广告</strong>：用户点击广告后直接跳转到应用商店，归因信息通过后台匹配。</li>
+<li><strong>有链接广告</strong>：用户点击广告后首先重定向到归因平台的中间页面，收集归因信息后再跳转到应用商店。</li>
+</ul>
+</li>
+<li><strong>准确性</strong>：<ul>
+<li><strong>无链接广告</strong>：归因准确性可能受限于设备标识符的变化和点击后的时间窗口。</li>
+<li><strong>有链接广告</strong>：归因更准确，因为链接中包含了明确的点击信息和广告来源。</li>
+</ul>
+</li>
+<li><strong>归因速度</strong>：<ul>
+<li><strong>无链接广告</strong>：归因过程可能需要更多时间来匹配和确认。</li>
+<li><strong>有链接广告</strong>：归因过程更加迅速，因为点击信息在链接中已经明确。</li>
+</ul>
+</li>
+</ol>
 
                 
               </div>
@@ -356,36 +423,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Springboot/" class="category-chain-item">Springboot</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Redisson/" class="print-no-link">#Redisson</a>
-      
-        <a href="/tags/Redis/" class="print-no-link">#Redis</a>
-      
-    </div>
   
 </div>
 
@@ -395,8 +432,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Springboot-Redisson实现延迟消息队列</div>
-      <div>https://cason.work/2024/04/29/Springboot-Redisson实现延迟消息队列/</div>
+      <div>移动测量合作伙伴（MMP）的广告归因链路</div>
+      <div>https://cason.work/2024/05/30/移动测量合作伙伴（MMP）的广告归因链路/</div>
     </div>
     <div class="license-meta">
       
@@ -408,7 +445,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月29日</div>
+          <div>2024年5月30日</div>
         </div>
       
       
@@ -440,18 +477,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/30/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E9%87%8F%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%EF%BC%88MMP%EF%BC%89%E7%9A%84%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0%E9%93%BE%E8%B7%AF/" title="移动测量合作伙伴（MMP）的广告归因链路">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">移动测量合作伙伴（MMP）的广告归因链路</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/22/%E5%AE%9E%E7%94%A8%E7%9A%84-IntelliJ-%E6%8F%92%E4%BB%B6/" title="实用的 IntelliJ 插件">
-                        <span class="hidden-mobile">实用的 IntelliJ 插件</span>
+                      <a href="/2024/04/29/Springboot-Redisson%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" title="Springboot-Redisson实现延迟消息队列">
+                        <span class="hidden-mobile">Springboot-Redisson实现延迟消息队列</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
