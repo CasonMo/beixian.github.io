@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Blog|CasonMo</title>
+  <title>Blog|CasonMo-Java后端知识学习经验分享</title>
   
   
   <link href="https://cason.work/atom.xml" rel="self"/>
   
   <link href="https://cason.work/"/>
-  <updated>2024-07-29T08:58:42.403Z</updated>
+  <updated>2024-10-30T03:24:06.339Z</updated>
   <id>https://cason.work/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统-mmap、sendFile、splice三种零拷贝技术介绍</title>
+    <link href="https://cason.work/2024/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-mmap%E3%80%81sendFile%E3%80%81splice%E4%B8%89%E7%A7%8D%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://cason.work/2024/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-mmap%E3%80%81sendFile%E3%80%81splice%E4%B8%89%E7%A7%8D%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/</id>
+    <published>2024-10-29T09:15:31.000Z</published>
+    <updated>2024-10-30T03:24:06.339Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>转载文章</p></blockquote><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在传统网络数据传输的过程中，数据会被来回拷贝很多次，而其中有一些是不必要拷贝，而零拷贝技术就是为了<code>减少这些不必要的数据复制操作</code>。下面会详细介绍各种数据拷贝的详细过程，这也是一个非常高频的面试问题。</p><h2 id="传统数据拷贝"><a href="#传统数据拷贝" class="headerlink" title="传统数据拷贝"></a>传统数据拷贝</h2><p>当我们通过网络从服务器上获取数据时，数据整体的传输过程是这样子的，如图（可以放大看）：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/377c55cbd1974d629d699c7a84c1c64a%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75-20241029212652226.awebp" alt="image.png"> 详细过程：</p><ol><li>等待cpu调度，通过cpu发起io请求，通过read()方法读取数据，此时用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache中把数据拷贝到用户缓冲区；</code></li><li>此时read()方法调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>上述过程中出现了4次上下文切换，2次cpu拷贝，2次DMA拷贝；可以发现这里面有很多是不必要的操作，如：从pageCache拷贝到用户缓冲区，再从用户缓冲区拷贝到socket缓冲区；而零拷贝的出现就是为了节省这些cpu拷贝、上下文切换，从而提高服务的整体性能。目前linux提供了mmap、sendfile、splice等都是为了省去不必要的操作从而提升服务整体性能。</p><h2 id="DMA拷贝"><a href="#DMA拷贝" class="headerlink" title="DMA拷贝"></a>DMA拷贝</h2><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">DMA其实就是在主板上安装了一块独立的芯片，它的作用当我们在内存和IO设备上传输设备的时候不需要<span class="hljs-meta">cpu</span>来控制数据的传输，而是直接通过DMA控制器来传输；这样就可以释放<span class="hljs-meta">cpu</span>来做其他的事情；但DMA只能用于设备之间的数据拷贝，所以传统数据传输只有在硬盘、网卡数据拷贝时才用得上。<br></code></pre></td></tr></table></figure><h2 id="mmap-write"><a href="#mmap-write" class="headerlink" title="mmap + write"></a>mmap + write</h2><p>mmap是linux内核提供的一种内存映射文件的方式，将一个进程的虚拟地址映射到磁盘文件地址。它可以将内核缓冲区的地址与用户缓冲区的地址进行映射，从而实现内核缓冲区到用户缓冲区的内存共享。省去数据从内核缓冲区拷贝到用户缓冲区的过程。具体过程如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/c8a901e9f9014e62b8df28048f756170%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><ol><li>发起mmap()调用，建立用户缓冲区和pageCache的地址映射；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li>mmap()调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>后续的write()方法和传统数据拷贝的过程是相同的，整体上发生了4次上下文切换，一次cpu拷贝，<code>节省了一次从pageCache拷贝到用户缓冲区的cpu拷贝过程</code>；同时用户态空间的共享区使用的是虚拟内存，并不会占用过多的物理内存。</p><p>优点：针对大文件可以极大的提高IO性能，但是对于小文件，内存映射反而会导致碎片空间的浪费。</p><h2 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile"></a>sendfile</h2><p>sendfile系统调用是Linux2.1引入的目的简化网络通过两个通道之间的数据传输；它可以使数据直接在内核空间进行IO传输，省去了用户空间和内核空间来回拷贝的过程。如图：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/07bb1cac719e48739f50c2a6cb50c1a9%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><ol><li>发起sendfile()调用，用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>sendfile()调用完成，内核态切换为用户态。</li></ol><p>整个过程中只发生了2次上下文切换，1次cpu拷贝；相比mmap+write又节省了<code>2次上下文切换</code>。 而在linux2.4内核版本开始，又增加了<code>gather操作</code>，可以把仅有的这次cpu拷贝也省去掉。过程如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/9651154e761044bc9b6b9132c7f96868%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><p>上图红色字体的过程为改进点。它把数据描述信息读到socket的缓冲区中，DMA Gather Copy根据socket缓冲的数据描述信息批量的从pageCache中读取到网卡设备上。至此剩余的一次<code>pageCache到socket缓冲的cpu拷贝</code>也被节省掉了。</p><h2 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h2><p>上面的零拷贝，都是大家平时刷文章经常刷到的，这里再介绍一种不那么常见的<code>splice</code>。过程图如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/23427256f0ae4aaab166c78412139216%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><p>在第5步是创建一个splice管道，并且把该管道的写端绑定在pageCache上，读端绑定到socket缓冲区上，再通过DMA拷贝到网卡设备上，也实现真正意义上的零cpu拷贝。</p><blockquote><p>作者：想打游戏的程序猿<br>链接：<a href="https://juejin.cn/post/7404036819107102739">https://juejin.cn/post/7404036819107102739</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;转载文章&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;在传统网络数据传输的过程中，数据会被来回拷贝很多次，而其中有一</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>抓包精灵-上传功能服务端代码</title>
@@ -498,35 +521,6 @@
     <category term="降级" scheme="https://cason.work/tags/%E9%99%8D%E7%BA%A7/"/>
     
     <category term="限流" scheme="https://cason.work/tags/%E9%99%90%E6%B5%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分布式配置中心-Nacos简单实践</title>
-    <link href="https://cason.work/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/"/>
-    <id>https://cason.work/2023/08/23/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Nacos%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</id>
-    <published>2023-08-23T08:07:15.000Z</published>
-    <updated>2024-04-11T02:27:28.318Z</updated>
-    
-    <content type="html"><![CDATA[<p>分布式配置中心是一种用于管理和集中存储应用程序配置的系统，特别适用于大规模、复杂的分布式系统。它的主要目标是将应用程序的配置信息从代码中分离出来，使得配置可以在运行时进行动态修改和管理，而无需重新部署应用程序。</p><p>以下是分布式配置中心的一些关键特点和优势：</p><ol><li><strong>集中管理：</strong> 分布式配置中心允许将所有应用程序的配置集中存储在一个地方，从而方便统一管理和修改配置，避免了在每个应用程序实例中手动更改配置。</li><li><strong>动态更新：</strong> 配置中心支持在应用程序运行时动态更新配置，而无需重新启动或重新部署应用。这对于需要频繁变更配置的场景非常有用。</li><li><strong>版本控制：</strong> 配置中心通常支持配置版本控制，使得可以跟踪配置的变更历史，方便回退或恢复配置。</li><li><strong>环境隔离：</strong> 配置中心允许将不同环境（如开发、测试、生产）的配置隔离开来，从而确保在不同环境中使用不同的配置。</li><li><strong>动态扩展：</strong> 配置中心可以支持多个应用程序实例和多个团队同时访问，并能够处理高并发的配置请求。</li><li><strong>安全性：</strong> 配置中心通常提供权限控制，确保只有授权用户可以访问和修改配置。</li><li><strong>集成支持：</strong> 配置中心可以与其他工具和框架集成，如监控系统、CI&#x2F;CD流水线等，从而更好地支持自动化和运维流程。</li></ol><h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><p>Nacos（Naming and Configuration Service）是阿里巴巴开源的一个用于服务发现、动态配置管理和可视化平台的项目。它结合了服务发现、配置管理和健康监测等功能，是一个综合的微服务基础设施组件。其中，Nacos的配置管理部分可以被用作分布式配置中心。</p><ul><li><p>添加nacos配置管理依赖</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">  <span class="hljs-comment">&lt;!-- nacos的配置管理依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure></li><li><p>在resource下创建bootstrap.yaml配置文件</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">gateway</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-comment"># 环境</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span> <br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-comment"># nacos地址</span><br>      <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span> <br>      <span class="hljs-attr">config:</span><br>        <span class="hljs-comment"># 文件后缀</span><br>        <span class="hljs-attr">file-extension:</span> <span class="hljs-string">yaml</span> <br></code></pre></td></tr></table></figure><ol><li><strong>配置加载顺序：</strong> 在Spring Boot应用程序中，配置文件的加载顺序是有一定规则的。<code>bootstrap.yaml</code> 配置文件在加载顺序上位于其他配置文件（如 <code>application.yaml</code> 或 <code>application.properties</code>）之前。这意味着它可以用于配置一些在应用程序启动之前就需要的属性，例如连接到配置服务器的属性。</li><li><strong>外部配置加载：</strong> 通常，分布式系统中的应用程序可能需要从配置中心（如Nacos、Consul等）获取配置信息。<code>bootstrap.yaml</code> 配置文件可以用来配置与配置中心的连接和身份验证等信息，以便在应用程序启动时能够正确地加载配置。</li></ol></li><li><p>在nacos中以&lt;spring.application.name&gt;-&lt;spring.profiles.active&gt;.yaml作为data id在DEFAULT_GROUP新建配置，例如：gateway-dev.yaml</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308231648127.png" alt="image-20230823161911507"></p></li></ul><p>项目启动后，无需重新启动或停机就会从nacos中动态加载配置下来，通过@Value即可获取对应的值。如果您将配置属性注入到了Spring管理的Bean中，而且希望在配置发生变化时动态刷新Bean的状态，您可以使用 <code>@RefreshScope</code> 注解。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RefreshScope</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyService</span> &#123;<br><br>    <span class="hljs-meta">@Value(&quot;$&#123;config.hello&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String helloConfig;<br><br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;分布式配置中心是一种用于管理和集中存储应用程序配置的系统，特别适用于大规模、复杂的分布式系统。它的主要目标是将应用程序的配置信息从代码中分离出来，使得配置可以在运行时进行动态修改和管理，而无需重新部署应用程序。&lt;/p&gt;
-&lt;p&gt;以下是分布式配置中心的一些关键特点和优势：&lt;/p</summary>
-      
-    
-    
-    
-    <category term="SpringCloud" scheme="https://cason.work/categories/SpringCloud/"/>
-    
-    
-    <category term="分布式系统" scheme="https://cason.work/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="Nacos" scheme="https://cason.work/tags/Nacos/"/>
-    
-    <category term="配置中心" scheme="https://cason.work/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
     
   </entry>
   
