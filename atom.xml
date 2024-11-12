@@ -6,7 +6,7 @@
   <link href="https://cason.work/atom.xml" rel="self"/>
   
   <link href="https://cason.work/"/>
-  <updated>2024-10-30T03:24:06.339Z</updated>
+  <updated>2024-11-12T03:29:09.284Z</updated>
   <id>https://cason.work/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>广告体系架构简单整理</title>
+    <link href="https://cason.work/2024/11/12/%E5%B9%BF%E5%91%8A%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E6%95%B4%E7%90%86/"/>
+    <id>https://cason.work/2024/11/12/%E5%B9%BF%E5%91%8A%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E6%95%B4%E7%90%86/</id>
+    <published>2024-11-12T03:22:24.000Z</published>
+    <updated>2024-11-12T03:29:09.284Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112110051158.png" alt="image-20241112110051158"></p><h3 id="1-数据来源"><a href="#1-数据来源" class="headerlink" title="1. 数据来源"></a>1. <strong>数据来源</strong></h3><ul><li><strong>H5 和 App</strong>：通过 JavaScript 和 SDK 实现用户行为数据的埋点采集。</li><li><strong>广告平台</strong>：通过 API 与广告平台进行交互，采集广告相关数据。</li><li><strong>HTTP</strong>：其他通过 HTTP 接口传输的数据。对接广告平台（媒体）API获取投放的广告的报表数据，或者MMP的webhook回调等等</li></ul><h3 id="2-数据采集"><a href="#2-数据采集" class="headerlink" title="2. 数据采集"></a>2. <strong>数据采集</strong></h3><ul><li><strong>Kafka</strong>：作为消息队列，用于存储和传输采集到的用户行为数据。Kafka 负责高效处理来自多个来源的大量实时数据。</li></ul><h3 id="3-大数据处理"><a href="#3-大数据处理" class="headerlink" title="3. 大数据处理"></a>3. <strong>大数据处理</strong></h3><ul><li>实时计算 (Flink)<ul><li>Flink 负责从 Kafka 获取用户行为数据流，对数据进行实时清洗和处理以及用户打标签</li><li>将处理后的数据持久化到数据库（例如 MySQL）。</li></ul></li><li>归档与数据存储<ul><li>将历史数据归档到 Hive，以便进行长期存储和查询、以及分担实时库的查询压力。</li></ul></li><li>离线计算 (Spark)<ul><li>使用 Spark 编写 SQL 作业，通过小海豚调度系统来执行。</li><li>离线计算用于分析用户画像，整合和处理用户行为数据。</li></ul></li></ul><h3 id="4-数据与服务监控"><a href="#4-数据与服务监控" class="headerlink" title="4. 数据与服务监控"></a>4. <strong>数据与服务监控</strong></h3><ul><li><strong>Prometheus</strong>：用于监控系统状态，收集和处理监控指标。api的调用的成功率，kafka的堆积情况等等。</li><li><strong>Logstash&#x2F;Filebeat</strong>：用于日志收集和转发，将日志数据发送到 Elasticsearch。系统的报错日志等等</li><li><strong>Elasticsearch</strong>：用作存储和检索日志数据的搜索引擎。</li><li><strong>Grafana 和 Kibana</strong>：用作数据可视化工具，分别连接到 Prometheus 和 Elasticsearch，提供实时的监控图表和分析视图。</li></ul><h3 id="5-数据展示"><a href="#5-数据展示" class="headerlink" title="5. 数据展示"></a>5. <strong>数据展示</strong></h3><ul><li><strong>Redash</strong>：用于数据展示和报表生成，帮助分析和可视化数据。</li><li><strong>Presto</strong>：访问多种类型的数据源在大规模数据集上进行快速、交互式的查询</li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>整个系统架构展示了如何从不同数据来源采集用户行为数据，并通过流式计算（Flink）和批处理（Spark）进行数据清洗、处理和分析。实时数据被用于快速响应，而离线数据则被用来构建详细的用户画像。监控和可视化层面，通过 Elasticsearch、Grafana 和 Kibana 等工具来进行数据和服务的监控。Redash 最终将分析结果以用户友好的方式展示。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112110051158.png&quot; alt=&quot;image-20241112110051158&quot;&gt;&lt;/p&gt;
+&lt;h3 </summary>
+      
+    
+    
+    
+    
+    <category term="广告" scheme="https://cason.work/tags/%E5%B9%BF%E5%91%8A/"/>
+    
+  </entry>
+  
+  <entry>
     <title>操作系统-mmap、sendFile、splice三种零拷贝技术介绍</title>
     <link href="https://cason.work/2024/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-mmap%E3%80%81sendFile%E3%80%81splice%E4%B8%89%E7%A7%8D%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/"/>
     <id>https://cason.work/2024/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-mmap%E3%80%81sendFile%E3%80%81splice%E4%B8%89%E7%A7%8D%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/</id>
     <published>2024-10-29T09:15:31.000Z</published>
-    <updated>2024-10-30T03:24:06.339Z</updated>
+    <updated>2024-11-12T03:23:22.181Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>转载文章</p></blockquote><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在传统网络数据传输的过程中，数据会被来回拷贝很多次，而其中有一些是不必要拷贝，而零拷贝技术就是为了<code>减少这些不必要的数据复制操作</code>。下面会详细介绍各种数据拷贝的详细过程，这也是一个非常高频的面试问题。</p><h2 id="传统数据拷贝"><a href="#传统数据拷贝" class="headerlink" title="传统数据拷贝"></a>传统数据拷贝</h2><p>当我们通过网络从服务器上获取数据时，数据整体的传输过程是这样子的，如图（可以放大看）：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/377c55cbd1974d629d699c7a84c1c64a%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75-20241029212652226.awebp" alt="image.png"> 详细过程：</p><ol><li>等待cpu调度，通过cpu发起io请求，通过read()方法读取数据，此时用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache中把数据拷贝到用户缓冲区；</code></li><li>此时read()方法调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>上述过程中出现了4次上下文切换，2次cpu拷贝，2次DMA拷贝；可以发现这里面有很多是不必要的操作，如：从pageCache拷贝到用户缓冲区，再从用户缓冲区拷贝到socket缓冲区；而零拷贝的出现就是为了节省这些cpu拷贝、上下文切换，从而提高服务的整体性能。目前linux提供了mmap、sendfile、splice等都是为了省去不必要的操作从而提升服务整体性能。</p><h2 id="DMA拷贝"><a href="#DMA拷贝" class="headerlink" title="DMA拷贝"></a>DMA拷贝</h2><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">DMA其实就是在主板上安装了一块独立的芯片，它的作用当我们在内存和IO设备上传输设备的时候不需要<span class="hljs-meta">cpu</span>来控制数据的传输，而是直接通过DMA控制器来传输；这样就可以释放<span class="hljs-meta">cpu</span>来做其他的事情；但DMA只能用于设备之间的数据拷贝，所以传统数据传输只有在硬盘、网卡数据拷贝时才用得上。<br></code></pre></td></tr></table></figure><h2 id="mmap-write"><a href="#mmap-write" class="headerlink" title="mmap + write"></a>mmap + write</h2><p>mmap是linux内核提供的一种内存映射文件的方式，将一个进程的虚拟地址映射到磁盘文件地址。它可以将内核缓冲区的地址与用户缓冲区的地址进行映射，从而实现内核缓冲区到用户缓冲区的内存共享。省去数据从内核缓冲区拷贝到用户缓冲区的过程。具体过程如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/c8a901e9f9014e62b8df28048f756170%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><ol><li>发起mmap()调用，建立用户缓冲区和pageCache的地址映射；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li>mmap()调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>后续的write()方法和传统数据拷贝的过程是相同的，整体上发生了4次上下文切换，一次cpu拷贝，<code>节省了一次从pageCache拷贝到用户缓冲区的cpu拷贝过程</code>；同时用户态空间的共享区使用的是虚拟内存，并不会占用过多的物理内存。</p><p>优点：针对大文件可以极大的提高IO性能，但是对于小文件，内存映射反而会导致碎片空间的浪费。</p><h2 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile"></a>sendfile</h2><p>sendfile系统调用是Linux2.1引入的目的简化网络通过两个通道之间的数据传输；它可以使数据直接在内核空间进行IO传输，省去了用户空间和内核空间来回拷贝的过程。如图：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/07bb1cac719e48739f50c2a6cb50c1a9%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><ol><li>发起sendfile()调用，用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>sendfile()调用完成，内核态切换为用户态。</li></ol><p>整个过程中只发生了2次上下文切换，1次cpu拷贝；相比mmap+write又节省了<code>2次上下文切换</code>。 而在linux2.4内核版本开始，又增加了<code>gather操作</code>，可以把仅有的这次cpu拷贝也省去掉。过程如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/9651154e761044bc9b6b9132c7f96868%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><p>上图红色字体的过程为改进点。它把数据描述信息读到socket的缓冲区中，DMA Gather Copy根据socket缓冲的数据描述信息批量的从pageCache中读取到网卡设备上。至此剩余的一次<code>pageCache到socket缓冲的cpu拷贝</code>也被节省掉了。</p><h2 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h2><p>上面的零拷贝，都是大家平时刷文章经常刷到的，这里再介绍一种不那么常见的<code>splice</code>。过程图如下：</p><p><img src="https://raw.githubusercontent.com/CasonMo/pic-go/master/img/23427256f0ae4aaab166c78412139216%7Etplv-73owjymdk6-jj-mark-v1%3A0%3A0%3A0%3A0%3A5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oOz5omT5ri45oiP55qE56iL5bqP54y_%3Aq75.awebp" alt="image.png"></p><p>在第5步是创建一个splice管道，并且把该管道的写端绑定在pageCache上，读端绑定到socket缓冲区上，再通过DMA拷贝到网卡设备上，也实现真正意义上的零cpu拷贝。</p><blockquote><p>作者：想打游戏的程序猿<br>链接：<a href="https://juejin.cn/post/7404036819107102739">https://juejin.cn/post/7404036819107102739</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>转载文章</p></blockquote><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在传统网络数据传输的过程中，数据会被来回拷贝很多次，而其中有一些是不必要拷贝，而零拷贝技术就是为了<code>减少这些不必要的数据复制操作</code>。下面会详细介绍各种数据拷贝的详细过程，这也是一个非常高频的面试问题。</p><h2 id="传统数据拷贝"><a href="#传统数据拷贝" class="headerlink" title="传统数据拷贝"></a>传统数据拷贝</h2><p>当我们通过网络从服务器上获取数据时，数据整体的传输过程是这样子的，如图（可以放大看）：</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112111431751.png" alt="image-20241112111431751"> 详细过程：</p><ol><li>等待cpu调度，通过cpu发起io请求，通过read()方法读取数据，此时用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache中把数据拷贝到用户缓冲区；</code></li><li>此时read()方法调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>上述过程中出现了4次上下文切换，2次cpu拷贝，2次DMA拷贝；可以发现这里面有很多是不必要的操作，如：从pageCache拷贝到用户缓冲区，再从用户缓冲区拷贝到socket缓冲区；而零拷贝的出现就是为了节省这些cpu拷贝、上下文切换，从而提高服务的整体性能。目前linux提供了mmap、sendfile、splice等都是为了省去不必要的操作从而提升服务整体性能。</p><h2 id="DMA拷贝"><a href="#DMA拷贝" class="headerlink" title="DMA拷贝"></a>DMA拷贝</h2><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">DMA其实就是在主板上安装了一块独立的芯片，它的作用当我们在内存和IO设备上传输设备的时候不需要<span class="hljs-meta">cpu</span>来控制数据的传输，而是直接通过DMA控制器来传输；这样就可以释放<span class="hljs-meta">cpu</span>来做其他的事情；但DMA只能用于设备之间的数据拷贝，所以传统数据传输只有在硬盘、网卡数据拷贝时才用得上。<br></code></pre></td></tr></table></figure><h2 id="mmap-write"><a href="#mmap-write" class="headerlink" title="mmap + write"></a>mmap + write</h2><p>mmap是linux内核提供的一种内存映射文件的方式，将一个进程的虚拟地址映射到磁盘文件地址。它可以将内核缓冲区的地址与用户缓冲区的地址进行映射，从而实现内核缓冲区到用户缓冲区的内存共享。省去数据从内核缓冲区拷贝到用户缓冲区的过程。具体过程如下：</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112111538855.png" alt="image-20241112111538855"></p><ol><li>发起mmap()调用，建立用户缓冲区和pageCache的地址映射；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li>mmap()调用完成，内核态切换为用户态；</li><li>等待cpu调度，通过cpu发起io请求，通过write()方法写数据，此时用户态切换为内核态；</li><li><code>cpu把数据从用户缓冲区拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>write()方法调用完成，内核态切换为用户态。</li></ol><p>后续的write()方法和传统数据拷贝的过程是相同的，整体上发生了4次上下文切换，一次cpu拷贝，<code>节省了一次从pageCache拷贝到用户缓冲区的cpu拷贝过程</code>；同时用户态空间的共享区使用的是虚拟内存，并不会占用过多的物理内存。</p><p>优点：针对大文件可以极大的提高IO性能，但是对于小文件，内存映射反而会导致碎片空间的浪费。</p><h2 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile"></a>sendfile</h2><p>sendfile系统调用是Linux2.1引入的目的简化网络通过两个通道之间的数据传输；它可以使数据直接在内核空间进行IO传输，省去了用户空间和内核空间来回拷贝的过程。如图：</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112111554791.png" alt="image-20241112111554791"></p><ol><li>发起sendfile()调用，用户态切换为内核态；</li><li>DMA对硬盘发起IO请求；</li><li>DMA从硬盘中把数据拷贝到pageCache中；</li><li>DMA拷贝完成后发送完成信息；</li><li><code>cpu从pageCache拷贝到socket缓冲区；</code></li><li>DMA通知网卡设备要发起IO请求；</li><li>DMA开始进行数据拷贝；</li><li>DMA拷贝完成，通知写完成信息；</li><li>sendfile()调用完成，内核态切换为用户态。</li></ol><p>整个过程中只发生了2次上下文切换，1次cpu拷贝；相比mmap+write又节省了<code>2次上下文切换</code>。 而在linux2.4内核版本开始，又增加了<code>gather操作</code>，可以把仅有的这次cpu拷贝也省去掉。过程如下：</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112111609402.png" alt="image-20241112111609402"></p><p>上图红色字体的过程为改进点。它把数据描述信息读到socket的缓冲区中，DMA Gather Copy根据socket缓冲的数据描述信息批量的从pageCache中读取到网卡设备上。至此剩余的一次<code>pageCache到socket缓冲的cpu拷贝</code>也被节省掉了。</p><h2 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h2><p>上面的零拷贝，都是大家平时刷文章经常刷到的，这里再介绍一种不那么常见的<code>splice</code>。过程图如下：</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/image-20241112111622999.png" alt="image-20241112111622999"></p><p>在第5步是创建一个splice管道，并且把该管道的写端绑定在pageCache上，读端绑定到socket缓冲区上，再通过DMA拷贝到网卡设备上，也实现真正意义上的零cpu拷贝。</p><blockquote><p>作者：想打游戏的程序猿<br>链接：<a href="https://juejin.cn/post/7404036819107102739">https://juejin.cn/post/7404036819107102739</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p></blockquote>]]></content>
     
     
       
@@ -36,6 +59,16 @@
     
     
     
+    <category term="操作系统" scheme="https://cason.work/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="零拷贝" scheme="https://cason.work/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/"/>
+    
+    <category term="mmap" scheme="https://cason.work/tags/mmap/"/>
+    
+    <category term="sendFile" scheme="https://cason.work/tags/sendFile/"/>
+    
+    <category term="splice" scheme="https://cason.work/tags/splice/"/>
     
   </entry>
   
@@ -488,39 +521,6 @@
     
     <category term="SpringCloud" scheme="https://cason.work/categories/SpringCloud/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>熔断降级限流-Sentinel简单实践</title>
-    <link href="https://cason.work/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/"/>
-    <id>https://cason.work/2023/08/25/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E9%99%90%E6%B5%81-Sentinel%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</id>
-    <published>2023-08-25T07:09:15.000Z</published>
-    <updated>2024-04-11T02:27:28.314Z</updated>
-    
-    <content type="html"><![CDATA[<p>在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。</p><p><strong>熔断：</strong> 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续的请求可能加重问题。熔断通常基于一些指标（如错误率、响应时间等）进行触发，如果这些指标超过了预设的阈值，系统会将该服务熔断，即暂停对它的请求，直到一段时间后重新尝试。熔断有助于防止故障扩散，提高系统的稳定性。</p><p><strong>降级：</strong> 降级是一种在系统压力剧增、资源不足或异常情况下的应对策略。为了保持核心功能的可用性，系统可以主动放弃一些非核心或次要功能，从而减轻系统的负载。例如，在高流量期间，系统可以降级为提供基本的服务，禁用某些高成本或资源密集型的功能。这可以确保系统的关键部分仍然正常工作，即使在资源有限的情况下也能保持较好的响应性能。</p><p><strong>限流：</strong> 限流是一种控制系统访问量的策略，用于防止系统过载。通过限制对某个特定服务、接口或资源的并发访问数量，限流可以防止过多的请求影响系统的性能和可用性。限流可以基于多种条件进行，如设置每秒查询数（QPS）限制、并发连接数、请求频率等。这有助于维护系统的稳定性，确保系统在其可承受的负载范围内运行。</p><h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><p>Sentinel旨在解决分布式系统中常见的流量控制、熔断降级和保护问题，帮助开发人员构建稳定、可靠的微服务架构。以下是Sentinel的一些重要方面：</p><ol><li><p><strong>流量控制：</strong> Sentinel可以根据系统的负载情况和资源的可用性，限制对某个特定资源的访问。通过设定阈值，开发人员可以限制资源的并发访问数、QPS等，防止过多的请求导致资源耗尽或性能下降。</p></li><li><p><strong>熔断降级：</strong> Sentinel可以监控资源的错误率、异常率等情况。如果错误率超过了设定的阈值，Sentinel可以自动触发熔断操作，停止对该资源的请求一段时间，以防止故障扩散。熔断机制有助于保护系统免受故障的影响。</p></li><li><p><strong>系统保护：</strong> Sentinel可以监控整个系统的健康状态，包括系统负载、资源利用率等。当系统负载过高或出现异常情况时，Sentinel可以采取措施，如限制某些资源的访问，以保护整个系统免受过载的影响。</p></li><li><p><strong>实时监控和统计：</strong> Sentinel提供实时的监控面板和统计信息，开发人员可以通过这些信息了解资源的使用情况、异常情况和系统的整体状态。这些数据有助于及时发现问题并采取措施。</p></li><li><p><strong>规则配置：</strong> Sentinel允许开发人员配置流量控制和熔断降级的规则。规则可以基于资源的名称、路径、HTTP方法等进行配置，以适应不同的场景和需求。</p></li><li><p><strong>集成和适用性：</strong> Sentinel可以与各种编程语言和框架一起使用，适用于微服务架构中的各种场景。它提供了丰富的API和插件，以便与现有系统集成。</p></li></ol><h3 id="简单实践"><a href="#简单实践" class="headerlink" title="简单实践"></a>简单实践</h3><ul><li><p>下载sentinel</p><blockquote><p>地址：<a href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a></p></blockquote></li><li><p>启动sentinel</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar sentinel-dashboard-1.8.6.jar <br></code></pre></td></tr></table></figure><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251829872.png" alt="image-20230825182945267"></p></li><li><p><strong>引入依赖：</strong> 在你的Spring Boot项目的 <code>pom.xml</code> 文件中，添加Sentinel的依赖：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure></li><li><p><strong>配置：</strong> 在你的 <code>application.properties</code> 或 <code>application.yml</code> 文件中，可以进行一些基本的配置，例如：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure></li><li><p>启动项目即可在页面中实时监控、配置流控规则等</p><p><img src="https://picgo-1258041929.cos.ap-guangzhou.myqcloud.com/img/202308251825142.png" alt="image-20230825182546927"></p></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在分布式系统中，熔断、降级和限流是三种常见的保护策略，用于确保系统的稳定性和可用性。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;熔断：&lt;/strong&gt; 熔断是一种针对特定服务或资源的保护机制。当该服务或资源出现异常、故障或性能下降时，熔断机制会迅速停止向该服务或资源发送请求，避免继续</summary>
-      
-    
-    
-    
-    <category term="SpringCloud" scheme="https://cason.work/categories/SpringCloud/"/>
-    
-    
-    <category term="分布式系统" scheme="https://cason.work/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="Sentinel" scheme="https://cason.work/tags/Sentinel/"/>
-    
-    <category term="熔断" scheme="https://cason.work/tags/%E7%86%94%E6%96%AD/"/>
-    
-    <category term="降级" scheme="https://cason.work/tags/%E9%99%8D%E7%BA%A7/"/>
-    
-    <category term="限流" scheme="https://cason.work/tags/%E9%99%90%E6%B5%81/"/>
     
   </entry>
   
